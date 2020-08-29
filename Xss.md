@@ -1,6 +1,8 @@
 # Reflected Xss Methods
 Many methods out in wild but here are few most common , but not limited.
 
+***Tip: While using other methods put method 2 in background in terminal or on vps***
+
 ### 1. Using Burp
  1. Download Reflection and sentinal plugin for burp.
  2. Walk and spider the target site.
