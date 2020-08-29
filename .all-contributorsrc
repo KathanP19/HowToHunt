@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "remonsec",
+      "name": "Mehedi Hasan Remon",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/54717234?v=4",
+      "profile": "https://github.com/remonsec",
+      "contributions": [
+        "tutorial"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "HowToHunt",
+  "projectOwner": "KathanP19",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
