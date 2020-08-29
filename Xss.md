@@ -37,7 +37,7 @@ Many methods out in wild but here are few most common , but not limited.
 Stored Xss are mostly found manually
  1. Enumerate the Firewall using above Methods and select a payload to test accordingly.
  2. Try that selected WAF bypass payload while registering on a site in fields like username, name, address, email, etc.
- 3. Try Payload in File name of profile picture.
+ 3. Try Payload in File name of profile picture and also in the source file of image.
  4. Try in Comment section anywhere on target site.
  5. Try on every input fields which get reflected in page and which can be seen by other users.
 
