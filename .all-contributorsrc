@@ -13,6 +13,15 @@
       "contributions": [
         "tutorial"
       ]
+    },
+    {
+      "login": "theinfosecguy",
+      "name": "Keshav Malik",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/33570148?v=4",
+      "profile": "https://www.theinfosecguy.me",
+      "contributions": [
+        "tutorial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
