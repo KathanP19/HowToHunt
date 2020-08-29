@@ -27,7 +27,7 @@ Many methods out in wild but here are few most common , but not limited.
  2. You can Manually Check Right Click View Page Source and search for `var=` , `=""` , `=''`.
  3. Now Append that to webpage urls. For example `https://example.com?hiddenvariablename=xss`.
  
-### 4. Other Methods
+### 5. Other Methods
  1. Use Methods 1 or 2 to Gather the urls
  2. Enumerate the Firewall using [https://github.com/Ekultek/WhatWaf](https://github.com/Ekultek/WhatWaf) or other similar tool.
  3. Find WAF bypass payload on twitter by searching or in this Github Repo [https://github.com/0xInfection/Awesome-WAF](https://github.com/0xInfection/Awesome-WAF)
