@@ -1,6 +1,8 @@
 # Reflected Xss Methods
 Many methods out in wild but here are few most common , but not limited.
 
+One Awesome mind map for approach to reflected xss can be found here [https://github.com/A9HORA/Reflected-XSS-Mindmap](https://github.com/A9HORA/Reflected-XSS-Mindmap) Made By [@A9HORA](https://twitter.com/A9HORA)
+
 ***Tip: While using other methods put method 2 in background in terminal or on vps***
 
 ### 1. Using Burp
