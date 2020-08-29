@@ -4,7 +4,9 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting That Particular Vulnerability. 
 
-**Note: You Can Help Me Complete This List By Making Pull Request**
+**Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
+
+**All the Credits to All the Contributors Without You It Could Have Never Been possible**
 
 If You Want To Support Me You Can Buy Me A Coffee
 
