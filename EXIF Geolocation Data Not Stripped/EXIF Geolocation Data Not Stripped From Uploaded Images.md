@@ -10,3 +10,5 @@ When a user uploads an image in example.com, the uploaded image’s EXIF Geoloca
 5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect ,   edit it as html )</br>
 6. open it (http://exif.regex.info/exif.cgi)</br>
 7. See wheather is that still showing exif data , if it is then Report it.
+
+Author:[@0xd3vil](https://twitter.com/0xd3vil)
