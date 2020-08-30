@@ -14,3 +14,5 @@
 [https://edoverflow.com/2017/broken-link-hijacking/](https://edoverflow.com/2017/broken-link-hijacking/)
 
 [https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d](https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d)
+
+Author:[@KathanP19](https://twitter.com/KathanP19)
