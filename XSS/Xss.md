@@ -49,3 +49,5 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
  1. Similar methods As given above except try putting payload which can give a callback on your server when executed.
  2. You can Used [https://xsshunter.com/](https://xsshunter.com/) or Use burpcollaborator or ngrok.
  3. Try it on contact forms or similar functionality.
+
+Author:[https://twitter.com/KathanP19](https://twitter.com/KathanP19)
