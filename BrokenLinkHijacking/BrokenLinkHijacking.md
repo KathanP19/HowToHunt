@@ -8,6 +8,8 @@
    Ouput will be like Something. 
    
    `─BROKEN─ https://www.linkedin.com/company/ACME-inc-/ (HTTP_999)`
+   
+ 3. Now you need to check if company has the page or not , if no then register as the company or try to get that username or url. 
 
 # Reference
 
