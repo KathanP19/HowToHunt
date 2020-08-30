@@ -56,6 +56,10 @@ This is one of the common issue on wordpress. To get some bucks with this miscon
     </value></param></params>
     </methodCall>
     ```
+### Tool To Automate XMLRPC-Scan.
+
+[XMLRPC-Scan](https://github.com/nullfil3/xmlrpc-scan)
+
 ### References
 [Bug Bounty Cheat Sheet](https://m0chan.github.io/2019/12/17/Bug-Bounty-Cheetsheet.html)
 
