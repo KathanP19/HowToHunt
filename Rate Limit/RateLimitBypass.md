@@ -18,7 +18,7 @@ X-Forwarded-For:
 X-Forwarded-For: IP
 ```
 
-## Rate Limit Bypass using Sepcial Characters 
+## Rate Limit Bypass using Special Characters 
 
 - Adding Null Byte ( %00 ) at the end of the Email can sometimes Bypass Rate Limit.
 - Try adding a Space Character after a Email. ( Not Encoded )
