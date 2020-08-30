@@ -30,3 +30,5 @@ X-Client: IP
 
 
 ## You can find some more here - [Check this out](https://medium.com/bugbountywriteup/bypassing-rate-limit-like-a-pro-5f3e40250d3c)
+
+Author: [Keshav Malik](https://www.linkedin.com/in/keshav-malik-22478014a)
