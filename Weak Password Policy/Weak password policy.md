@@ -9,3 +9,5 @@ A weak password policy increases the probability of an attacker having success u
    In both cases, the application does not prevent this decision. </br>
 
 To improve the password strength, the application should avoid 1-to-1 usage of personal information as the account password.
+
+Author: [@0xd3vil](https://twitter.com/0xd3vil)
