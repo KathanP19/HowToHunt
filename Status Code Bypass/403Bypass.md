@@ -35,3 +35,5 @@ Well Always look for some references or proof of concept if someone sharing any 
 I have some poc video on my YouTube channel for 403 and other Improper access control bugs with those methods. You can check them
 
 YouTube: [Mehedi Hasan Remon](https://www.youtube.com/channel/UCF_yxU7acxUojiGiOAMafQQ/videos?view_as=subscriber)
+
+Author:[@remonsec](https://twitter.com/remonsec)
