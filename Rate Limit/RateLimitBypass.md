@@ -22,7 +22,7 @@ X-Forwarded-For: IP
 
 - Adding Null Byte ( %00 ) at the end of the Email can sometimes Bypass Rate Limit.
 - Try adding a Space Character after a Email. ( Not Encoded )
-- Some Common Characters that help bypassing Rate Limit : %0d , %2e , %09 , %20 , %0, %00, %0d%0a, %0a, %09, %0C
+- Some Common Characters that help bypassing Rate Limit : %0d , %2e , %09 , %20 , %0, %00, %0d%0a, %0a, %0C
 
 
 ## Using IP Rotate Burp Extension
