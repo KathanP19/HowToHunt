@@ -44,5 +44,5 @@ X-Forwarded-For: IP
 
 # Authors:  
 [Keshav Malik](https://www.linkedin.com/in/keshav-malik-22478014a) </br>
-[0xd3vil](https://linkedin.com/in/0xd3vil)
+[0xd3vil](https://linkedin.com/in/0xd3vil) </br>
 [Virdoex_hunter](https://twitter.com/Virdoex_hunter)
