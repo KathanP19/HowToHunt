@@ -1,5 +1,5 @@
 ## 403 Bypass
-I am sharing all this tips and techniques from my own personal experiance there no official references for that
+I am sharing all this tips and techniques from my own personal experience there no official references for that
 
 ### Directory Based
 If you see directory with no slash at end then do these acts there
