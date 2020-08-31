@@ -50,5 +50,5 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
  2. You can Used [https://xsshunter.com/](https://xsshunter.com/) or Use burpcollaborator or ngrok.
  3. Try it on contact forms or similar functionality.
 
-Authors:
+### Authors
 * [@KathanP19](https://twitter.com/KathanP19)
