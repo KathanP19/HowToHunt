@@ -1,4 +1,5 @@
 **Cross Site Request Forgery(CSRF)**
+
 Hello Guys, I Tried My Best To Share all The CSRF Bypasses I Know.
 I Hope This Will Help You.
 
@@ -22,4 +23,14 @@ I Hope This Will Help You.
 -Switch From Non-Form `Content-Type: application/json` or `Content-Type: application/x-url-encoded` To `Content-Type: form-multipart`
 
 ```
-Author: [@SMHTahsin33](https://twitter.com/SMHTahsin33)
+### References
+[Medium Writeup](https://medium.com/swlh/intro-to-csrf-cross-site-request-forgery-9de669df03de)
+
+[Medium Writeup](https://medium.com/swlh/attacking-sites-using-csrf-ba79b45b6efe)
+
+[Medium Writeup](https://medium.com/swlh/bypassing-csrf-protection-c9b217175ee)
+
+### Author
+**Name:** Syed Mushfik Hasan Tahsin
+
+**Handle:** [@SMHTahsin33](https://twitter.com/SMHTahsin33)
