@@ -11,7 +11,7 @@ Step->4  If origin is reflected in response means the target is vuln to CORS
 ```
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-* Hunting method 2(mutliple means including subdomains):
+* Hunting method 2(multiple means including subdomains):
 ```
 step 1-> find domains i.e subfinder -d target.com -o domains.txt
 step 2-> check alive ones : cat domains.txt | httpx | tee -a alive.txt
