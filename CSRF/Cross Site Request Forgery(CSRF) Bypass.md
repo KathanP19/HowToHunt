@@ -44,8 +44,7 @@ I Hope This Will Help You.
 [Medium Writeup](https://medium.com/swlh/bypassing-csrf-protection-c9b217175ee)
 
 
-# Authors
-
+### Authors
 * [@SMHTahsin33](https://twitter.com/SMHTahsin33)
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
 * [@remonsec](https://twitter.com/remonsec)
