@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting That Particular Vulnerability. 
 
@@ -25,6 +25,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.theinfosecguy.me"><img src="https://avatars3.githubusercontent.com/u/33570148?v=4" width="100px;" alt=""/><br /><sub><b>Keshav Malik</b></sub></a><br /><a href="#tutorial-theinfosecguy" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://0xd3vil.github.io/"><img src="https://avatars3.githubusercontent.com/u/32324065?v=4" width="100px;" alt=""/><br /><sub><b>Vivek Kumar Yadav</b></sub></a><br /><a href="#tutorial-0xd3vil" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://smhtahsin33.me"><img src="https://avatars0.githubusercontent.com/u/60981314?v=4" width="100px;" alt=""/><br /><sub><b>smhtahsin33</b></sub></a><br /><a href="#tutorial-SMHTahsin33" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/Virdoexhunter"><img src="https://avatars1.githubusercontent.com/u/68891432?v=4" width="100px;" alt=""/><br /><sub><b>Deepak Dhiman</b></sub></a><br /><a href="#tutorial-Virdoexhunter" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
