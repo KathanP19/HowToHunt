@@ -37,6 +37,12 @@ X-Forwarded-For: IP
 
 ## You can find some more here - [Check this out](https://medium.com/bugbountywriteup/bypassing-rate-limit-like-a-pro-5f3e40250d3c)
 
-Authors:  
+# Reference
+* https://twitter.com/m4ll0k2/status/1294983599943540738/photo/1
+* https://twitter.com/SalahHasoneh1/status/1287366496432332800
+* https://twitter.com/SMHTahsin33/status/1295054667613757441(all in one must check)
+
+# Authors:  
 [Keshav Malik](https://www.linkedin.com/in/keshav-malik-22478014a) </br>
-[0xd3vil](https://linkedin.com/in/0xd3vil)
+[0xd3vil](https://linkedin.com/in/0xd3vil) </br>
+[Virdoex_hunter](https://twitter.com/Virdoex_hunter)
