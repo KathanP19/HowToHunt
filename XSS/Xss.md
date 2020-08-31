@@ -14,7 +14,7 @@ One Awesome mind map for approach to reflected xss can be found here [https://gi
 ### 2. Using Waybackurls and other similar site
  1. Use [Gau](https://github.com/lc/gau) or [Wayback urls](https://github.com/tomnomnom/waybackurls) to passively gather urls of the target.
  2. Filter the parameters using `grep "="` or gf patterns and store it in a new file.
- 3. Now run [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) or [bxss](https://github.com/ethicalhackingplayground/bxss/) on that new file.
+ 3. Now run [Gxss](https://github.com/KathanP19/Gxss) or [bxss](https://github.com/ethicalhackingplayground/bxss/) on that new file.
  4. Check Reflected Param Manually or use some tool like [dalfox](https://github.com/hahwul/dalfox) 
 
 ### 3. Using Google Dorks
@@ -50,4 +50,5 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
  2. You can Used [https://xsshunter.com/](https://xsshunter.com/) or Use burpcollaborator or ngrok.
  3. Try it on contact forms or similar functionality.
 
-Author:[https://twitter.com/KathanP19](https://twitter.com/KathanP19)
+Authors:
+* [@KathanP19](https://twitter.com/KathanP19)
