@@ -25,7 +25,7 @@ Than this is an old session does not expire bug
     6.Paste that cookies in cookie editor extension
     7.Refresh page if you are logged in than this is a session hijacking
 ```  
-`Impact:` If attacker get cookies of victim it will leads to sessin hijacking
+`Impact:` If attacker get cookies of victim it will leads to account takeover.
  
  
 ### Password reset link token does not expire(Insecure Configurability)
