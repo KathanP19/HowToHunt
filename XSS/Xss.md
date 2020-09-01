@@ -87,7 +87,7 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 - https://www.youtube.com/watch?v=gBqzzhgHoYg
 - https://www.youtube.com/watch?v=WclmtS8Ftc4
 
-# XSS filter evasion tips**
+# XSS filter evasion tips
 
 *Tips*
 - < and > can be replace with html entities `&lt;` and `&gt;`
