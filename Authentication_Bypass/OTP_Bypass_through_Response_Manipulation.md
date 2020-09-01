@@ -1,6 +1,8 @@
-OTP Bypass response manipulation( Register or login or password reset )
+# OTP Bypass response manipulation( Register or login or password reset )
 
-  Steps:
+### Steps:
+ 
+  ```
     1.Register 2 accounts with any 2 mobile number(first enter right otp)
     2.Intercept your request
     3.click on action -> Do intercept -> intercept response to this request.
@@ -9,7 +11,7 @@ OTP Bypass response manipulation( Register or login or password reset )
     6.Intercept respone to the request
     7.See the message like you get status:0
     8.Change status to 1 i.e, status:1 and forward the request if you logged in means you just done authentication bypass.
-    
+  ```
     
     
     
