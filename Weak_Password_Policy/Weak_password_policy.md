@@ -15,7 +15,7 @@ There are two ways in which this can be checked
 - Check if you can use Password some Weak Passwords such as 123456, 111111 , abcabc , qwerty123
 - Try above mentioned when Resetting Password , Creating Account , Changing Password from Account Settings
 
-*** Applications usually have Restrictions on Password while Creating Account, Make sure you check for both the cases when Resetting Password***
+* Applications usually have Restrictions on Password while Creating Account, Make sure you check for both the cases when Resetting Password
 
 
 ### References
