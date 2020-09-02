@@ -2,12 +2,23 @@
 
 A weak password policy increases the probability of an attacker having success using brute force and dictionary attacks against user accounts. An attacker who can determine user passwords can take over a user's account and potentially access sensitive data in the application.
 
-<h4>Steps to reproduce:</h4>
+There are two ways in which this can be checked 
 
-1. Create a new account and use the email address as the password. </br>
-2. Reset your password and choose your email address as the password. </br>
-   In both cases, the application does not prevent this decision. </br>
+### First Way 
 
-To improve the password strength, the application should avoid 1-to-1 usage of personal information as the account password.
+- Check if you can use Password same as that of Email Address
+- Check if you can use Username same as that of Email Address
+- Try above mentioned when Resetting Password , Creating Account , Changing Password from Account Settings
 
-Author: [@0xd3vil](https://twitter.com/0xd3vil)
+### Second Way 
+
+- Check if you can use Password some Weak Passwords such as 123456, 111111 , abcabc , qwerty123
+- Try above mentioned when Resetting Password , Creating Account , Changing Password from Account Settings
+
+*** Applications usually have Restrictions on Password while Creating Account, Make sure you check for both the cases when Resetting Password***
+
+
+### References
+
+- [All About Weak Password Policy](http://applicationsecurity.io/appsec-findings-database/weak-password-policy/)
+- [OWASP Guide for Weak Passwords](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/07-Testing_for_Weak_Password_Policy)
