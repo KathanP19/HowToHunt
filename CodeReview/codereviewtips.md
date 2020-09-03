@@ -68,5 +68,5 @@ Look out for missing cookie flags such as httpOnly and secure.
 Additionally, pay special attention to the application’s unexpected behavior, conditionals, and complex functions. 
 These locations are where obscure bugs are often discovered.
 
- 
-
+### Authors
+* [@harsha0x01](https://twitter.com/harsha0x01)
