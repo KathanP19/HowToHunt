@@ -1,7 +1,9 @@
 Easy CVES using Researching
   Tools:google,twitter,nuclei
   
-  Steps:
+ 
+ 
+ Steps:
     1.Grab all the subdomains i.e, subfinder -d domain.com | tee -a domains.txt
     2.Grap all alive domains i.e,  cat domains.txt | httpx -status-code | grep 200 | cut -d " " -f1 | tee -a alive.txt
     3.Run nuclei basic-detection,panels,workflows,cves templates differently and store results in different file. i.e, cat alive.txt | nuclei -t nuclei-templates/workflows | tee -a workflows.
