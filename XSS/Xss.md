@@ -116,4 +116,4 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 
 ### Authors
 * [@KathanP19](https://twitter.com/KathanP19)
-0000000
+* [@harsha0x01](https://twitter.com/harsha0x01)
