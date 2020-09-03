@@ -75,6 +75,19 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 - XSS hunter contains a payload for CSP bypass
 - Generate some variations of your payloads (example replace < with `&lt;`)
 
+### Where to look for Blind XSS……
+```
+1- Review forms
+2- Contact Us pages
+3- Passwords(You never know if the other side doesn’t properly handle input and if your password is in View mode)
+4- Address fields of e-commerce sites
+5- First or Last Name field while doing Credit Card Payments
+6- Set User-Agent to a Blind XSS payload. You can do that easily from a proxy such as Burpsuite.
+7- Log Viewers
+8- Feedback Page
+9- Chat Applications
+10- Any app that requires user moderation
+```
 
 # DOM XSS
 
@@ -103,3 +116,4 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 
 ### Authors
 * [@KathanP19](https://twitter.com/KathanP19)
+* [@harsha0x01](https://twitter.com/harsha0x01)
