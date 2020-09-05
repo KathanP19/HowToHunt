@@ -7,8 +7,8 @@
 5. Ensure CSP is Implemented in a secure way Guide to setup secure CSP
 6. Ensure X-XSS-Protection header is set (not as 0).
 7. Ensure Cookie security flags are set,
-Secure Flag and Httponly set as true
-Same site set as Lax or strict depends on nature of the Webapp (but not as set as none)
+   Secure Flag and Httponly set as true
+   Same site set as Lax or strict depends on nature of the Webapp (but not as set as none)
 8. Ensure ETag token is set if the website requires to keep updating the resources.
 9. Ensure feature policy is set.
 10. Ensure X-Content-Type-Options is set.
