@@ -10,6 +10,10 @@
    `─BROKEN─ https://www.linkedin.com/company/ACME-inc-/ (HTTP_999)`
    
  3. Now you need to check if company has the page or not , if no then register as the company or try to get that username or url. 
+ 
+ ## Alternate Step
+ 1. Go to [Online Broken Link Checker](https://ahrefs.com/broken-link-checker)
+ 2. Input the domain name
 
 # Reference
 
