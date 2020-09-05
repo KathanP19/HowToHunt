@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -31,6 +31,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/bishal0x01"><img src="https://avatars3.githubusercontent.com/u/26160488?v=4" width="100px;" alt=""/><br /><sub><b>Bishal Shrestha</b></sub></a><br /><a href="#tutorial-bishal0x01" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/Cyber-Pirate"><img src="https://avatars1.githubusercontent.com/u/69442715?v=4" width="100px;" alt=""/><br /><sub><b>Cyber-Pirate</b></sub></a><br /><a href="#tutorial-Cyber-Pirate" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
