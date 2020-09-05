@@ -15,3 +15,6 @@
 11. Disable XML features that the application does not intend to use(prevents XXE)
 12. Use the security headers page to check what headers are missing!
 ```
+
+### Author
+- @[Harsha0x01](https://twitter.com/harsha0x01)
