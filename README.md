@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -34,6 +34,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Cyber-Pirate"><img src="https://avatars1.githubusercontent.com/u/69442715?v=4" width="100px;" alt=""/><br /><sub><b>Cyber-Pirate</b></sub></a><br /><a href="#tutorial-Cyber-Pirate" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/h4ckboy19"><img src="https://avatars1.githubusercontent.com/u/61796314?v=4" width="100px;" alt=""/><br /><sub><b>Naman Shah</b></sub></a><br /><a href="#tutorial-h4ckboy19" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://anugrahsr.netlify.com/"><img src="https://avatars3.githubusercontent.com/u/44763564?v=4" width="100px;" alt=""/><br /><sub><b>ANUGRAH S R</b></sub></a><br /><a href="#tutorial-Anugrahsr" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/SocioDroid"><img src="https://avatars1.githubusercontent.com/u/47445489?v=4" width="100px;" alt=""/><br /><sub><b>Aishwarya Kendle</b></sub></a><br /><a href="#tutorial-SocioDroid" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
