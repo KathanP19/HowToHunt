@@ -5,3 +5,4 @@
 https://github.com/BishopFox/GitGot
 https://github.com/hisxo/gitGraber
 https://github.com/tillson/git-hound
+https://securitytrails.com/blog/github-dorks
