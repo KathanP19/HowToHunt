@@ -1,5 +1,5 @@
 ## 403 Bypass
-I am sharing all this tips and techniques from my own personal experiance there no official references for that
+I am sharing all this tips and techniques from my own personal experience there no official references for that
 
 ### Directory Based
 If you see directory with no slash at end then do these acts there
@@ -35,3 +35,5 @@ Well Always look for some references or proof of concept if someone sharing any 
 I have some poc video on my YouTube channel for 403 and other Improper access control bugs with those methods. You can check them
 
 YouTube: [Mehedi Hasan Remon](https://www.youtube.com/channel/UCF_yxU7acxUojiGiOAMafQQ/videos?view_as=subscriber)
+
+Author:[@remonsec](https://twitter.com/remonsec)

@@ -14,7 +14,7 @@ One Awesome mind map for approach to reflected xss can be found here [https://gi
 ### 2. Using Waybackurls and other similar site
  1. Use [Gau](https://github.com/lc/gau) or [Wayback urls](https://github.com/tomnomnom/waybackurls) to passively gather urls of the target.
  2. Filter the parameters using `grep "="` or gf patterns and store it in a new file.
- 3. Now run [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) or [bxss](https://github.com/ethicalhackingplayground/bxss/) on that new file.
+ 3. Now run [Gxss](https://github.com/KathanP19/Gxss) or [bxss](https://github.com/ethicalhackingplayground/bxss/) on that new file.
  4. Check Reflected Param Manually or use some tool like [dalfox](https://github.com/hahwul/dalfox) 
 
 ### 3. Using Google Dorks
@@ -34,6 +34,17 @@ One Awesome mind map for approach to reflected xss can be found here [https://gi
  2. Enumerate the Firewall using [https://github.com/Ekultek/WhatWaf](https://github.com/Ekultek/WhatWaf) or other similar tool.
  3. Find WAF bypass payload on twitter by searching or in this Github Repo [https://github.com/0xInfection/Awesome-WAF](https://github.com/0xInfection/Awesome-WAF)
  4. Also Use [Arjun](https://github.com/s0md3v/Arjun) to find hidden params.
+
+*Tips*
+- Check the error pages (404,403,..) sometimes they contain reflected values
+	- Trigger a 403 by trying to get the .htaccess file
+- Try every reflected parameter
+
+*Video's*
+- https://www.youtube.com/watch?v=wuyAY3vvd9s
+- https://www.youtube.com/watch?v=GsyOuQBG2yM
+- https://www.youtube.com/watch?v=5L_14F-uNGk
+- https://www.youtube.com/watch?v=N3HfF6_3k94
  
 # Stored Xss Methods
 Stored Xss are mostly found manually
@@ -43,9 +54,66 @@ Stored Xss are mostly found manually
  4. Try in Comment section anywhere on target site.
  5. Try on every input fields which get reflected in page and which can be seen by other users.
 
+*Tips*
+- For every input field
+	- Try to get ```<a href=#>test</a>``` an entity in
+	- Try to get an obfuscated entity in
+	- If it catches on anything, go deeper
+
+*Video's*
+- https://www.youtube.com/watch?v=uHy1x1NkwRU
+
 # Blind Xss
 Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you get response on you server.
 
  1. Similar methods As given above except try putting payload which can give a callback on your server when executed.
  2. You can Used [https://xsshunter.com/](https://xsshunter.com/) or Use burpcollaborator or ngrok.
  3. Try it on contact forms or similar functionality.
+
+*Tips*
+- Copy every payload from your xsshunter payloads section and paste it into every field you see
+- XSS hunter contains a payload for CSP bypass
+- Generate some variations of your payloads (example replace < with `&lt;`)
+
+### Where to look for Blind XSS……
+```
+1- Review forms
+2- Contact Us pages
+3- Passwords(You never know if the other side doesn’t properly handle input and if your password is in View mode)
+4- Address fields of e-commerce sites
+5- First or Last Name field while doing Credit Card Payments
+6- Set User-Agent to a Blind XSS payload. You can do that easily from a proxy such as Burpsuite.
+7- Log Viewers
+8- Feedback Page
+9- Chat Applications
+10- Any app that requires user moderation
+```
+
+# DOM XSS
+
+*Tips*
+- Would not recommend manually looking for DOM XSS
+- Burp suite PRO scanner can find DOM XSS
+- Tool: https://github.com/dpnishant/ra2-dom-xss-scanner
+
+*Video's*
+- https://www.youtube.com/watch?v=gBqzzhgHoYg
+- https://www.youtube.com/watch?v=WclmtS8Ftc4
+
+# XSS filter evasion tips
+
+*Tips*
+- < and > can be replace with html entities `&lt;` and `&gt;`
+- You can try an XSS polyglot
+	- ```javascript:/*--></title></style></textarea></script></xmp><svg/onload='+/"/+/onmouseover=1/+/[*/[]/+alert(1)//'>```
+	- https://gist.github.com/michenriksen/d729cd67736d750b3551876bbedbe626
+
+# Thanks To
+* [The XSS rat](https://www.youtube.com/channel/UCjBhClJ59W4hfUly51i11hg)
+
+# Reference
+* [https://github.com/heilla/SecurityTesting/blob/master/HuntingCheckList.md](https://github.com/heilla/SecurityTesting/blob/master/HuntingCheckList.md)
+
+### Authors
+* [@KathanP19](https://twitter.com/KathanP19)
+* [@harsha0x01](https://twitter.com/harsha0x01)
