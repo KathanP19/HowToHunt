@@ -60,6 +60,7 @@ X-Remote-Addr: 127.0.0.1
 
 
 ## You can find some more here - [Check this out](https://medium.com/bugbountywriteup/bypassing-rate-limit-like-a-pro-5f3e40250d3c)
+## You can find more with screenshot https://medium.com/@huzaifa_tahir/methods-to-bypass-rate-limit-5185e6c67ecd
 
 # Reference
 * https://twitter.com/m4ll0k2/status/1294983599943540738/photo/1
