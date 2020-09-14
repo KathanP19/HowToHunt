@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -36,6 +36,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://anugrahsr.netlify.com/"><img src="https://avatars3.githubusercontent.com/u/44763564?v=4" width="100px;" alt=""/><br /><sub><b>ANUGRAH S R</b></sub></a><br /><a href="#tutorial-Anugrahsr" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/SocioDroid"><img src="https://avatars1.githubusercontent.com/u/47445489?v=4" width="100px;" alt=""/><br /><sub><b>Aishwarya Kendle</b></sub></a><br /><a href="#tutorial-SocioDroid" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/SandeepkrishnaS"><img src="https://avatars2.githubusercontent.com/u/32749116?v=4" width="100px;" alt=""/><br /><sub><b>MadMaxx</b></sub></a><br /><a href="#tutorial-SandeepkrishnaS" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/Akshaykerkar"><img src="https://avatars3.githubusercontent.com/u/71178984?v=4" width="100px;" alt=""/><br /><sub><b>Akshaykerkar</b></sub></a><br /><a href="#tutorial-Akshaykerkar" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
