@@ -11,7 +11,7 @@ Easy Subdomain Takeover Method
 			
 			
 			
-			3:cat domains.txt | while read domain;do dig +short $domain;done | tee -a digs.txt
+			3:cat domains.txt | while read domain;do dig  $domain;done | tee -a digs.txt
 			
 			
 			
