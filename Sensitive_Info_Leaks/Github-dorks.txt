@@ -1,0 +1,8 @@
+SF_USERNAME salesforce
+filename:.git-credentials
+filename:.bash_profile aws
+filename:sftp-config.json password
+filename:.env MAIL_HOST=smtp.gmail.com
+rds.amazonaws.com password
+extension:json mongolab.com
+extension:sql mysql dump
