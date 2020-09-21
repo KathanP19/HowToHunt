@@ -163,3 +163,7 @@ Here are some quick methods to detect the SQL Injection vulnerability, though th
 * Arjun - https://github.com/s0md3v/Arjun
 * Hakcrawler - https://github.com/hakluke/hakrawler
 
+
+###Author :
+
+*[@xhan1x](https://twitter.com/xhan1x)
