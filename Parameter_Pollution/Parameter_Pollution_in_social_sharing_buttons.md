@@ -1,9 +1,11 @@
-Hi Guys,
+# Parameter Pollution in social sharing buttons
 
+Hi Guys,
 Though it is not severe bug.But still some organizations take this seriously.
 
-Steps :
+## Steps :
 
+```
 1.Browse through your target.
   say https://target.com
 2.Find a article or blog present on target website which must have a link to share that blog on different social networks such as
@@ -16,10 +18,10 @@ Steps :
 4.Now hit enter with the abover url and just click on share with social media.
   Just observe the content if it is including our payload i.e. https://attacker.com
   Then it is vulnerable or else try next target.
+```  
+## References:
+* https://hackerone.com/reports/105953
+* Google
   
-  References:
-  https://hackerone.com/reports/105953
-  Google
-  
-  You can finde me here
-  https://twitter.com/KenAdams000
+## Author
+* [KenAdams000](https://twitter.com/KenAdams000)
