@@ -82,7 +82,9 @@ This would get blocked by the CSP
 This would pass because accounts.google.com is allowed to load javascript files. However, we are abusing the JSONP feature to load our malicious javascript.
 
 ```something.example.com?vuln_param=https://accounts.google.com/o/oauth2/revoke?callback=alert(1337)```
-CSP Injection Bypass
+
+#### CSP Injection Bypass
+
 The third type of CSP bypass is called CSP injection. This occurs when user supplied input is reflected in the CSP header. Suppose you have the following url:
 
 ```example.com?vuln=something_vuln_csp```
