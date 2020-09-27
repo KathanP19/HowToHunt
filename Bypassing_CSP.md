@@ -23,21 +23,22 @@ object-src 'none';
 
 _Some definitions_
 
-**script-src:** This directive specifies allowed sources for JavaScript. This includes not only URLs loaded directly into  elements, but also things like inline script event handlers (onclick) and XSLT stylesheets which can trigger script execution. 
-**default-src:** This directive defines the policy for fetching resources by default. When fetch directives are absent in CSP header the browser follows this directive by default. 
-**Child-src:** This directive defines allowed resources for web workers and embedded frame contents. 
-**connect-src:** This directive restricts URLs to load using interfaces like ,fetch,websocket,XMLHttpRequest 
-**frame-src:** This directive restricts URLs to which frames can be called out. 
-**frame-ancestors:** This directive specifies the sources that can embed the current page. This directive applies to , , , and  tags. This directive can't be used in  tags and applies only to non-HTML resources. 
-**img-src:** It defines allowed sources to load images on the web page. 
-**Manifest-src:** This directive defines allowed sources of application manifest files. 
-**media-src:** It defines allowed sources from where media objects like , and  can be loaded. 
-**object-src:** It defines allowed sources for the , and  elements.
-**base-uri:** It defines allowed URLs which can be loaded using  element. 
-**form-action:** This directive lists valid endpoints for submission from  tags. 
-**plugin-types:** It defineslimits the kinds of mime types a page may invoke. 
-upgrade-insecure-requests: This directive instructs browsers to rewrite URL schemes, changing HTTP to HTTPS. This directive can be useful for websites with large numbers of old URL's that need to be rewritten. 
-**sandbox:** sandbox directive enables a sandbox for the requested resource similar to the  sandbox attribute. It applies restrictions to a page's actions including preventing popups, preventing the execution of plugins and scripts, and enforcing a same-origin policy.
+1. **script-src:** This directive specifies allowed sources for JavaScript. This includes not only URLs loaded directly into  elements, but also things like inline script event handlers (onclick) and XSLT stylesheets which can trigger script execution. 
+2. **default-src:** This directive defines the policy for fetching resources by default. When fetch directives are absent in CSP header the browser follows this directive by default.
+3. **Child-src:** This directive defines allowed resources for web workers and embedded frame contents. 
+4. **connect-src:** This directive restricts URLs to load using interfaces like ,fetch,websocket,XMLHttpRequest 
+5. **frame-src:** This directive restricts URLs to which frames can be called out. 
+6. **frame-ancestors:** This directive specifies the sources that can embed the current page. This directive applies to , , , and  tags. This directive can't be used in  tags and applies only to non-HTML resources. 
+7. **img-src:** It defines allowed sources to load images on the web page. 
+8. **Manifest-src:** This directive defines allowed sources of application manifest files. 
+9. **media-src:** It defines allowed sources from where media objects like , and  can be loaded. 
+10. **object-src:** It defines allowed sources for the , and  elements.
+11. **base-uri:** It defines allowed URLs which can be loaded using  element. 
+12. **form-action:** This directive lists valid endpoints for submission from  tags.
+13. **plugin-types:** It defineslimits the kinds of mime types a page may invoke. 
+upgrade-insecure-requests: This directive instructs browsers to rewrite URL schemes, changing HTTP to HTTPS. This directive can be useful for websites with large numbers of old URL's that need to be rewritten.
+14. **sandbox:** sandbox directive enables a sandbox for the requested resource similar to the  sandbox attribute. It applies restrictions to a page's actions including preventing popups, preventing the execution of plugins and scripts, and enforcing a same-origin policy.
+
 
 
 ### Basic CSP Bypass
