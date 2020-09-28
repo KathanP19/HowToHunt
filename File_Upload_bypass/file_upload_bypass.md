@@ -15,3 +15,7 @@ For this method we use polygots. Polyglots, in a security context, are files tha
 so while we have to upload a JPEG file type we actaully can upload a PHAR-JPEG file which will appear to be a JPEg file type to the server while validating. the reason is the file PHAR-JPEg file has both the JPEG header and the PHP file also. so while uploading it didn’t get detected and later after processing the PHP file can be used to exploit.
 
 And at last Uploading a shell to some random websites for fun is not really cool so don’t ever try untill unless you have the permission to test.
+
+
+Author 
+- [harsha](https://twitter.com/harsha0x01)
