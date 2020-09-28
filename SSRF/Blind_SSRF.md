@@ -22,5 +22,6 @@ Snippet:
 
 I will list more as i find if you have found any please kindly list them here so that other's beneift from it.
 
-Contributor: [@cowlingbanana](https://github.com/cowlingbanana)
+### Contributor:
+ * [@cowlingbanana](https://github.com/cowlingbanana)
 
