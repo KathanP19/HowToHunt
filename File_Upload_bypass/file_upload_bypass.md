@@ -16,6 +16,8 @@ so while we have to upload a JPEG file type we actaully can upload a PHAR-JPEG f
 
 And at last Uploading a shell to some random websites for fun is not really cool so don’t ever try untill unless you have the permission to test.
 
+-----
 
-Author 
+### Author 
+
 - [harsha](https://twitter.com/harsha0x01)
