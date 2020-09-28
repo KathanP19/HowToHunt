@@ -1,8 +1,9 @@
 # Bypassing File Uploads
-```
+
 Suppose you have a limitation that you can only upload in a few formats like PDF, JPEG, JPG, ….But what if you can upload a PHP file by defying the Upload mechnism and validation of file type check. let me tell you if someone can upload a PHP file then its game over for the website as he will upload a php shell and can easily perform an RCE , or Worst will simply gain a reverse shell on the server.
-```
+
 > __How does Bypass work__
+
 Well it depends on which kind of validation the system is using …it is just verfying the extension ?? if its just doing that then it becomes very easy to bypass and upload a PHP file or something malicious. suppose we have to upload a JPG file so the extension must be something.jpg
 
 ### 1. Bypassing Normal extension
