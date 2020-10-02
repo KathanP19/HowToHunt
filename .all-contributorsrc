@@ -5,6 +5,15 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
+   {
+      "login": "KathanP19",
+      "name": "Kathan Patel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/33719912?v=4",
+      "profile": "https://github.com/KathanP19",
+      "contributions": [
+        "tutorial"
+      ]
+    },
     {
       "login": "remonsec",
       "name": "Mehedi Hasan Remon",
