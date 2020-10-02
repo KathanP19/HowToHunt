@@ -13,7 +13,7 @@
 ```      
 Than this is an old session does not expire bug
       
-      
+      ged 
 ### Session Hijacking(Intended Behavior)
 * Steps:
 ```
@@ -37,6 +37,17 @@ Than this is an old session does not expire bug
       4.Instead logged in with your old password and change your email to other
       5.Now use that password link sents to old email and check if you are able to change your password if yes than there is the title bug.
  ```    
+ 
+ ### Server security misconfiguration -> Lack of security headers -> Cache control for a security page
+ * Steps :
+ ``` 
+     1. Login to the application
+     2. Navigate around the pages
+     3. Logout
+     4. Press (Alt+left-arrow) buttons
+     5. If you are logged in or can view the pages navigated by the user. Then you found a bug.
+  ```
+  `Impact:` At a PC cafe, if a person was in a very important page with alot of details and logged out, then another person comes and clicks back (because he didnt close the browser) then data is exposed. User information leaked
       
   Happy Hacking:)
   
