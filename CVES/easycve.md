@@ -4,6 +4,9 @@
 * Google
 * Twitter
 * Nuclei
+* jaeles
+* exploit-db.com
+* Rapid7.com
   
 ## Steps:
 ```
