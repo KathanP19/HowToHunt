@@ -22,3 +22,15 @@ And at last Uploading a shell to some random websites for fun is not really cool
 -----
 
 
+**How the bypass was possible?**
+
+1. Create a malicious file with an extension that is accepted by the application.
+2. Upload that file and click on send.
+3. Capture the request in any proxy tool, edit the file extension to the malicious extension that you want. In some cases, you might need to change the content type of a file.
+4. Forward the request to the server.
+
+------
+
+Resources :-
+
+- [File upload Bypass pdf](https://harshitsengar.in/resources/File%20Upload%20Bypass%20.pdf)
