@@ -7,9 +7,10 @@ When you set some string so long so server cannot process it anymore it cause DO
 ## How to test
 
 ---
-
-create app and put field like username or address or even profile picture name parameter ( second refrence )   like 1000 character of string . Search A's account from B's account either it will
-
+```
+Create app and put field like username or address or even profile picture name parameter ( second refrence ) like 1000 character of string . 
+Search A's account from B's account either it will
+```
 - Either it will keeping on searching for long time
 - Either the application will crash (500 - Error Code)
 
@@ -21,4 +22,5 @@ https://hackerone.com/reports/764434
 
 ---
 
-Author :- [twitter](https://twitter.com/jatsumit3)
+## Author :- 
+* [jatsumit3](https://twitter.com/jatsumit3)
