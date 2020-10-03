@@ -5,7 +5,7 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
-   {
+    {
       "login": "KathanP19",
       "name": "Kathan Patel",
       "avatar_url": "https://avatars2.githubusercontent.com/u/33719912?v=4",
@@ -190,6 +190,15 @@
       "name": "praneeth1998",
       "avatar_url": "https://avatars3.githubusercontent.com/u/36130152?v=4",
       "profile": "https://github.com/praneeth1998",
+      "contributions": [
+        "tutorial"
+      ]
+    },
+    {
+      "login": "sumitjat",
+      "name": "sumitjat",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/36793278?v=4",
+      "profile": "http://instagram.com/sumitjat",
       "contributions": [
         "tutorial"
       ]
