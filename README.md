@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -52,6 +52,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://instagram.com/sumitjat"><img src="https://avatars2.githubusercontent.com/u/36793278?v=4" width="100px;" alt=""/><br /><sub><b>sumitjat</b></sub></a><br /><a href="#tutorial-sumitjat" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/Mr-p0tat0"><img src="https://avatars1.githubusercontent.com/u/59037001?v=4" width="100px;" alt=""/><br /><sub><b>Mr_p0tat0</b></sub></a><br /><a href="#tutorial-Mr-p0tat0" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/ashhadali10"><img src="https://avatars1.githubusercontent.com/u/54775497?v=4" width="100px;" alt=""/><br /><sub><b>ashhadali10</b></sub></a><br /><a href="#tutorial-ashhadali10" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
