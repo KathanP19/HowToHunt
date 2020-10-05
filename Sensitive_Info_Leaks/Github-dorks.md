@@ -99,4 +99,4 @@
 - extension:yaml [mongolab.com] (http://mongolab.com/)
 - [WFClient] Password= extension:ica
 - extension:avastlic “[support.avast.com] (http://support.avast.com/)”
-extension:json googleusercontent client_secret
+- extension:json googleusercontent client_secret
