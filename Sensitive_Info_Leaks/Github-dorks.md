@@ -1,45 +1,45 @@
-**GitHub Dork List**
+**GitHub Dork List :**
 
 **GitHub Dorks for Finding Files**
 
- filename:manifest.xml
- filename:travis.yml
- filename:vim_settings.xml
- filename:database
- filename:prod.exs NOT prod.secret.exs
- filename:prod.secret.exs
- filename:.npmrc _auth
- filename:.dockercfg auth
- filename:WebServers.xml
- filename:.bash_history <Domain name>
- filename:sftp-config.json
- filename:sftp.json path:.vscode
- filename:secrets.yml password
- filename:.esmtprc password
- filename:passwd path:etc
- filename:dbeaver-data-sources.xml
- path:sites databases password
- filename:config.php dbpasswd
- filename:prod.secret.exs
- filename:configuration.php JConfig password
- filename:.sh_history
- shodan_api_key language:python
- filename:shadow path:etc
- JEKYLL_GITHUB_TOKEN
- filename:proftpdpasswd
- filename:.pgpass
- filename:idea14.key
- filename:hub oauth_token
- HEROKU_API_KEY language:json
- HEROKU_API_KEY language:shell
- SF_USERNAME salesforce
- filename:.bash_profile aws
- extension:json [api.forecast.io](http://api.forecast.io/)
- filename:.env MAIL_HOST=[smtp.gmail.com](http://smtp.gmail.com/)
- filename:wp-config.php
- extension:sql mysql dump
- filename:credentials aws_access_key_id
- filename:id_rsa or filename:id_dsa
+filename:manifest.xml
+filename:travis.yml
+filename:vim_settings.xml
+filename:database
+filename:prod.exs NOT prod.secret.exs
+filename:prod.secret.exs
+filename:.npmrc _auth
+filename:.dockercfg auth
+filename:WebServers.xml
+filename:.bash_history <Domain name>
+filename:sftp-config.json 
+filename:sftp.json path:.vscode
+filename:secrets.yml password
+filename:.esmtprc password
+filename:passwd path:etc
+filename:dbeaver-data-sources.xml
+path:sites databases password
+filename:config.php dbpasswd
+filename:prod.secret.exs
+filename:configuration.php JConfig password
+filename:.sh_history
+shodan_api_key language:python
+filename:shadow path:etc
+JEKYLL_GITHUB_TOKEN
+filename:proftpdpasswd
+filename:.pgpass
+filename:idea14.key
+filename:hub oauth_token
+HEROKU_API_KEY language:json
+HEROKU_API_KEY language:shell
+SF_USERNAME salesforce
+filename:.bash_profile aws
+extension:json [api.forecast.io](http://api.forecast.io/)
+filename:.env MAIL_HOST=[smtp.gmail.com](http://smtp.gmail.com/)
+filename:wp-config.php
+extension:sql mysql dump
+filename:credentials aws_access_key_id
+filename:id_rsa or filename:id_dsa
 
 **GitHub Dorks for Finding Languages**
 
