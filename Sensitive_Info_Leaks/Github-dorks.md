@@ -41,6 +41,9 @@
 - filename:credentials aws_access_key_id
 - filename:id_rsa or filename:id_dsa
 
+----------
+
+
 **GitHub Dorks for Finding Languages**
 
  - language:python username
@@ -51,6 +54,9 @@
  - language:shell username
  - language:java api
  - HOMEBREW_GITHUB_API_TOKEN language:shell
+
+------
+
 
 **GiHub Dorks for Finding API Keys, Tokens and Passwords**
 
@@ -74,6 +80,9 @@
 - OTP
 - user auth
 
+
+-----
+
 **GitHub Dorks for Finding Username**s
 
 - user:name (user:admin)
@@ -87,6 +96,8 @@
 - created:>=2011–06–12
 - created:2016–02–07 location:iceland
 - created:2011–04–06..2013–01–14 <user> in:username
+
+-----
 
 **GitHub Dorks for Finding Information using Extension**
 
