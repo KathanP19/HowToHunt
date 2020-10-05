@@ -123,7 +123,7 @@ Ex:- <script>%0alert(1)</script>
 
 Ex:- %2522
 
-4.esting for recursive filters, if firewall removes text in red, we will have clear payload
+4.Testing for recursive filters, if firewall removes text in red, we will have clear payload
 
 Ex:- <src<script>ipt>alert(1);</scr</script>ipt>
 
