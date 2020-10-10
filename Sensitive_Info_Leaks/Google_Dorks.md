@@ -11,7 +11,16 @@
 `inurl:example.com allintext:username,password filetype:log` <br>
 `site:example.com "-----BEGIN RSA PRIVATE KEY-----" inurl:id_rsa`<br>
 
+![t](https://miro.medium.com/max/550/1*N9W6DfGA6wxgKTiywV9aUA.png) <br>
+
+
+[Refrence](https://blog.usejournal.com/how-recon-helped-samsung-protect-their-production-repositories-of-samsungtv-ecommerce-estores-4c51d6ec4fdd)
+
+
 #### Other than Google, Try these dorks on various Search Engines such as Duck Duck Go, Bing etc.
+
+
+
 
 Author - [Keshav Malik](twitter.com/g0t_rOoT_) <br>
 Updated by - [Naveen Prakaasham](twitter.com/NPrakaasham)
