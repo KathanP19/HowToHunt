@@ -34,4 +34,13 @@ In this stage you have to play around the subdomains. Now do changed with the wo
 * AltDNS
 * DNSGen + ShuffleDNS
 
+## Reference & Resources
+
+https://pentester.land/cheatsheets/2018/11/14/subdomains-enumeration-cheatsheet.html
+
+https://0xpatrik.com/subdomain-enumeration-2019/
+
+https://0xpatrik.com/subdomain-enumeration-smarter/
+
+
 Theres a lot you can do. For now just mentioning communty standard approaches. Will be updating it regularly depending on the methodology comes out. 
