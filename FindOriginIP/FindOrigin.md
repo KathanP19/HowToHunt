@@ -1,7 +1,7 @@
 **Identifying a WAF**
 ```
 dig +short example.com
-curl -s <https://ipinfo.io/><ip address> | jq -r '.org'
+curl -s https://ipinfo.io/IP | jq -r '.org'
 ```
 
 -  With AWS, you can often identify a load balancer with the presence of "AWSLB" and "AWSLBCORS" cookies
