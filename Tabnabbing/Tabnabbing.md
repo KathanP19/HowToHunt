@@ -25,6 +25,6 @@ or
 <a href="..." target="_blamk" />
 ```
 
-###Author
+### Author
 
 * [@bolli95](https://github.com/bolli95)
