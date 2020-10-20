@@ -2,12 +2,10 @@
 
 Even though this vulnerability is rated by many bug bounty programs as a low severity bug, it is worth looking for it as it is very easy to find. 
 
----
 ### More information about the vulnerability:
 
 When tabnabbing, the attacker searches for links that are inserted into the website and are under his control. Such links may be contained in a forum post, for example. Once he has found this kind of functionality, it checks that the link's `rel` attribute does neither contain the value `noopener` nor `noreferrer` and the target attribute contains the value `_blank`. If this is the case, the website is vulnerable to tabnabbing. 
 
----
 ### How to exploit: 
 ```
 1. Attacker posts a link to a website under his control that contains the following JS code: window.opener.location = "http://evil.com"
@@ -17,7 +15,6 @@ When tabnabbing, the attacker searches for links that are inserted into the webs
 5. The victim tries to log on again and the attacker receives the credentials
 ```
 
----
 ### How to search for it: 
 
 As already mentioned, you have to search for the following link formats: 
@@ -27,8 +24,6 @@ As already mentioned, you have to search for the following link formats:
 or
 <a href="..." target="_blamk" />
 ```
-
----
 
 ###Author
 
