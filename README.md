@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -55,6 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/ashhadali10"><img src="https://avatars1.githubusercontent.com/u/54775497?v=4" width="100px;" alt=""/><br /><sub><b>ashhadali10</b></sub></a><br /><a href="#tutorial-ashhadali10" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/Nav-Prak"><img src="https://avatars1.githubusercontent.com/u/54226343?v=4" width="100px;" alt=""/><br /><sub><b>Nav-Prak</b></sub></a><br /><a href="#tutorial-Nav-Prak" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/CXVVMVII"><img src="https://avatars0.githubusercontent.com/u/35371691?v=4" width="100px;" alt=""/><br /><sub><b>NoBodysSafe</b></sub></a><br /><a href="#tutorial-CXVVMVII" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/bolli95"><img src="https://avatars3.githubusercontent.com/u/7793324?v=4" width="100px;" alt=""/><br /><sub><b>Max Boll</b></sub></a><br /><a href="#tutorial-bolli95" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
