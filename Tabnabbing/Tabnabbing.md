@@ -22,7 +22,7 @@ As already mentioned, you have to search for the following link formats:
 ```html
 <a href="..." target="_blank" rel="" />  
 or
-<a href="..." target="_blamk" />
+<a href="..." target="_blank" />
 ```
 
 ### Author
