@@ -4,7 +4,7 @@ Even though this vulnerability is rated by many bug bounty programs as a low sev
 
 ### More information about the vulnerability:
 
-When tabnabbing, the attacker searches for links that are inserted into the website and are under his control. Such links may be contained in a forum post, for example. Once he has found this kind of functionality, it checks that the link's `rel` attribute does neither contain the value `noopener` nor `noreferrer` and the target attribute contains the value `_blank`. If this is the case, the website is vulnerable to tabnabbing. 
+When tabnabbing, the attacker searches for links that are inserted into the website and are under his control. Such links may be contained in a forum post, for example. Once he has found this kind of functionality, it checks that the link's `rel` attribute does not contain the value `noopener` and the target attribute contains the value `_blank`. If this is the case, the website is vulnerable to tabnabbing. 
 
 ### How to exploit: 
 ```
