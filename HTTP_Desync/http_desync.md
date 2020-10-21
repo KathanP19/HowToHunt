@@ -3,42 +3,43 @@
 "HTTP request smuggling is a technique for interfering with the way a web site processes sequences of HTTP requests that are received from one or more users. Request smuggling vulnerabilities are often critical in nature, allowing an attacker to bypass security controls, gain unauthorized access to sensitive data, and directly compromise other application users. " -Portswigger  
 
 
-- Where?:  
+ ## Where ?:  
 
- -Any Endpoint might be Vulnerable to HTTP Desync attack.  
+ - Any Endpoint might be Vulnerable to HTTP Desync attack.  
  
- -You can Find the Vulnerability on Non-endpoints as well, But impact is always much higher on Sensitive Endpoints ;)
+ - You can Find the Vulnerability on Non-endpoints as well, But impact is always much higher on Sensitive Endpoints ;)
+ ---
+ ### Step 1:  
 
-Step 1:  
-
--Go To Repeater tab, and try various Timing based payloads to confirm the bug. More Explaination here:  
+ * Go To Repeater tab, and try various Timing based payloads to confirm the bug. More Explaination here:  
 
 [Finding the Vulnerability](https://portswigger.net/web-security/request-smuggling/finding)
 
-Step 2:  
+### Step 2:  
 
--Once you have successfully discovored the bug, you can chain it with various bugs eg. Account Takeover by stealing session IDs, Cross side Scripting Attacks in User-Agent Header,etc. More Description here:  
+* Once you have successfully discovored the bug, you can chain it with various bugs eg. Account Takeover by stealing session IDs, Cross side Scripting Attacks in User-Agent Header,etc. More Description here:  
 
 [Exploiting the Vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting)  
 
+---
+## Tools:  
 
-- Tools:  
+1. [defparam`s_smuggler.py](https://github.com/defparam/smuggler)  
 
-1.[defparam`s_smuggler.py](https://github.com/defparam/smuggler)  
+`Usage:`  
+* Smuggler.py :
 
-- Usage:  
+    `cat alive_urls.txt | python3 smuggler.py -m GET/POST #either GET or POST ` 
+    
+    OR
+    
+    ` python3 smuggler.py -u https://example.com -m GET/POST  `
+    
+2. [Burp_smuggler](https://github.com/PortSwigger/http-request-smuggler) (also available in BApp store)  
 
--Smuggler.py :
-    ``` cat alive_urls.txt | python3 smuggler.py -m GET/POST #either GET or POST ```
-           or
-    ``` python3 smuggler.py -u https://example.com -m GET/POST  ```
+## More Info:  
 
-2.[Burp_smuggler](https://github.com/PortSwigger/http-request-smuggler) (also available in BApp store)  
-
-
-#### More Info:  
-
-- Topics  
+### Topics  
 
 https://paper.seebug.org/1049/ (Recommended !)  
 
@@ -46,7 +47,7 @@ https://paper.seebug.org/1049/ (Recommended !)
 
 [Portswigger Lab](https://portswigger.net/web-security/request-smuggling)  
 
-- Reports (Hackerone):  
+### Reports (Hackerone):  
 
 [Report 1](https://hackerone.com/reports/737140)  
 
@@ -64,7 +65,7 @@ https://paper.seebug.org/1049/ (Recommended !)
 
 [Report 8](https://hackerone.com/reports/740037)  
 
-- Writeups (Medium.com):  
+## Writeups (Medium.com):  
 
 [Article 1](https://medium.com/@ricardoiramar/the-powerful-http-request-smuggling-af208fafa142)  
 
@@ -74,7 +75,7 @@ https://paper.seebug.org/1049/ (Recommended !)
 
 [Article 4](https://medium.com/bugbountywriteup/crossing-the-borders-the-illegal-trade-of-http-requests-57da188520ca)  
 
-- Extra:  
+## Extra:  
 
 [A Brief Vidoe About Req. Smuggling](https://youtu.be/gzM4wWA7RFo)
 
