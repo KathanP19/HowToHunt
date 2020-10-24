@@ -21,6 +21,8 @@ Here are some quick methods to detect the SQL Injection vulnerability, though th
   5. sqlmap -m sqli --dbs --batch
   6. use tamper scripts
 ```
+* More Details in this source thread [https://twitter.com/El3ctr0Byt3s/status/1302706241240731649](https://twitter.com/El3ctr0Byt3s/status/1302706241240731649)
+
 ## 3. Using heuristic scan to get hidden parameters :
 ```
   1. Use subdomain enumeration tools on the domain.
