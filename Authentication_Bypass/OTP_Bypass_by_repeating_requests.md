@@ -9,3 +9,6 @@
       5. If you got an OTP to your phone, try using that OTP to register that non-existent number
       
 ------------------------------------------------------------------------------------------------------------------------------
+
+## Author
+[febinrev](https://twitter.com/febinrev)
