@@ -53,7 +53,7 @@ Stored Xss are mostly found manually
  3. Try Payload in File name of profile picture and also in the source file of image.
  4. Try in Comment section anywhere on target site.
  5. Try on every input fields which get reflected in page and which can be seen by other users.
-
+ 6. Try to signup using your name + xss payload and that can lead to stored xss.
 *Tips*
 - For every input field
 	- Try to get ```<a href=#>test</a>``` an entity in
@@ -62,6 +62,8 @@ Stored Xss are mostly found manually
 
 *Video's*
 - https://www.youtube.com/watch?v=uHy1x1NkwRU
+Writeup:
+-https://medium.com/@fatin151485/how-i-found-my-first-stored-xss-on-popular-eboighar-com-6bd497b0bb96
 
 # Blind Xss
 Similar to Reflected Xss Or Stored Xss But you Dont get any reflection, but you get response on you server.
