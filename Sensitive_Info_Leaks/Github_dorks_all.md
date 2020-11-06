@@ -1,3 +1,4 @@
+```
 #=
 #N=
 &key=
@@ -1651,3 +1652,7 @@ filename:.ftpconfig
 filename:.remote-sync.json
 filename:sftp.json path:.vscode
 filename:WebServers.xml
+```
+
+## Author:
+[@manasH4rsh](https://twitter.com/manasH4rsh)
