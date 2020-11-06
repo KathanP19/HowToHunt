@@ -1,11 +1,16 @@
->>Big IP shodan Search:- 
-http.title:"BIG-IP&reg;-Redirect" org:Org
+* Big IP shodan Search:- 
 
->>CVE 2020-3452
- http.html_hash:-628873716 
-“set-cookie: webvpn;” 
+`http.title:"BIG-IP&reg;-Redirect" org:Org`
 
->> CVE CVE-2019-11510
-http.html:/dana-na/  
+* CVE 2020-3452
+ 
+` http.html_hash:-628873716 
+“set-cookie: webvpn;”` 
+
+* CVE CVE-2019-11510
+
+`http.html:/dana-na/`  
 
 
+## Author:
+[@manasH4rsh](https://twitter.com/manasH4rsh)
