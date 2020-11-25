@@ -12,8 +12,6 @@
       5.After successfully changed or reset go to other browser refresh the page if you are still logged in
 ```      
 Than this is an old session does not expire bug
-      
-      ged 
 ### Session Hijacking(Intended Behavior)
 * Steps:
 ```
