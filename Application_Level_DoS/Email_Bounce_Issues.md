@@ -18,4 +18,4 @@ Once you have the Email Service Provider, Check there Hard Bounce Limits. Here a
 * [https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68](https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68)
 
 ### Author: 
-* (Keshav Malik)[twitter.com/g0t_rOoT_]
+* [Keshav Malik](https://twitter.com/g0t_rOoT_)
