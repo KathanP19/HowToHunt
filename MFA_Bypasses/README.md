@@ -6,5 +6,8 @@
 ### Source
 * [https://twitter.com/hackerscrolls/status/1256276376019230720](https://twitter.com/hackerscrolls/status/1256276376019230720)
 
+### 2FA Bypass by Harshbothra 
+* [MindMap](https://www.mindmeister.com/1736437018?t=SEeZOmvt01)
+
 ### Author
 * [KathanP19](https://twitter.com/KathanP19)
