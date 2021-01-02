@@ -78,5 +78,5 @@ Enter the code 000000 or null to bypass 2FA protection.
 ___
 #### Author
 
-[Harsh Bothra](https://twitter.com/harshbothra_)
+[Harsh Bothra](https://twitter.com/harshbothra_) \
 [Vishal Saini](https://twitter.com/k4k4r07)
