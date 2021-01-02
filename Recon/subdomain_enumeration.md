@@ -44,3 +44,7 @@ https://0xpatrik.com/subdomain-enumeration-smarter/
 
 
 Theres a lot you can do. For now just mentioning communty standard approaches. Will be updating it regularly depending on the methodology comes out. 
+
+___
+## Author
+[Mehedi Hasan Remon](https://twitter.com/remonsec)
