@@ -48,10 +48,14 @@
 ### CSRF
 
 * [CSRF](./CSRF/README.md)
-* [CSRF Bypass](./CSRF/Cross Site Request Forgery(CSRF) Bypass.md)
+* [CSRF Bypass](./CSRF/Cross_Site_Request_Forgery_Bypass.md)
 
 ### Finding CVEs
 
 * [CVES](./CVES/easycve.md)
 
-## Check List 
+## CheckList
+
+* [Web Application Pentesting Checklist](./CheckList/Web-Application-Pentesting-checklist.md)
+* [Web Checklist by Chintan Gurjar.pdf](./CheckList/Web_Checklist_by_Chintan_Gurjar.pdf)
+* [Mindmap by Rohit Gautam](./CheckList/mindmap.png)
