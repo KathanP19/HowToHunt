@@ -56,5 +56,5 @@
 ### CheckList
 
 * [Web Application Pentesting Checklist](./CheckList/Web-Application-Pentesting-checklist.md)
-* [Web Checklist by Chintan Gurjar.pdf](./CheckList/Web_Checklist_by_Chintan_Gurjar.pdf)
+* [Web Checklist by Chintan Gurjar.pdf](https://github.com/KathanP19/HowToHunt/blob/master/CheckList/Web_Checklist_by_Chintan_Gurjar.pdf)
 * [Mindmap by Rohit Gautam](https://github.com/KathanP19/HowToHunt/blob/master/CheckList/mindmap.png)
