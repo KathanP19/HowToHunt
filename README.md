@@ -1,18 +1,39 @@
 # README.md
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)]()  Some Tutorials and Things to Do while Hunting Particular Vulnerability.
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](./#contributors-)  Some Tutorials and Things to Do while Hunting Particular Vulnerability.
+
+**Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
 
 **Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
 
 **All the Credits to All the Contributors Without You It Could Have Never Been possible**
 
+**All the Credits to All the Contributors Without You It Could Have Never Been possible**
+
 **If you want to know what's added every week then follow me on twitter** [**https://twitter.com/KathanP19**](https://twitter.com/KathanP19) **I post what's updated every weekends.**
+
+**If you want to know what's added every week then follow me on twitter** [**https://twitter.com/KathanP19**](https://twitter.com/KathanP19) **I post what's updated every weekends.**
+
+If You Want To Support Me You Can Buy Me A Coffee
 
 If You Want To Support Me You Can Buy Me A Coffee
 
 ## Contributors ✨
 
+## Contributors ✨
+
 Thanks goes to these wonderful people \([emoji key](https://allcontributors.org/docs/en/emoji-key)\):
+
+Thanks goes to these wonderful people \([emoji key](https://allcontributors.org/docs/en/emoji-key)\):
+
+| [![](https://avatars2.githubusercontent.com/u/33719912?v=4) **Kathan Patel**](https://github.com/KathanP19) [✅]() | [![](https://avatars2.githubusercontent.com/u/54717234?v=4) **Mehedi Hasan Remon**](https://github.com/remonsec) [✅]() | [![](https://avatars3.githubusercontent.com/u/33570148?v=4) **Keshav Malik**](https://www.theinfosecguy.me) [✅]() | [![](https://avatars3.githubusercontent.com/u/32324065?v=4) **Vivek Kumar Yadav**](https://0xd3vil.github.io/) [✅]() | [![](https://avatars0.githubusercontent.com/u/60981314?v=4) **Syed Mushfik Hasan Tahsin**](https://twitter.com/smhtahsin33) [✅]() | [![](https://avatars1.githubusercontent.com/u/68891432?v=4) **Deepak Dhiman**](https://github.com/Virdoexhunter) [✅]() | [![](https://avatars3.githubusercontent.com/u/49231687?v=4) **maverickNerd**](https://github.com/maverickNerd) [✅]() |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [![](https://avatars3.githubusercontent.com/u/47480010?v=4) **Harsha Vardhan**](http://harsha.ambati05@gmail.com) [✅]() | [![](https://avatars3.githubusercontent.com/u/26160488?v=4) **Bishal Shrestha**](https://github.com/bishal0x01) [✅]() | [![](https://avatars1.githubusercontent.com/u/69442715?v=4) **Cyber-Pirate**](https://github.com/Cyber-Pirate) [✅]() | [![](https://avatars1.githubusercontent.com/u/61796314?v=4) **Naman Shah**](https://github.com/h4ckboy19) [✅]() | [![](https://avatars3.githubusercontent.com/u/44763564?v=4) **ANUGRAH S R**](https://anugrahsr.netlify.com/) [✅]() | [![](https://avatars1.githubusercontent.com/u/47445489?v=4) **Aishwarya Kendle**](https://github.com/SocioDroid) [✅]() | [![](https://avatars2.githubusercontent.com/u/32749116?v=4) **MadMaxx**](https://github.com/SandeepkrishnaS) [✅]() |
+| [![](https://avatars3.githubusercontent.com/u/71178984?v=4) **Akshaykerkar**](https://github.com/Akshaykerkar) [✅]() | [![](https://avatars2.githubusercontent.com/u/6929303?v=4) **Shadab Ansari**](https://github.com/shadabansari) [✅]() | [![](https://avatars0.githubusercontent.com/u/51919963?v=4) **CowlingBanana**](https://github.com/CowlingBanana) [✅]() | [![](https://avatars3.githubusercontent.com/u/54794940?v=4) **Meet**](https://github.com/1nVok3r1729) [✅]() | [![](https://avatars1.githubusercontent.com/u/55856490?v=4) **Tushar**](https://github.com/tushars25) [✅]() | [![](https://avatars3.githubusercontent.com/u/8291014?v=4) **Chintan Gurjar**](http://infosecninja.blogspot.com/) [✅]() | [![](https://avatars3.githubusercontent.com/u/36130152?v=4) **praneeth1998**](https://github.com/praneeth1998) [✅]() |
+| [![](https://avatars2.githubusercontent.com/u/36793278?v=4) **sumitjat**](http://instagram.com/sumitjat) [✅]() | [![](https://avatars1.githubusercontent.com/u/59037001?v=4) **Mr\_p0tat0**](https://github.com/Mr-p0tat0) [✅]() | [![](https://avatars1.githubusercontent.com/u/54775497?v=4) **ashhadali10**](https://github.com/ashhadali10) [✅]() | [![](https://avatars1.githubusercontent.com/u/54226343?v=4) **Nav-Prak**](https://github.com/Nav-Prak) [✅]() | [![](https://avatars0.githubusercontent.com/u/35371691?v=4) **NoBodysSafe**](https://github.com/CXVVMVII) [✅]() | [![](https://avatars3.githubusercontent.com/u/7793324?v=4) **Max Boll**](https://github.com/bolli95) [✅]() | [![](https://avatars2.githubusercontent.com/u/55628921?v=4) **Yash K**](https://github.com/Yashrk078) [✅]() |
+| [![](https://avatars2.githubusercontent.com/u/52229330?v=4) **febinrev**](https://github.com/febinrev) [✅]() | [![](https://avatars3.githubusercontent.com/u/15983667?v=4) **fatinsourav**](http://fatinsourav.github.io) [✅]() | [![](https://avatars2.githubusercontent.com/u/51358868?v=4) **iNoSec2**](https://github.com/iNoSec2) [✅]() | [![](https://avatars3.githubusercontent.com/u/33492814?v=4) **Manas Harsh**](https://github.com/manasjha7) [✅]() | [![](https://avatars2.githubusercontent.com/u/60779622?v=4) **0xsunil**](https://github.com/0xsunil) [✅]() | [![](https://avatars1.githubusercontent.com/u/60481830?v=4) **Rakesh**](https://github.com/deephunt3r) [✅]() |  |
 
 | [![](https://avatars2.githubusercontent.com/u/33719912?v=4) **Kathan Patel**](https://github.com/KathanP19) [✅](./#tutorial-KathanP19) | [![](https://avatars2.githubusercontent.com/u/54717234?v=4) **Mehedi Hasan Remon**](https://github.com/remonsec) [✅](./#tutorial-remonsec) | [![](https://avatars3.githubusercontent.com/u/33570148?v=4) **Keshav Malik**](https://www.theinfosecguy.me) [✅](./#tutorial-theinfosecguy) | [![](https://avatars3.githubusercontent.com/u/32324065?v=4) **Vivek Kumar Yadav**](https://0xd3vil.github.io/) [✅](./#tutorial-0xd3vil) | [![](https://avatars0.githubusercontent.com/u/60981314?v=4) **Syed Mushfik Hasan Tahsin**](https://twitter.com/smhtahsin33) [✅](./#tutorial-SMHTahsin33) | [![](https://avatars1.githubusercontent.com/u/68891432?v=4) **Deepak Dhiman**](https://github.com/Virdoexhunter) [✅](./#tutorial-Virdoexhunter) | [![](https://avatars3.githubusercontent.com/u/49231687?v=4) **maverickNerd**](https://github.com/maverickNerd) [✅](./#tutorial-maverickNerd) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -20,6 +41,8 @@ Thanks goes to these wonderful people \([emoji key](https://allcontributors.org/
 | [![](https://avatars3.githubusercontent.com/u/71178984?v=4) **Akshaykerkar**](https://github.com/Akshaykerkar) [✅](./#tutorial-Akshaykerkar) | [![](https://avatars2.githubusercontent.com/u/6929303?v=4) **Shadab Ansari**](https://github.com/shadabansari) [✅](./#tutorial-shadabansari) | [![](https://avatars0.githubusercontent.com/u/51919963?v=4) **CowlingBanana**](https://github.com/CowlingBanana) [✅](./#tutorial-CowlingBanana) | [![](https://avatars3.githubusercontent.com/u/54794940?v=4) **Meet**](https://github.com/1nVok3r1729) [✅](./#tutorial-1nVok3r1729) | [![](https://avatars1.githubusercontent.com/u/55856490?v=4) **Tushar**](https://github.com/tushars25) [✅](./#tutorial-tushars25) | [![](https://avatars3.githubusercontent.com/u/8291014?v=4) **Chintan Gurjar**](http://infosecninja.blogspot.com/) [✅](./#tutorial-iamthefrogy) | [![](https://avatars3.githubusercontent.com/u/36130152?v=4) **praneeth1998**](https://github.com/praneeth1998) [✅](./#tutorial-praneeth1998) |
 | [![](https://avatars2.githubusercontent.com/u/36793278?v=4) **sumitjat**](http://instagram.com/sumitjat) [✅](./#tutorial-sumitjat) | [![](https://avatars1.githubusercontent.com/u/59037001?v=4) **Mr\_p0tat0**](https://github.com/Mr-p0tat0) [✅](./#tutorial-Mr-p0tat0) | [![](https://avatars1.githubusercontent.com/u/54775497?v=4) **ashhadali10**](https://github.com/ashhadali10) [✅](./#tutorial-ashhadali10) | [![](https://avatars1.githubusercontent.com/u/54226343?v=4) **Nav-Prak**](https://github.com/Nav-Prak) [✅](./#tutorial-Nav-Prak) | [![](https://avatars0.githubusercontent.com/u/35371691?v=4) **NoBodysSafe**](https://github.com/CXVVMVII) [✅](./#tutorial-CXVVMVII) | [![](https://avatars3.githubusercontent.com/u/7793324?v=4) **Max Boll**](https://github.com/bolli95) [✅](./#tutorial-bolli95) | [![](https://avatars2.githubusercontent.com/u/55628921?v=4) **Yash K**](https://github.com/Yashrk078) [✅](./#tutorial-Yashrk078) |
 | [![](https://avatars2.githubusercontent.com/u/52229330?v=4) **febinrev**](https://github.com/febinrev) [✅](./#tutorial-febinrev) | [![](https://avatars3.githubusercontent.com/u/15983667?v=4) **fatinsourav**](http://fatinsourav.github.io) [✅](./#tutorial-fatinsourav) | [![](https://avatars2.githubusercontent.com/u/51358868?v=4) **iNoSec2**](https://github.com/iNoSec2) [✅](./#tutorial-iNoSec2) | [![](https://avatars3.githubusercontent.com/u/33492814?v=4) **Manas Harsh**](https://github.com/manasjha7) [✅](./#tutorial-manasjha7) | [![](https://avatars2.githubusercontent.com/u/60779622?v=4) **0xsunil**](https://github.com/0xsunil) [✅](./#tutorial-0xsunil) | [![](https://avatars1.githubusercontent.com/u/60481830?v=4) **Rakesh**](https://github.com/deephunt3r) [✅](./#tutorial-deephunt3r) |  |
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
