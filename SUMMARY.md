@@ -1,4 +1,4 @@
 # Table of contents
 
-* [README.md](README.md)
+* [HowToHunt.md](README.md)
 
