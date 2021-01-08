@@ -2,7 +2,7 @@
 
 * [HowToHunt.md](README.md)
 
-## Account Takeover Methodology
+### Account Takeover Methodology
 
 * [Chaining Low Impact Bugs with Xss](./Account_Takeovers_Methodologies/Chaining_low_impact_bugs_with_xss.md)
 * [No Rate Limit On Login with Weak Password Policy](./Account_Takeovers_Methodologies/No_rate_limit_on_login_with_weak_password_policy.md)
@@ -12,35 +12,46 @@
 * [Using Sensitive Data Exposure](./Account_Takeovers_Methodologies/Using_sensitive_data_exposure.md)
 * [Token Leaks In Response](./Account_Takeovers_Methodologies/token_leaks_in_response.md)
 
-## Application Level DoS
+### Application Level DoS
 
 * [Email Bounce Issues](./Application_Level_DoS/Email_Bounce_Issues.md)
 * [Long Password DoS](./Application_Level_DoS/Long_Password_DoS.md)
 * [Long String DOS](./Application_Level_DoS/Long_String_DOS.md)
 
-## Authentication Bypass
+### Authentication Bypass
 
 * [2FA Bypasses](./Authentication_Bypass/2FA_Bypasses.md)
 * [OTP Bypass By Repeating Requests](./Authentication_Bypass/OTP_Bypass_by_repeating_requests.md)
 * [OTP Bypass Via Response Manipulation](./Authentication_Bypass/OTP_Bypass_via_response_manipulation.md)
 
-## Broken-Link Hijacking
+### Broken-Link Hijacking
 
 * [Broken-Link Hijacking](./BrokenLinkHijacking/BrokenLinkHijacking.md)
 
-## Broken Auth And Session Management
+### Broken Auth And Session Management
 
 * [Session Based Bugs](./Broken_Auth_And_Session_Management/Session_based_bugs.md)
 
-## Bypassing CSP
+### Bypassing CSP
 
 * [CSP Bypass](./Bypassing_CSP/CSP_bypass.md)
 
-## CMS
+### CMS
 
 * [Wordpress](./CMS/wordpress.md)
 
-## CORS
+### CORS
 
 * [CORS](./CORS/CORS.md)
 * [CORS Bypasses](./CORS/CORS Bypasses.md)
+
+### CSRF
+
+* [CSRF](./CSRF/README.md)
+* [CSRF Bypass](./CSRF/Cross Site Request Forgery(CSRF) Bypass.md)
+
+### Finding CVEs
+
+* [CVES](./CVES/easycve.md)
+
+## Check List 
