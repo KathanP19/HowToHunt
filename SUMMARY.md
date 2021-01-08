@@ -17,3 +17,30 @@
 * [Email Bounce Issues](./Application_Level_DoS/Email_Bounce_Issues.md)
 * [Long Password DoS](./Application_Level_DoS/Long_Password_DoS.md)
 * [Long String DOS](./Application_Level_DoS/Long_String_DOS.md)
+
+## Authentication Bypass
+
+* [2FA Bypasses](./Authentication_Bypass/2FA_Bypasses.md)
+* [OTP Bypass By Repeating Requests](./Authentication_Bypass/OTP_Bypass_by_repeating_requests.md)
+* [OTP Bypass Via Response Manipulation](./Authentication_Bypass/OTP_Bypass_via_response_manipulation.md)
+
+## Broken-Link Hijacking
+
+* [Broken-Link Hijacking](./BrokenLinkHijacking/BrokenLinkHijacking.md)
+
+## Broken Auth And Session Management
+
+* [Session Based Bugs](./Broken_Auth_And_Session_Management/Session_based_bugs.md)
+
+## Bypassing CSP
+
+* [CSP Bypass](./Bypassing_CSP/CSP_bypass.md)
+
+## CMS
+
+* [Wordpress](./CMS/wordpress.md)
+
+## CORS
+
+* [CORS](./CORS/CORS.md)
+* [CORS Bypasses](./CORS/CORS Bypasses.md)
