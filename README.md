@@ -6,7 +6,7 @@ Some Tutorials and Things to Do while Hunting Particular Vulnerability.
 
 ## GitBook Link :- https://kathan19.gitbook.io/
 
-** Goto Above GitBook link if you want to read. 
+* Goto Above GitBook link if you want to read. 
 
 **Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
 
