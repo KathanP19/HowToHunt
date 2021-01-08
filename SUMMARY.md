@@ -2,7 +2,9 @@
 
 * [HowToHunt.md](README.md)
 
-## Account Takeover Methodology
+
+<details>
+<summary>Account Takeover Methodology</summary>
 
 * [Chaining Low Impact Bugs with Xss](./Account_Takeovers_Methodologies/Chaining_low_impact_bugs_with_xss.md)
 * [No Rate Limit On Login with Weak Password Policy](./Account_Takeovers_Methodologies/No_rate_limit_on_login_with_weak_password_policy.md)
@@ -11,6 +13,8 @@
 * [Using CSRF](./Account_Takeovers_Methodologies/Using_CSRF.md)
 * [Using Sensitive Data Exposure](./Account_Takeovers_Methodologies/Using_sensitive_data_exposure.md)
 * [Token Leaks In Response](./Account_Takeovers_Methodologies/token_leaks_in_response.md)
+
+</details>
 
 ## Application Level DoS
 
