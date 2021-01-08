@@ -4,13 +4,17 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
+## GitBook Link :- https://kathan19.gitbook.io/
+
+** Goto Above GitBook link if you want to read. 
+
 **Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
 
 **All the Credits to All the Contributors Without You It Could Have Never Been possible**
 
 **If you want to know what's added every week then follow me on twitter [https://twitter.com/KathanP19](https://twitter.com/KathanP19) I post what's updated every weekends.**
 
-If You Want To Support Me You Can Buy Me A Coffee
+[If You Want To Support Project Or Me You Can Buy Me A Coffee](https://www.buymeacoffee.com/kathanp19)
 
 <a href="https://www.buymeacoffee.com/kathanp19" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
