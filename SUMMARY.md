@@ -125,6 +125,7 @@
 
 ### Recon
 
+* [Recon Workflow](./Recon/Workflow.md)
 * [Subdomain Enumeration](./Recon/subdomain_enumeration.md)
 
 ### SQLi
