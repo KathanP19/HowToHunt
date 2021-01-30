@@ -88,3 +88,6 @@
 
 ## NOTE :
 If you find any API key or credentials or any other sensitive information under test directory then do not report it because that is an intended behaviour.
+
+## Author:
+[Mr._fr3qu3n533](https://twitter.com/mr_fr3qu3n533)
