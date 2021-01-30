@@ -33,7 +33,7 @@
 - HOMEBREW_GITHUB_API_TOKEN language:shell
 
 ## API keys, Token & Hard-Coded Password search:
-
+ 
 - SecretKey / Secrect_key / skey
 - privatekey / private_key / pkey
 - user_secret / userSecret
