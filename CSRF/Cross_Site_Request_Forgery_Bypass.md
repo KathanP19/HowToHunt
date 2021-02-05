@@ -3,6 +3,7 @@
 Hello Guys, I Tried My Best To Share all The CSRF Bypasses I Know.
 I Hope This Will Help You.
 
+Csrf will be login, logout, resetpass, change password, add-cart, like, comment, profie change, user details change, blance transffer, subscription ect
 ```
 -Change Request Method [POST => GET]
 
@@ -21,6 +22,10 @@ I Hope This Will Help You.
 -Extract Token via HTML injection
 
 -Switch From Non-Form `Content-Type: application/json` or `Content-Type: application/x-url-encoded` To `Content-Type: form-multipart`
+
+-Change/delete the last or frist character from the token
+
+-Change referrer to Referrer
 
 -Bypass the regex
   If the site is looking for “bank.com” in the referer URL, maybe “bank.com.attacker.com” or “attacker.com/bank.com” will work.
