@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-35-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-36-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -70,6 +70,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/0xsunil"><img src="https://avatars2.githubusercontent.com/u/60779622?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0xsunil</b></sub></a><br /><a href="#tutorial-0xsunil" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/deephunt3r"><img src="https://avatars1.githubusercontent.com/u/60481830?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rakesh</b></sub></a><br /><a href="#tutorial-deephunt3r" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/Pratyaksh06"><img src="https://avatars.githubusercontent.com/u/43118103?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pratyaksh Singh</b></sub></a><br /><a href="#tutorial-Pratyaksh06" title="Tutorials">✅</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/tamimhasan404"><img src="https://avatars.githubusercontent.com/u/66991901?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tamim Hasan</b></sub></a><br /><a href="#tutorial-tamimhasan404" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
