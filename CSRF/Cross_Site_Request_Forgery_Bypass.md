@@ -53,5 +53,5 @@ Csrf will be login, logout, resetpass, change password, add-cart, like, comment,
 * [@SMHTahsin33](https://twitter.com/SMHTahsin33)
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
 * [@remonsec](https://twitter.com/remonsec)
-* [@TamimHa69587900](https://twitter.com/TamimHa69587900)
+* [@tamimhasan404](https://twitter.com/tamimhasan404)
 
