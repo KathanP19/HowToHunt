@@ -84,6 +84,10 @@
 
 * [Host-Header](./Host-Header/Host-Header.md)
 
+### HTML-Injection
+
+* [HTML-Injection](./HTML_Injection/HTML_Injection_on_password_reset_page.md)
+
 ### IDOR
 
 * [IDOR](./IDOR/IDOR.md)
@@ -118,6 +122,7 @@
 
 * [MindMap](./Password_Reset_Functionality/README.md)
 * [Password Reset Token Leakage](./Password_Reset_Functionality/Password_Reset_Token_Leakage.md)
+* [Account_Takeover_By_Password_Reset_Functionality](./Password_Reset_Functionality/Account_Takeover_By_Password_Reset_Functionality.md)
 
 ### Rate Limit
 
