@@ -87,5 +87,13 @@ Content-Type: application/json
 ### Reference
 [https://twitter.com/swaysThinking/status/1301663848223715328](https://twitter.com/swaysThinking/status/1301663848223715328)
 
+### Reports (Hackerone)
+
+- [IDOR to delete images from other stores](https://hackerone.com/reports/404797)
+- [IDOR in changing shared file name](https://hackerone.com/reports/547663)
+- [User uploaded portfolio files can be accessed by any user even after deleted](https://hackerone.com/reports/300179)
+- [IDOR and statistics leakage in Orders](https://hackerone.com/reports/544329)
+
 ### Author
 * [@harsha0x01](https://twitter.com/harsha0x01)
+* [@klaus](https://twitter.com/klaus_dev)
