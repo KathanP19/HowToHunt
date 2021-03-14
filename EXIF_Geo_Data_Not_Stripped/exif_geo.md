@@ -11,4 +11,10 @@ When a user uploads an image in example.com, the uploaded image’s EXIF Geoloca
 6. open it (http://exif.regex.info/exif.cgi)</br>
 7. See wheather is that still showing exif data , if it is then Report it.
 
-Author:[@0xd3vil](https://twitter.com/0xd3vil)
+# Reports (Hackerone)
+
+- [IDOR with Geolocation data not stripped from images](https://hackerone.com/reports/906907)
+
+# Author
+* [@0xd3vil](https://twitter.com/0xd3vil)
+* [@klaus](https://twitter.com/klaus_dev)

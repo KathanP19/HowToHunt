@@ -89,11 +89,24 @@ Content-Type: application/json
 
 ### Reports (Hackerone)
 
+#### Resolved
+
 - [IDOR to delete images from other stores](https://hackerone.com/reports/404797)
 - [IDOR in changing shared file name](https://hackerone.com/reports/547663)
 - [User uploaded portfolio files can be accessed by any user even after deleted](https://hackerone.com/reports/300179)
 - [IDOR and statistics leakage in Orders](https://hackerone.com/reports/544329)
+- [I.D.O.R To Order,Book,Buy,reserve On YELP FOR FREE (UNAUTHORIZED USE OF OTHER USER'S CREDIT CARD)](https://hackerone.com/reports/391092)
+- [IDOR allow access to payments data of any user](https://hackerone.com/reports/751577)
+- [IDOR allow to extract all registered email](https://hackerone.com/reports/302485)
+- [IDOR at https://account.mackeeper.com/at/load-reports/profile/<profile_id> leaks information about devices/licenses](https://hackerone.com/reports/783117)
+- [IDOR bug to See hidden slowvote of any user even when you dont have access right](https://hackerone.com/reports/661978)
+- [IDOR on update user preferences](https://hackerone.com/reports/854290)
+- [idor on upload profile functionality](https://hackerone.com/reports/741683)
+- [IDOR to view User Order Information](https://hackerone.com/reports/287789)
+- [IDOR with Geolocation data not stripped from images](https://hackerone.com/reports/906907)
+- [Replace other user files in Inbox messages](https://hackerone.com/reports/322661)
 
 ### Author
+
 * [@harsha0x01](https://twitter.com/harsha0x01)
 * [@klaus](https://twitter.com/klaus_dev)

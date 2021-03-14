@@ -19,8 +19,22 @@
 
 #### Other than Google, Try these dorks on various Search Engines such as Duck Duck Go, Bing etc.
 
+## Reports (Hackerone)
 
+### Resolved
+
+- [Securing "Reset password" pages from bots](https://hackerone.com/reports/43807)
+- [Private Grab Messages on Android App can be accessed and cached by Search Engines](https://hackerone.com/reports/221558)
+
+### Informative
+
+- [Information disclosure through search engines (password reset token)](https://hackerone.com/reports/322988)
+
+### N/A
+
+- [Research papers on yelp are getting indexed by google bots.](https://hackerone.com/reports/207435)
 
 
 Author - [Keshav Malik](twitter.com/g0t_rOoT_) <br>
-Updated by - [Naveen Prakaasham](twitter.com/NPrakaasham)
+Updated by - [Naveen Prakaasham](twitter.com/NPrakaasham) <br>
+Updated by - [@klaus](https://twitter.com/klaus_dev)

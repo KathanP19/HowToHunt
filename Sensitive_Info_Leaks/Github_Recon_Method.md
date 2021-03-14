@@ -13,5 +13,17 @@ Using Github we can find sensitive infos.
 * https://github.com/tillson/git-hound
 * https://securitytrails.com/blog/github-dorks
 
-### Author:
+## Reports (Hackerone)
+
+### Resolved
+
+- [Important information leaked on Github](https://hackerone.com/reports/649322)
+- [Github Token Leaked publicly for https://github.com/mopub](https://hackerone.com/reports/612231)
+- [CircleCI token in github repo allows for access to sensitive build information](https://hackerone.com/reports/858915)
+- [Information Leak - Github - JMS Information](https://hackerone.com/reports/360811)
+- [Leaked artifactory_key, artifactory_api_key, and gcloud refresh_token via GitHub.](https://hackerone.com/reports/496414)
+- [Github Token Leaked publicly for https://github.sc-corp.net](https://hackerone.com/reports/396467)
+
+## Author:
 * [@0xCCFFF](https://twitter.com/0xCCFFF) (MadMaxx)
+* [@klaus](https://twitter.com/klaus_dev)

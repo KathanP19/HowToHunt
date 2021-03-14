@@ -58,11 +58,20 @@ If you cannot find your engine in the above repository, [Google](https://www.goo
 #### Check out our talk on the same at NULL / OWASP Bangalore meetup, June 2020
 [https://www.youtube.com/watch?v=xCunHBH8ZQ4](https://www.youtube.com/watch?v=xCunHBH8ZQ4)
 
+### Reports (Hackerone)
+
+#### Resolved
+
+- [subdomain takeover at news-static.semrush.com](https://hackerone.com/reports/294201)
+- [Subdomain takeover of resources.hackerone.com](https://hackerone.com/reports/863551)
+- [Subdomain takeover at info.hacker.one](https://hackerone.com/reports/202767)
+- [Bulgaria - Subdomain takeover of mail.starbucks.bg](https://hackerone.com/reports/736863)
+- [Remote code execution by hijacking an unclaimed S3 bucket in Rocket.Chat's installation script.](https://hackerone.com/reports/399166)
+- [Possible SOP bypass in www.starbucks.com due to insecure crossdomain.xml](https://hackerone.com/reports/244504)
+
 # Authors:
 [@aish_kendle](https://twitter.com/aish_kendle)
 
 [@thakare_prateek](https://twitter.com/thakare_prateek)
 
-
-
-
+[@klaus](https://twitter.com/klaus_dev)
