@@ -6,6 +6,7 @@
 * https://youtu.be/ghfmx4pr1Qg ( very begginer friendly)
 * https://medium.com/ag-grid/a-plain-english-introduction-to-json-web-tokens-jwt-what-it-is-and-what-it-isnt-8076ca679843
 * https://medium.com/swlh/hacking-json-web-tokens-jwts-9122efe91e4a
+* Cheat Sheet - [Pentester's Lab](https://assets.pentesterlab.com/jwt_security_cheatsheet/jwt_security_cheatsheet.pdf)
  
 ### NOTES FOR ATTACKING JWT
 * What the heck is this ?!
@@ -96,6 +97,7 @@ Payload
       (Link: [https://github.com/aress31/jwtcat](https://github.com/aress31/jwtcat))
       
       (Link : [https://github.com/ticarpi/jwt_tool.git](https://github.com/ticarpi/jwt_tool.git))
+  * Tool to test security of JSON Web Tokens [jwtXploiter](https://github.com/DontPanicO/jwtXploiter)
 
 ---------------------------------------------------------------------------------------------------------------------------
 ### SOURCES: 
@@ -103,4 +105,4 @@ Payload
 ### Author
 * [Naman Shah](https://twitter.com/naman_1910)
 * [@kAshhadali10](https://twitter.com/kAshhadali10)
- 
+* [@0xrtt](https://twitter.com/0xrtt)
