@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-39-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-42-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -76,6 +76,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Pratish58"><img src="https://avatars.githubusercontent.com/u/51779480?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pratish58</b></sub></a><br /><a href="#tutorial-Pratish58" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/klau5dev"><img src="https://avatars.githubusercontent.com/u/70058709?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kalus</b></sub></a><br /><a href="#tutorial-klau5dev" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/Zero0x00"><img src="https://avatars.githubusercontent.com/u/26040638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zero (Arif)</b></sub></a><br /><a href="#tutorial-Zero0x00" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://chirag-agrawal.medium.com/"><img src="https://avatars.githubusercontent.com/u/68269472?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chirag Agrawal</b></sub></a><br /><a href="#tutorial-Raiders0786" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/kushagrasarathe"><img src="https://avatars.githubusercontent.com/u/76868364?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kushagra Sarathe</b></sub></a><br /><a href="#tutorial-kushagrasarathe" title="Tutorials">✅</a></td>
+        <td align="center"><a href="https://github.com/rtcms"><img src="https://avatars.githubusercontent.com/u/35173068?v=4?s=100" width="100px;" alt=""/><br /><sub><b>RT</b></sub></a><br /><a href="#tutorial-rtcms" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
