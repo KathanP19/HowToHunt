@@ -355,7 +355,34 @@
       "contributions": [
         "tutorial"
       ]
-    }
+  },
+    {
+      "login": "Raiders0786",
+      "name": "Chirag Agrawal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68269472?v=4",
+      "profile": "https://chirag-agrawal.medium.com/",
+      "contributions": [
+        "tutorial"
+      ]
+  },
+    {
+      "login": "kushagrasarathe",
+      "name": "Kushagra Sarathe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76868364?v=4",
+      "profile": "https://github.com/kushagrasarathe",
+      "contributions": [
+        "tutorial"
+      ]
+          },
+    {
+      "login": "rtcms",
+      "name": "RT",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35173068?v=4",
+      "profile": "https://github.com/rtcms",
+      "contributions": [
+        "tutorial"
+      ]
+     }
   ],
   "contributorsPerLine": 7,
   "projectName": "HowToHunt",
