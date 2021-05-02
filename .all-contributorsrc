@@ -355,7 +355,7 @@
       "contributions": [
         "tutorial"
       ]
-  },
+    },
     {
       "login": "Raiders0786",
       "name": "Chirag Agrawal",
@@ -364,7 +364,7 @@
       "contributions": [
         "tutorial"
       ]
-  },
+    },
     {
       "login": "kushagrasarathe",
       "name": "Kushagra Sarathe",
@@ -373,7 +373,7 @@
       "contributions": [
         "tutorial"
       ]
-          },
+    },
     {
       "login": "rtcms",
       "name": "RT",
@@ -382,7 +382,16 @@
       "contributions": [
         "tutorial"
       ]
-     }
+    },
+    {
+      "login": "anishkashukla",
+      "name": "Anishka Shukla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35867406?v=4",
+      "profile": "http://www.anishkashukla.com",
+      "contributions": [
+        "tutorial"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "HowToHunt",
