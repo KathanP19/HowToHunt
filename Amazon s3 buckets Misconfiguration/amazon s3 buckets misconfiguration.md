@@ -36,7 +36,7 @@ aws s3 rm test.txt s3://<bucket name>/test.txt (if that is present)
 
  * [Hackerone Report](https://hackerone.com/reports/700051)
  * [Hackerone Report](https://hackerone.com/reports/229690)
- * [https://bugbountypoc.com/s3-bucket-misconfiguration-from-basics-to-pawn/](https://bugbountypoc.com/s3-bucket-misconfiguration-from-basics-to-pawn/)
+ * [https://bugbountypoc.com/s3-bucket-misconfiguration-from-basics-to-pawn](https://bugbountypoc.com/s3-bucket-misconfiguration-from-basics-to-pawn)
 
 ### Author :
  
