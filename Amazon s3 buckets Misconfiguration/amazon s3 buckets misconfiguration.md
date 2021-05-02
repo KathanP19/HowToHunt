@@ -3,7 +3,7 @@
 First of all, you need to install aws cli -
 
  * Pip install awscli
- *  Set access key 
+ * Set access key 
  * Set secret key
 
 aws s3 ls s3://<bucket name>
