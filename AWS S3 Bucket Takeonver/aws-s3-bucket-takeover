@@ -1,0 +1,10 @@
+AWS S3 Bucket Takeover using broken link in within email.
+
+Email of careems recives, which has a broken link, I did inspect element in browser to find the broken link, the link was:
+<img alt="Careem" title="Careem" src="https://ci5.googleusercontent.com/proxy/VFkr93bHbGyGsKAShSjEy1Wa5c2_E1roaPHqkXAgvfFVAe-4cPZ59CKXCpY-vig5E96sY7ojsvKFiy8uAkfA564sndlRHO01J_LqgsbCJyyzudeSS78=s0-d-e1-ft#https://s3.amazonaws.com/careemcrm/promotional/careem_logo_Care.png" class="CToWUd">
+
+Broken link :https://s3.amazonaws.com/careemcrm/promotional/careem_logo_Care.png
+
+Then I just go to the bucket directly by:https://s3.amazonaws.com/careemcrm
+Where It says, <Code>NoSuchBucket</Code> 
+Which means, I can register this bucket, so I did the same, Through the AWS CLI (from my account) I registered the Bucket and uploaded a file to it. Which can be now seemed in Careems email that we got.
