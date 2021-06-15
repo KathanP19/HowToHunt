@@ -101,6 +101,7 @@ Payload
 
 ---------------------------------------------------------------------------------------------------------------------------
 ### SOURCES: 
+- Intresting blog - [Medium](https://barrymalone.medium.com/json-web-tokens-beginner-exploitation-5a44f8f6efff)
 * Youtube,Medium,Github,Google
 ### Author
 * [Naman Shah](https://twitter.com/naman_1910)
