@@ -27,6 +27,10 @@ Command to move the file into the bucket.
 
 aws s3 mv test.txt s3://<bucket name>
 
+Command to copy the file from local drive to the S3 bucket. 
+
+aws s3 cp test.txt s3://[bucketname]/test.txt
+
 Command to delete the file into the bucket
 
 aws s3 rm test.txt s3://<bucket name>/test.txt (if that is present)
@@ -41,5 +45,6 @@ aws s3 rm test.txt s3://<bucket name>/test.txt (if that is present)
 ### Author :
  
  * [Anishka Shukla](https://twitter.com/AnishkaShukla)
+ * [Anubhav Singh](https://twitter.com/AnubhavSingh_)
 
 
