@@ -5,12 +5,11 @@
 ### Account Takeover Methodology
 
 * [Chaining Low Impact Bugs with Xss](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#chaining-session-hijacking-with-xss)
-* [No Rate Limit On Login with Weak Password Policy](./Account_Takeovers_Methodologies/No_rate_limit_on_login_with_weak_password_policy.md)
-* [Password Reset Poisoning Leads To Token Theft](./Account_Takeovers_Methodologies/Password_reset_poisoning_leads_to_token_theft.md)
-* [Using Auth Bypass](./Account_Takeovers_Methodologies/Using_Auth_Bypass.md)
-* [Using CSRF](./Account_Takeovers_Methodologies/Using_CSRF.md)
-* [Using Sensitive Data Exposure](./Account_Takeovers_Methodologies/Using_sensitive_data_exposure.md)
-* [Token Leaks In Response](./Account_Takeovers_Methodologies/token_leaks_in_response.md)
+* [No Rate Limit On Login with Weak Password Policy](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#no-rate-limit-on-login-with-weak-password-policy)
+* [Password Reset Poisoning Leads To Token Theft](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#password-reset-poisioning-leads-to-token-theft)
+* [Using Auth Bypass](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#using--auth-bypass)
+* [Using CSRF](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#try-for-csrf-on)
+* [Token Leaks In Response](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#token-leaks-in-response)
 
 ### Application Level DoS
 
