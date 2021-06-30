@@ -3,7 +3,9 @@
 * [HowToHunt.md](README.md)
 
 ### Account Takeover Methodology
+
 * [Account Takeover Methodology](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md)
+
 ### Application Level DoS
 
 * [Email Bounce Issues](./Application_Level_DoS/Email_Bounce_Issues.md)
