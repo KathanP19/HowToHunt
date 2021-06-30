@@ -7,7 +7,7 @@ Some Tutorials and Things to Do while Hunting Particular Vulnerability.
 ## GitBook Link :- https://kathan19.gitbook.io/
 ## GitHub Repo Link :- https://github.com/KathanP19/HowToHunt
 
-* Goto Above GitBook link if you want to read and To Contribute goto Github and and make a Pull Request !!.
+***\- Goto Above GitBook link if you want to read and To Contribute goto Github and and make a Pull Request !!.***
 
 **Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
 
