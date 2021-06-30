@@ -43,11 +43,6 @@
     7.See the message like you get status:0
     8.Change status to 1 i.e, status:1 and forward the request if you logged in means you just done authentication bypass.
   ```
-  
-Author:
-* [@akshaykerkar13](https://twitter.com/akshaykerkar13)
-* [@Yn0tWhy](https://twitter.com/Yn0tWhy)
-* [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
 
 ## Bypassing OTP in registration forms by repeating the form submission multiple times using repeater
 
