@@ -8,15 +8,12 @@
 
 ### Application Level DoS
 
-* [Email Bounce Issues](./Application_Level_DoS/Email_Bounce_Issues.md)
-* [Long Password DoS](./Application_Level_DoS/Long_Password_DoS.md)
-* [Long String DOS](./Application_Level_DoS/Long_String_DOS.md)
+* [Application Level DoS Methods](/Application_Level_DoS/ALD_Methods.md)
 
 ### Authentication Bypass
 
 * [2FA Bypasses](./Authentication_Bypass/2FA_Bypasses.md)
-* [OTP Bypass By Repeating Requests](./Authentication_Bypass/OTP_Bypass_by_repeating_requests.md)
-* [OTP Bypass Via Response Manipulation](./Authentication_Bypass/OTP_Bypass_via_response_manipulation.md)
+* [OTP Bypass](./Authentication_Bypass/OTP_Bypass.md)
 
 ### Broken-Link Hijacking
 
