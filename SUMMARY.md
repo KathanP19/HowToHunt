@@ -4,7 +4,7 @@
 
 ### Account Takeover Methodology
 
-* [Chaining Low Impact Bugs with Xss](./Account_Takeovers_Methodologies/Chaining_low_impact_bugs_with_xss.md)
+* [Chaining Low Impact Bugs with Xss](./Account_Takeovers_Methodologies/Account_Takeovers_Methods.md#chaining-session-hijacking-with-xss)
 * [No Rate Limit On Login with Weak Password Policy](./Account_Takeovers_Methodologies/No_rate_limit_on_login_with_weak_password_policy.md)
 * [Password Reset Poisoning Leads To Token Theft](./Account_Takeovers_Methodologies/Password_reset_poisoning_leads_to_token_theft.md)
 * [Using Auth Bypass](./Account_Takeovers_Methodologies/Using_Auth_Bypass.md)
