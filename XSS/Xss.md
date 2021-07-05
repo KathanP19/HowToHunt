@@ -141,6 +141,12 @@ Ex:- <svg•onload=alert(1)>
 Ex:- GET /?q=xss  POST/
                   q=xss
 ```
+* Try CRLF Inection
+```
+Ex:- GET /%0A%ODValue=%20Virus
+     POST 
+     Value= Virus
+ ```
 ## Thanks To
 * [The XSS rat](https://www.youtube.com/channel/UCjBhClJ59W4hfUly51i11hg)
 * [sratarun](https://twitter.com/sratarun)
