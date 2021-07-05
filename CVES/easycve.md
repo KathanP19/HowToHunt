@@ -19,7 +19,6 @@
     10.Go to google and put cve or some details grab from  twitter for a better poc read writeups related to that.
     11.Try all cves if success report it.:)
  ```   
- * Please follow me on twitter [@Virdoex_hunter](https://twitter.com/Virdoex_hunter).
 
 ### Authors
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)

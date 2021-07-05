@@ -84,7 +84,17 @@ Insufficient Email Verification means the application doesn’t verify the email
 1.  Forced Browsing. (directly navigating to files which comes after verifying the email)
 2.  Response or Status Code Manipulation. (Replacing the bad response status like 403 to 200 can be useful)
 3.  There are much more ways of bypassing . **Tip**: Just google it.
+#### Email verification bypass after signup:-
 
+```
+1. Sing up on the web application as attacker@mail.com
+2. You will receive a confirmation email on attacker@mail.com, do not open that link now.
+3. The application may ask for confirming your email, check if it allows navigating to account settings page.
+4. On settings page check if you can change the email.
+5. If allowed, change the email to victim@mail.com.
+6. Now you will be asked to confirm victim@mail.com by opening the confirmation link received on victim@mail.com, insted of opening the new link go to attacker@mail.com inbox and open the previous received link.
+7. If the application verifies vitim@mail.com by using perivious verification link received on attacker mail, then this is a email verification bypass. 
+```
 > Further Read  
 >  [https://hackerone.com/reports/1040047](https://hackerone.com/reports/1040047)  
 >  [https://hackerone.com/reports/617896](https://hackerone.com/reports/617896)  
@@ -93,8 +103,11 @@ Insufficient Email Verification means the application doesn’t verify the email
 
 **_Thanks for Reading. Any Suggestions are always welcomed!!_**
 
-Follow me for more….
+## Sources:-
 
-Twitter: [https://twitter.com/Sm4rty\_](https://twitter.com/Sm4rty_)  
-LinkedIn: [https://www.linkedin.com/in/sm4rty](https://www.linkedin.com/in/sm4rty)  
-Instragram: [https://www.instagram.com/sm4rty](https://www.instagram.com/sm4rty)
++ https://twitter.com/kushagrasarathe/status/1385111472385060867?s=19
+
+## Author:-
+
++ @Kushagra Sarathe - [Twitter](https://twitter.com/kushagrasarathe) & [GitHub](https://github.com/kushagrasarathe)
++ @Sm4rty - [Twitter](https://twitter.com/Sm4rty\_)  , [LinkedIn](https://www.linkedin.com/in/sm4rty) &  [Instragram](https://www.instagram.com/sm4rty)

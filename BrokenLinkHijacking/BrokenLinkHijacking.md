@@ -1,4 +1,5 @@
-# Steps
+
+## Steps
 
 1. Manually find and click external links on the target site ( For Example:- Some Links to Social Media Accounts or Some external Media Link)
 2. While Doing Manual work also put [broken-link-checker](https://github.com/stevenvachon/broken-link-checker) in background using below Command interminal.
@@ -15,11 +16,10 @@
  1. Go to [Online Broken Link Checker](https://ahrefs.com/broken-link-checker) Or [Alternative Online Broken Link Checker](https://brokenlinkcheck.com/)
  2. Input the domain name
 
-# Reference
+## Reference
 
-[https://edoverflow.com/2017/broken-link-hijacking/](https://edoverflow.com/2017/broken-link-hijacking/)
-
-[https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d](https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d)
+* [https://edoverflow.com/2017/broken-link-hijacking/](https://edoverflow.com/2017/broken-link-hijacking/)
+* [https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d](https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d)
 
 ### Author:
 * [@KathanP19](https://twitter.com/KathanP19)

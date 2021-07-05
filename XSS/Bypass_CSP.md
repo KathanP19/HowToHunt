@@ -1,3 +1,4 @@
+
 #### What is CSP?
 
 CSP stands for `Content Security Policy` which is a mechanism to define which resources can be fetched out or executed by a web page. In other words, it can be understood as a policy that decides which scripts, images, iframes can be called or executed on a particular page from different locations. Content Security Policy is implemented via response headers or meta elements of the HTML page. From there, it’s browser’s call to follow that policy and actively block violations as they are detected.
@@ -100,3 +101,6 @@ report-uri https://csp.example.com;
 ```
 
 This means we can control what value the script-src value is set to. We can easily bypass the CSP by setting this value to a domain we control.
+
+## Author:
+* [@harsha0x01](https://twitter.com/harsha0x01)

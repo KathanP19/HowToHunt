@@ -23,13 +23,10 @@
 
 * [Session Based Bugs](./Broken_Auth_And_Session_Management/Session_based_bugs.md)
 
-### Bypassing CSP
-
-* [CSP Bypass](./Bypassing_CSP/CSP_bypass.md)
-
 ### CMS
 
 * [Wordpress](./CMS/wordpress.md)
+* [Moodle](./CMS/Moodle.md)
 
 ### CORS
 
@@ -50,10 +47,11 @@
 * [Web Application Pentesting Checklist](./CheckList/Web-Application-Pentesting-checklist.md)
 * [Web Checklist by Chintan Gurjar.pdf](https://github.com/KathanP19/HowToHunt/blob/master/CheckList/Web_Checklist_by_Chintan_Gurjar.pdf)
 * [Mindmap by Rohit Gautam](https://github.com/KathanP19/HowToHunt/blob/master/CheckList/mindmap.png)
+* [Mindmap by Cristian Cornea](https://github.com/KathanP19/HowToHunt/blob/master/CheckList/Web_Penetration_Testing_Methodology%402x.png)
 
-### Source Code Review
+### Web Page Source Code Review
 
-* [Code Review Tips](./CodeReview/codereviewtips.md)
+* [Web Page Code Review Tips](./Web_Source_Review/codereviewtips.md)
 
 ### EXIF Geo Data Not Stripped
 
@@ -66,6 +64,10 @@
 ### Find Origin IP
 
 * [Find Origin](./FindOriginIP/FindOrigin.md)
+
+### GraphQL
+
+* [GraphQL](./GraphQL/GraphQL.md)
 
 ### HTTP Desync Attack
 
@@ -136,6 +138,11 @@
 ### SSTI
 
 * [SSTI](./SSTI/SSTI.md)
+
+### Sign Up Functionality
+
+* [Sign Up Bugs](./Sign_Up_Functionality/Hunting_for_bugs_in_signup_feature.md)
+* [Sign Up MindMap](./Sign_Up_Functionality/Signup_Mindmap.png)
 
 ### Sensitive Info Leaks
 

@@ -26,4 +26,5 @@
    `curl -i -s -k -X 'GET' -H 'Host: <site>' -H 'X-rewrite-url: admin/login' 'https://<site>/'.`
 
 
-Author:[@KathanP19](https://twitter.com/KathanP19)
+## Author:
+* [@KathanP19](https://twitter.com/KathanP19)
