@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-51-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-52-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -93,6 +93,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/0xRyuk"><img src="https://avatars.githubusercontent.com/u/64897374?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rishi Choudhary</b></sub></a><br /><a href="#tutorial-0xRyuk" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/N3T-hunt3r"><img src="https://avatars.githubusercontent.com/u/66157052?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yasser Khan</b></sub></a><br /><a href="#tutorial-N3T-hunt3r" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://net-hunter121.github.io/Yasser-Khan/"><img src="https://avatars.githubusercontent.com/u/83981655?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yasser khan</b></sub></a><br /><a href="#tutorial-Net-hunter121" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
