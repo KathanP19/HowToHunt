@@ -1,13 +1,12 @@
-### Old Session Does Not Expire:
+### Old Session Does Not Expire After Password Change:
 * Steps:
 ```
-      1.create your account
-      2.open two browser eg.,chrome and firefox
-      3.Login in one browser eg.chrome
-      4.In other browser(firefox) login either change your password or reset your password
-      5.After successfully changed or reset go to other browser refresh the page if you are still logged in
+      1.create An account On Your Target Site
+      2.Login Into Two Browser With Same Account(Chrome, FireFox.You Can Use Incognito Mode As well) 
+      3.Change You Password In Chrome, On Seccessfull Password Change Referesh Your Logged in Account In FireFox/Incognito Mode.
+      4.If you'r still logged in Then This Is a Bug
 ```      
-Than this is an old session does not expire bug
+
 ### Session Hijacking (Intended Behavior)
 * Steps:
 ```
@@ -22,14 +21,14 @@ Than this is an old session does not expire bug
 `Impact:` If attacker get cookies of victim it will leads to account takeover.
  
  
-### Password reset link token does not expire (Insecure Configurability)
+### Password reset token does not expire (Insecure Configurability)
 * Steps:
 ```
-      1.Create your account on target
-      2.request a forget password link
+      1.Create your account on target Site.
+      2.request for a forget password token.
       3.Don't use that link
-      4.Instead logged in with your old password and change your email to other
-      5.Now use that password link sents to old email and check if you are able to change your password if yes than there is the title bug.
+      4.Instead logged in with your old password and change your email to other.
+      5.Now use that password link sents to old email and check if you are able to change your password if yes than there is the litle bug.
  ```    
  
  ### Server security misconfiguration -> Lack of security headers -> Cache control for a security page
@@ -62,6 +61,42 @@ Than this is an old session does not expire bug
 Email Verfication was bypassed due to Broken Authentication Mechanism , Thus more Privileged account can be accessed by an attacker making website prone to Future Attacks.    
   Happy Hacking:)
   
+  ### Email Verification Bypass (P3/P4)
+  * Steps :
+   ``` 
+    1)First You need to Create an account with Your Own Email Address.
+    2)After Creating An Account A Verification Link will be sent to your account.
+    3)Dont Use The Email Verification link. Change Your Email to Victim's Email.
+    4)Now Go in Your Email and Click of You Email Verification Link.
+    5)if the Victim's Email Get Verified then This is a Bug.
+```
+`Impact` : Email Verfication Bypass
+
+ ### Old Password Reset Token Not Expiring Upon Requesting New One (Sometimes P4) :
+  * Steps :
+ ``` 
+    1)First You need to Create an account with a Valid Email Address.
+    2)After Creating An Account log out from your Account and Navigate on Forgot Password Page.
+    3)Request a Password Reset Link for your Account.A Verification Link will be sent to your account.
+    4)Without Using this Password Reset Link Request A New Password Reset Link.
+    5)Now go in Your email and Use 1st Password Reset Link Rather than Using 2nd One And Change Your Password.
+    6) If You Are Able to Change Your Password Than This Is a tiny Bug ;).
+```
+* Note:- Some Companies Won't Accept it As Valid Issue. 
+
+### Password Reset Token Not Expiring After Password Change (P4):
+  * Steps :
+ ``` 
+    1)First You need to Create an account with a Valid Email Address.
+    2)After Creating An Account log out from your Account and Navigate on Forgot Password Page.
+    3)Request a Password Reset Link for your Account.
+    4)Use The Password Reset Link And Change The Password, After Changing the Password Login to Your Account.
+    5)Now Use The Old Password Reset Link To Change The Password Again.
+    6) If You Are Able to Change Your Password Again Than This Is a tiny Bug  ;).
+```
+
+* Thanks For Reading Guys Happy Hunting :).
+
   ## Resources:
   Google,Youtube.
 
