@@ -1,6 +1,6 @@
 # XSS Filters Bypass.
 
-if You Are New then You Can Read the basics here :-https://fanimalikhack.medium.com/xss-powerful-methodology-for-beginners-797633a2efd0
+if You Are a Beginner then First Clear the Basic Concepts .
 
 
 * ```alert()``` Alternatives
@@ -20,7 +20,7 @@ if You Are New then You Can Read the basics here :-https://fanimalikhack.medium.
    5)Use onclick
    6)Use onscroll   
 ```
-* Note:- if () get filtered then Use \`\` Rather then () , Some Examples Are Below
+* Note:- if () get filtered then Use \`\` Rather then () , Some Examples Are Below.
 
 ```
    1)<script>alert`1`</script>
@@ -29,5 +29,8 @@ if You Are New then You Can Read the basics here :-https://fanimalikhack.medium.
    4)javascript:prompt`1`
    5)javascript:alert`1`
 ```
+## Resources
+- 1:-[Portswigger](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+- 2:-[OWASP](https://owasp.org/www-community/xss-filter-evasion-cheatsheet)
 
-## Twitter:[@fanimalikhack](https://twitter.com/fanimalikhack/)
+## Twitter:[Fani Malik](https://twitter.com/fanimalikhack/)
