@@ -1,3 +1,5 @@
+# Broken Authentication And Session Management.
+
 ### Old Session Does Not Expire After Password Change:
 * Steps:
 ```
@@ -101,5 +103,6 @@ Email Verfication was bypassed due to Broken Authentication Mechanism , Thus mor
   Google,Youtube.
 
 ## Authors
-* [https://twitter.com/Virdoex_hunter](https://twitter.com/Virdoex_hunter)
+* [https://twitter.com/Virdoex_hunter](https://twitter.com/Virdoex_hunter) 
 * Linkedin : [@chirag_Agrawal](https://www.linkedin.com/in/chirag-agrawal-770488144/), Twitter  : [@Raiders](https://twitter.com/ChiragA15977205)
+* Twitter : [Fani Malik](https://twitter.com/fanimalikhack) 
