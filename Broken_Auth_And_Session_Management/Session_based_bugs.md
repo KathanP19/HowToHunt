@@ -69,7 +69,7 @@ Email Verfication was bypassed due to Broken Authentication Mechanism , Thus mor
     1)First You need to Create an account with Your Own Email Address.
     2)After Creating An Account A Verification Link will be sent to your account.
     3)Dont Use The Email Verification link. Change Your Email to Victim's Email.
-    4)Now Go in Your Email and Click of You Email Verification Link.
+    4)Now Go in Your Email and Click on Your Own Email Verification Link.
     5)if the Victim's Email Get Verified then This is a Bug.
 ```
 `Impact` : Email Verfication Bypass
