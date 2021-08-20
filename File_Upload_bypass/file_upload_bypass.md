@@ -31,6 +31,10 @@ And at last Uploading a shell to some random websites for fun is not really cool
 
 ------
 
+**Test PDF upload functionality.
+
+- [https://github.com/jonaslejon/malicious-pdf](https://github.com/jonaslejon/malicious-pdf)
+
 Resources :-
 
 - [File upload Bypass pdf](https://harshitsengar.in/resources/File%20Upload%20Bypass%20.pdf)
