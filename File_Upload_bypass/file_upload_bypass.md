@@ -31,7 +31,7 @@ And at last Uploading a shell to some random websites for fun is not really cool
 
 ------
 
-**Test PDF upload functionality.
+**Test PDF upload functionality.**
 
 - [https://github.com/jonaslejon/malicious-pdf](https://github.com/jonaslejon/malicious-pdf)
 
