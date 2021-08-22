@@ -1,3 +1,5 @@
+## CVE's Shodan Dorks.
+
 * Big IP shodan Search:- 
 
 `http.title:"BIG-IP&reg;-Redirect" org:Org`
@@ -11,6 +13,11 @@
 
 `http.html:/dana-na/`  
 
+* CVE-2020–5902
+ 
+ ```inurl:/tmui/login.jsp```
+
 
 ## Author:
-[@manasH4rsh](https://twitter.com/manasH4rsh)
+- [@manasH4rsh](https://twitter.com/manasH4rsh)
+- [Fani Malik](https://twitter.com/FaniMalikHack)
