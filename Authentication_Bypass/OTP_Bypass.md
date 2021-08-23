@@ -54,9 +54,20 @@
       4. Go to Repeater tab and change the non-existent phone number to your phone number
       5. If you got an OTP to your phone, try using that OTP to register that non-existent number
   ```    
+  
+## No Rate Limit
+ * Steps:-
+ ```
+     1) Create an Account
+     2) When Application Ask you For the OTP( One-time password ), Enter wrong OTP and Capture this Request In Burp.
+     3) Send This Request into Repeater and repeat it by setting up payload on otp Value.
+     4) if there is no Rate Limit then wait for 200 Status Code (Sometimes 302)
+     5)if you get 200 ok or 302 Found Status Code that means you've bypass OTP
+ ```
 
 ### Contributors:
 * [@akshaykerkar13](https://twitter.com/akshaykerkar13)
 * [@Yn0tWhy](https://twitter.com/Yn0tWhy)
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
 * [febinrev](https://twitter.com/febinrev)
+* [Fani Malik](https://twitter.com/fanimalikhack)
