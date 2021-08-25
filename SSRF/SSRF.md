@@ -43,9 +43,9 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/flaws/
 * https://www.youtube.com/watch?v=324cZic6asE
 * https://www.youtube.com/watch?v=o-tL9ULF0KI
 * https://www.youtube.com/watch?v=324cZic6asE&t=751s
-* https://youtu.be/ds4Gp4xoaeA
 * https://youtu.be/m4BxIf9PUx0
 * https://youtu.be/apzJiaQ6a3k
+* [A New Era of SSRF](https://www.youtube.com/watch?v=R9pJ2YCXoJQ) by [Orange Tsai](https://blog.orange.tw/)
 
 ### Hackerone Reports
 * https://hackerone.com/hacktivity?order_field=popular&filter=type%3Apublic&querystring=SSRF
@@ -108,3 +108,4 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/flaws/
 
 ### Author:
 * [@0xCyberPirate](https://twitter.com/0xCyberPirate)
+* [0xrtt](https://twitter.com/0xrtt)
