@@ -10,6 +10,7 @@
 `inurl:example.com intext:admin ext:sql inurl:admin` <br>
 `inurl:example.com allintext:username,password filetype:log` <br>
 `site:example.com "-----BEGIN RSA PRIVATE KEY-----" inurl:id_rsa`<br>
+`site:*.gov.* "responsible disclosure"`<br>
 
 ![t](https://miro.medium.com/max/550/1*N9W6DfGA6wxgKTiywV9aUA.png) <br>
 
@@ -35,6 +36,8 @@
 - [Research papers on yelp are getting indexed by google bots.](https://hackerone.com/reports/207435)
 
 
-Author - [Keshav Malik](twitter.com/g0t_rOoT_) <br>
-Updated by - [Naveen Prakaasham](twitter.com/NPrakaasham) <br>
-Updated by - [@klaus](https://twitter.com/klaus_dev)
+Author 
+- [Keshav Malik](twitter.com/g0t_rOoT_) <br>
+- [Naveen Prakaasham](twitter.com/NPrakaasham) <br>
+- [@klaus](https://twitter.com/klaus_dev)
+- [Fani Malik](https://twitter.com/fanimalikhack)
