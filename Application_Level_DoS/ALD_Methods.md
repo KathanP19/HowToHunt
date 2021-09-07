@@ -39,6 +39,11 @@ Search A's account from B's account either it will
 - Either it will keeping on searching for long time
 - Either the application will crash (500 - Error Code)
 
+
+## Use Password From Password.txt
+⚠️`it's not recommended using more than 5000 characters as password.`
+- Here is the [Password.txt](https://raw.githubusercontent.com/KathanP19/HowToHunt/master/Application_Level_DoS/Password.txt)
+
 ## Reference : 
 \- Email Bounce Issues
 * [https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68](https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68)
@@ -55,3 +60,4 @@ Search A's account from B's account either it will
 
 ## Author: 
 * [Keshav Malik](https://twitter.com/g0t_rOoT_)
+* [Fani Malik](https://twitter.com/fanimalikhack)
