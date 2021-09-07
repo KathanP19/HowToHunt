@@ -76,6 +76,11 @@ If the session is already hijacked and there is a session timeout vuln
 Enter the code 000000 or null to bypass 2FA protection.
 ```
 ___
+
+### Articles 
+- [Testing Two-Factor Authentication](https://research.nccgroup.com/2021/06/10/testing-two-factor-authentication/) by [NCC Group](https://research.nccgroup.com/)
+
+
 ## Author
 
 [Harsh Bothra](https://twitter.com/harshbothra_) \
