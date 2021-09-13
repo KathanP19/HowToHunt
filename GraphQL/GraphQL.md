@@ -13,6 +13,7 @@
 - [GraphQL Voyager](https://apis.guru/graphql-voyager/)
 - [GraphQL Cheatsheet](https://devhints.io/graphql)
 - [AutoGraphQL](https://graphql-dashboard.herokuapp.com/) -  Demo [Video ](https://www.youtube.com/watch?v=JJmufWfVvyU)
+- [graphw00f](https://github.com/dolevf/graphw00f) - GraphQL Server Engine Fingerprinting utility to learn more about what technology is behind a given GraphQL endpoint
 
 # Labs
 - Damn-Vulnerable-GraphQL-Application - [Github](https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application)
