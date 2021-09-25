@@ -8,6 +8,7 @@
 - [That single GraphQL issue that you keep missing](https://blog.doyensec.com/2021/05/20/graphql-csrf.html) by [Doyensec](https://www.doyensec.com/)
 - [Reverse engineer a GraphQL API](https://swizec.com/blog/reverse-engineer-a-graphql-api-to-automate-love-notes-codewithswiz-24)
 - [Exploiting GraphQL](https://blog.assetnote.io/2021/08/29/exploiting-graphql/) by [Assetnote](https://assetnote.io/)
+- [GraphQL Resources Thread](https://twitter.com/holybugx/status/1441460070387261440?s=21) by [HolyBugx](https://twitter.com/HolyBugx)
 
 # Tools
 - [GraphQL Voyager](https://apis.guru/graphql-voyager/)
