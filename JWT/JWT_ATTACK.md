@@ -6,6 +6,8 @@
 * https://youtu.be/ghfmx4pr1Qg ( very begginer friendly)
 * https://medium.com/ag-grid/a-plain-english-introduction-to-json-web-tokens-jwt-what-it-is-and-what-it-isnt-8076ca679843
 * https://medium.com/swlh/hacking-json-web-tokens-jwts-9122efe91e4a
+* https://anubhav-singh.medium.com/get-a-feel-of-jwt-json-web-token-8ee9c16ce5ce
+* https://anubhav-singh.medium.com/attacks-on-json-web-token-jwt-278a49a1ad2e
 * Cheat Sheet - [Pentester's Lab](https://assets.pentesterlab.com/jwt_security_cheatsheet/jwt_security_cheatsheet.pdf)
  
 ### NOTES FOR ATTACKING JWT
@@ -67,7 +69,7 @@ Payload
  --------------------------------------------------------
  1. First decode full token or 1 1 each part of token to base64
  2. Change the payload use jwt web token burp
- 3. Changing encrption  rs256 to sh256
+ 3. Changing encrption  RS256 to HS256
  4. Signature not changes remove it or temper it,
  5. Brute forcing the key in hs256 because it use same key to sign and verify means publickey=private key
  ---------------------------------------------------------------------------------------------------
@@ -87,17 +89,12 @@ Payload
 ---
  # TOOLS TO USE
  -----------------------------------------------------------------------------------------------
- * Jwt token attack burp extention
- 
-      (Link - [https://github.com/portswigger/json-web-token-attacker](https://github.com/portswigger/json-web-token-attacker))
+ * [Jwt token attack burp extention](https://github.com/portswigger/json-web-token-attacker)
  * Base64 decoder
  * jwt.io to analyse the struct of token
- * jwt cat for weak secret token
-      
-      (Link: [https://github.com/aress31/jwtcat](https://github.com/aress31/jwtcat))
-      
-      (Link : [https://github.com/ticarpi/jwt_tool.git](https://github.com/ticarpi/jwt_tool.git))
-  * Tool to test security of JSON Web Tokens [jwtXploiter](https://github.com/DontPanicO/jwtXploiter)
+ * jwt cat for weak secret token [jwtcat](https://github.com/aress31/jwtcat) 
+ * Tool is used for validating, forging, scanning and tampering JWTs [jwt_tool](https://github.com/ticarpi/jwt_tool)
+ * Tool to test security of JSON Web Tokens [jwtXploiter](https://github.com/DontPanicO/jwtXploiter)
 
 ---------------------------------------------------------------------------------------------------------------------------
 ### SOURCES: 
@@ -107,3 +104,4 @@ Payload
 * [Naman Shah](https://twitter.com/naman_1910)
 * [@kAshhadali10](https://twitter.com/kAshhadali10)
 * [@0xrtt](https://twitter.com/0xrtt)
+* [Anubhav Singh](https://twitter.com/AnubhavSingh_)
