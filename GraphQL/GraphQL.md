@@ -14,6 +14,7 @@
 - [GraphQL Cheatsheet](https://devhints.io/graphql)
 - [AutoGraphQL](https://graphql-dashboard.herokuapp.com/) -  Demo [Video ](https://www.youtube.com/watch?v=JJmufWfVvyU)
 - [graphw00f](https://github.com/dolevf/graphw00f) - GraphQL Server Engine Fingerprinting utility to learn more about what technology is behind a given GraphQL endpoint
+-[InQL - Introspection GraphQL Scanner](https://portswigger.net/bappstore/296e9a0730384be4b2fffef7b4e19b1f) - A security testing tool to facilitate GraphQL technology security auditing efforts
 
 # Labs
 - Damn-Vulnerable-GraphQL-Application - [Github](https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application)
