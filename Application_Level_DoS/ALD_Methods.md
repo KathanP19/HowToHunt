@@ -44,6 +44,27 @@ Search A's account from B's account either it will
 ⚠️`it's not recommended using more than 5000 characters as password.`
 - Here is the [Password.txt](https://raw.githubusercontent.com/KathanP19/HowToHunt/master/Application_Level_DoS/Password.txt)
 
+## 4. Permanent DOS to victim
+This is not Application Level DOS but a Permanent DOS to victim.
+In some website user get blocked after trying to loging in with wrong credidentials.We will untilize this feature as bug :D.
+
+**How to check**.
+- Go to login page of example.com.
+- Now enter valid account email and wrong password .
+- Try to login with these details for few times(at least 10-20 times).You can use repeater or intruder in burpsuite.
+- If your account get blocked, check the blocking time period.If the blocking time period is more than 30 min .You can report it.
+
+**Point to Remember**
+- Make sure there is no captcha during login because we cann't make any automated tool to loop the request.
+- Make sure Old session are expired after being blocked.
+
+**What is priority of this bug?**
+- If the user get permanently block after some wrong attempts this is considered as P2. 
+- If the user get temporarly block this is considered as P3/P4.
+
+During report try to add impact by saying that you can permanently block user account by looping this request with some intervals.
+
+
 ## Reference : 
 \- Email Bounce Issues
 * [https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68](https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68)
@@ -58,6 +79,10 @@ Search A's account from B's account either it will
 - [https://medium.com/@shahjerry33/long-string-dos-6ba8ceab3aa0](https://medium.com/@shahjerry33/long-string-dos-6ba8ceab3aa0)
 - https://hackerone.com/reports/764434
 
+\- Permanent DOS to victim
+- https://youtu.be/5drIMXCQuNw
+
 ## Author: 
 * [Keshav Malik](https://twitter.com/g0t_rOoT_)
 * [Fani Malik](https://twitter.com/fanimalikhack)
+
