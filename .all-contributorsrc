@@ -508,6 +508,15 @@
       "contributions": [
         "tutorial"
       ]
+    },
+    {
+      "login": "themarkib",
+      "name": "Bikram kharal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53949692?v=4",
+      "profile": "http://www.bikramkharal.com.np",
+      "contributions": [
+        "tutorial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
