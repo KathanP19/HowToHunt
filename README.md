@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-55-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-56-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -97,6 +97,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/fanimalikhack"><img src="https://avatars.githubusercontent.com/u/59456216?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fani Malik Hack</b></sub></a><br /><a href="#tutorial-fanimalikhack" title="Tutorials">✅</a></td>
     <td align="center"><a href="http://dhruvin.me"><img src="https://avatars.githubusercontent.com/u/49072279?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dhruvin shah</b></sub></a><br /><a href="#tutorial-dhrruvin" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://2020udemycoupons.blogspot.com"><img src="https://avatars.githubusercontent.com/u/65343799?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TCode110</b></sub></a><br /><a href="#tutorial-TCode110" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/Faizee-Asad"><img src="https://avatars.githubusercontent.com/u/72010857?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Faizee Asad</b></sub></a><br /><a href="#tutorial-Faizee-Asad" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
