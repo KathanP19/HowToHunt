@@ -100,7 +100,13 @@ Insufficient Email Verification means the application doesn’t verify the email
 >  [https://hackerone.com/reports/617896](https://hackerone.com/reports/617896)  
 >  [https://hackerone.com/reports/737169](https://hackerone.com/reports/737169)
 
+#### 6\. Path Overwrite
 
+If an application allows users to check their profile with direct path /{username} always try to signup with system reserved file names, such as index.php, signup.php, login.php, etc. In some cases what happens here is, when you signup with username: `index.php`, now upon visiting target.tld/index.php, your profile will comeup and occupy the index.php page of an application. Similarly, if an attacker is able to signup with username `login.php`, Imagine login page getting takeovered.
+
+> Further Read:
+https://infosecwriteups.com/logical-flaw-resulting-path-hijacking-dd4d1e1e832f
+  
 **_Thanks for Reading. Any Suggestions are always welcomed!!_**
 
 ## Sources:-
