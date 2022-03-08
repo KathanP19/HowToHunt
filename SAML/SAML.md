@@ -252,3 +252,6 @@ Burp search [SAMLResponse]
  1.PHNhbWx -> b64decode -> '<saml'
  2.PD94bWw -> b64decode -> '<?xml'
 ```
+
+### Author:
+- [Kathan Patel](https://twitter.com/KathanP19)
