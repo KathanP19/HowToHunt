@@ -94,7 +94,7 @@
 5. Done!
 ```
 
-1. ****None algorithm****
+2. ****None algorithm****
 
 ```python
 1. Turn Intercept on in burp and Login to Web App
@@ -118,7 +118,7 @@ Using JWT_Tool.
 5. Change you Payload value to desire with the token that worked and Done!
 ```
 
-1. ****Change algorithm from RS256 to HS256****
+3. ****Change algorithm from RS256 to HS256****
 
 ```python
 Note: This Attack will convert the workflow from Asymmetric to Symmetric encryption and now we can sign the new tokens with the same public key.
@@ -138,7 +138,7 @@ Note: This Attack will convert the workflow from Asymmetric to Symmetric encrypt
 * This will work when web app support both algorithm.
 ```
 
-1. ****Signature not being checked****
+4. ****Signature not being checked****
 
 ```python
 1. Turn Intercept on in burp and Login to Web App
@@ -148,7 +148,7 @@ Note: This Attack will convert the workflow from Asymmetric to Symmetric encrypt
 5. Done, Forward the Request.
 ```
 
-1. ****Crack the secret key****
+5. ****Crack the secret key****
 
 ```python
 1. Turn Intercept on in burp and Login to Web App
@@ -167,7 +167,7 @@ Note: This Attack will convert the workflow from Asymmetric to Symmetric encrypt
 * You can also find any leaking secret key in jwt.json config file.
 ```
 
-1. **Attacks using kid in JWT token.**
+6. **Attacks using kid in JWT token.**
 
 ```python
 Use arbitrary files to verify
@@ -199,7 +199,7 @@ Command injection
 
 ```
 
-1. ****Forged Header Parameter****
+7. ****Forged Header Parameter****
 
 ```python
 JSON Set URL (jku)
