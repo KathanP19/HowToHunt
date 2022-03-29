@@ -7,11 +7,11 @@ Some Tutorials and Things to Do while Hunting Particular Vulnerability.
 ## GitBook Link :- https://kathan19.gitbook.io/
 ## GitHub Repo Link :- https://github.com/KathanP19/HowToHunt
 
-***\- Goto Above GitBook link if you want to read and To Contribute goto Github and and make a Pull Request !!.***
+***\- Go to Above GitBook link if you want to read and To Contribute go to Github and and make a Pull Request !!.***
 
-**Note: You Can Help Me Complete This List By Making Pull Request And Please Mention Your Twitter Handler at the End Of the file.**
+**Note: You can help me complete this list by making Pull Request and please do mention your twitter handler at the end of the file.**
 
-**All the Credits to All the Contributors Without You It Could Have Never Been possible**
+**All the credits to all the contributors, without you all it could have never been possible**
 
 **If you want to know what's added every week then follow me on twitter [https://twitter.com/KathanP19](https://twitter.com/KathanP19) I post what's updated every weekends.**
 
@@ -21,7 +21,7 @@ Some Tutorials and Things to Do while Hunting Particular Vulnerability.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people :
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
