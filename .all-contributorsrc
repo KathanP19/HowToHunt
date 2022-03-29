@@ -535,6 +535,15 @@
       "contributions": [
         "tutorial"
       ]
+    },
+    {
+      "login": "DotSlashTX",
+      "name": "TX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25368035?v=4",
+      "profile": "https://github.com/DotSlashTX",
+      "contributions": [
+        "tutorial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
