@@ -87,7 +87,7 @@
 
 ### JWT ATTACK
 
-* [JWT](./JWT/JWT_ATTACK.md)
+* [JWT](./JWT/JWT.md)
 
 ### MFA Bypass
 
