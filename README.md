@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-60-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-61-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -104,6 +104,7 @@ Thanks goes to these wonderful people :
     <td align="center"><a href="https://github.com/c0ff33b34n"><img src="https://avatars.githubusercontent.com/u/86168298?v=4?s=100" width="100px;" alt=""/><br /><sub><b>c0ff33b34n</b></sub></a><br /><a href="#tutorial-c0ff33b34n" title="Tutorials">✅</a></td>
     <td align="center"><a href="http://veshraj.info.np"><img src="https://avatars.githubusercontent.com/u/54109630?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Veshraj Ghimire</b></sub></a><br /><a href="#tutorial-V35HR4J" title="Tutorials">✅</a></td>
     <td align="center"><a href="https://github.com/DotSlashTX"><img src="https://avatars.githubusercontent.com/u/25368035?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TX</b></sub></a><br /><a href="#tutorial-DotSlashTX" title="Tutorials">✅</a></td>
+    <td align="center"><a href="https://github.com/Kr1shna4garwal"><img src="https://avatars.githubusercontent.com/u/85845881?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Krishna Agarwal</b></sub></a><br /><a href="#tutorial-Kr1shna4garwal" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
