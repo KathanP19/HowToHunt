@@ -5,6 +5,7 @@ Here I will try my best to mention all common security misconfigurations for Wor
 * Wordpress Detection
 * General Scan Tool
 * xmlrpc.php
+* Directory listing
 * CVE-2018-6389
 * CVE-2021-24364
 * WP Cornjob DOS
@@ -67,6 +68,21 @@ This is one of the common issue on wordpress. To get some bucks with this miscon
 [Medium Writeup](https://medium.com/@the.bilal.rizwan/wordpress-xmlrpc-php-common-vulnerabilites-how-to-exploit-them-d8d3c8600b32)
 
 [WpEngine Blog Post](https://wpengine.com/resources/xmlrpc-php/)
+
+# Directory listing
+Sometimes developers forget to disable the directory listing on /wp-content/uploads. So this is the common issue on wordpress sites.
+
+### Detection
+/wp-content/uploads
+
+### Pro tip
+Add this path to your fuzzing wordlist
+
+### References
+[H1 Report](https://hackerone.com/reports/201984)
+[H1 Report](https://hackerone.com/reports/762118)
+[H1 Report](https://hackerone.com/reports/789388)
+[H1 Report](https://hackerone.com/reports/448985)
 
 # CVE-2018-6389
 This issue can down any Wordpress site under 4.9.3 So while reporting make sure that your target website is running wordpress under 4.9.3
