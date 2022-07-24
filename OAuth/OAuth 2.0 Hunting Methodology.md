@@ -1,7 +1,3 @@
----
-banner: "https://learndirectus.com/content/images/2022/02/oauth.png"
-banner_icon: 🔐
----
 ## OAuth 2.0 Hunting Methodology
 In OAuth there are 2 types of flows/grant types:
 - Authorization code flow
@@ -9,11 +5,11 @@ In OAuth there are 2 types of flows/grant types:
 
 Note: *if the oauth service uses authorization code flow then there is little to no chance of finding a bug but if the oauth service uses implicit flow then there is a good chance of finding bugs*
 
-### how to differentiate between implicit and authorization code grant type
+## How to differentiate between implicit and authorization code grant type
 
-#### Authorization code grant type
+### <ins>Authorization code grant type</ins>
 
-**Authorization request**
+**- Authorization request**
 - When you send an authorization request to the oauth service in the client application , The client application sends a request to the OAuth service's `/authorization` endpoint asking for permission to access specific user data.
 
 >note: the endpoint name can be different according to the application like `/auth` etc. but you can identify them based on the parameters used.
@@ -29,7 +25,7 @@ so, in authorization code grant type the `response_type` parameter should be `co
 
 now, after the user login to their account with the OAuth provider and gives consent to access their data. the user will be redirected to the `/callback` endpoint that was specified in the `redirect_uri` parameter of the authorization request. The resulting `GET` request will contain the authorization code as a query parameter.
 
-**Authorization code grant**
+**- Authorization code grant**
 
 ```
 GET /callback?code=a1b2c3d4e5f6g7h8&state=ae13d489bd00e3c24 HTTP/1.1 
@@ -44,9 +40,9 @@ Rest of the stuff like access token grant and API calls are done in the back-end
 - the `/callback` request contains authorization code as a parameter.
 ```
 
-#### Implicit grant type
+### <ins>Implicit grant type</ins>
 
-**Authorization request**
+**- Authorization request**
 - The implicit flow starts in pretty much the same way as the authorization code flow. The only major difference is that the `response_type` parameter must be set to `token`.
 
 ```
@@ -54,7 +50,7 @@ GET /authorization?client_id=12345&redirect_uri=https://client-app.com/callback&
 Host: oauth-authorization-server.com
 ```
 
-**Access Token grant**
+**- Access Token grant**
 
 If the user logs in and gives their consent to the request access , the oauth service redirects the user to the `/callback` endpoint but instead of sending a parameter containing an authorization code, it will send the access token and other token-specific data as a URL fragment.
 
