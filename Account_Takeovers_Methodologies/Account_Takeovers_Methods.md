@@ -33,7 +33,7 @@ Check out Auth Bypass method, there is a method for OTP bypass via response mani
 3.Check for the resoponse
 4.Change the respone by manipulating the following parameters
   {“code”:”invalid_credentials”} -> {“code”:”valid_credentials”}
-  {“verify”:”false”}              -> {“verify”:”true”}
+  {“verify”:”false”}             -> {“verify”:”true”}
   
   
 ```
