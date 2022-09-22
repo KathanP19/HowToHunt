@@ -171,7 +171,7 @@ It is possible that the application may not enforce access control for this new 
 
 [Finding more IDORs - Tips and Tricks | Aon](https://www.aon.com/cyber-solutions/aon_cyber_labs/finding-more-idors-tips-and-tricks/)
 
-[KathanP19/HowToHunt](https://github.com/KathanP19/HowToHunt/blob/master/IDOR/IDOR.md)
+[KathanP19/HowToHunt](https://github.com/KathanP19/HowToHunt/blob/master/IDOR/IDOR-Old.md)
 
 [Learn about Insecure Object Reference (IDOR) | BugBountyHunter.com](https://www.bugbountyhunter.com/vulnerability/?type=idor)
 
