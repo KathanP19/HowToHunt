@@ -13,7 +13,7 @@
  3. Now you need to check if company has the page or not , if no then register as the company or try to get that username or url. 
  
  ## Alternate Step
- 1. Go to [Online Broken Link Checker](https://ahrefs.com/broken-link-checker) Or [Alternative Online Broken Link Checker](https://brokenlinkcheck.com/)
+ 1. Go to [Online Broken Link Checker](https://ahrefs.com/broken-link-checker), [Dead Link Checker](https://www.deadlinkchecker.com/) Or [Alternative Online Broken Link Checker](https://brokenlinkcheck.com/)
  2. Input the domain name
 
 ## Reference
@@ -24,3 +24,4 @@
 ### Author:
 * [@KathanP19](https://twitter.com/KathanP19)
 * [@cyph3r_asr](https://twitter.com/cyph3r_asr)
+* [@v3daxt](https://twitter.com/v3daxt)

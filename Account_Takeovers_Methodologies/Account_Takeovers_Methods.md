@@ -28,6 +28,14 @@ So if you find that target have weak password policy, try to go for no rate limi
 ## Using  Auth Bypass
 ```
 Check out Auth Bypass method, there is a method for OTP bypass via response manipulation, this can leads to account takeovers.
+1.Enter the wrong auth code / Password
+2.Capture a auth request in burpsuite and send it to repeater 
+3.Check for the resoponse
+4.Change the respone by manipulating the following parameters
+  {“code”:”invalid_credentials”} -> {“code”:”valid_credentials”}
+  {“verify”:”false”}             -> {“verify”:”true”}
+  
+  
 ```
 ## Try For CSRF On
 ```
@@ -61,6 +69,8 @@ Check out Auth Bypass method, there is a method for OTP bypass via response mani
 
 ## Reference:
 * Various Source From Google,Twitter,Medium
+* https://avanishpathak.medium.com/an-account-takeover-vulnerability-due-to-response-manipulation-e23fe629bd1
 
 ## Author
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
+* [@v3daxt](https://twitter.com/v3daxt)

@@ -64,6 +64,13 @@
      4) if there is no Rate Limit then wait for 200 Status Code (Sometimes 302)
      5)if you get 200 ok or 302 Found Status Code that means you've bypass OTP
  ```
+ ## More test cases for bypassing OTP-
+ ```
+     1) Check for default OTP - 111111, 123456, 000000
+     2) Check if otp has been leaked in respone (Capture the request in burpsuite and send it to repeater to check the response)
+     3) Check if old OTP is still vaild
+ ```
+ 
 
 ### Contributors:
 * [@akshaykerkar13](https://twitter.com/akshaykerkar13)
@@ -71,3 +78,4 @@
 * [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
 * [febinrev](https://twitter.com/febinrev)
 * [Fani Malik](https://twitter.com/fanimalikhack)
+* [@v3daxt](https://twitter.com/v3daxt)
