@@ -35,7 +35,8 @@
 
 ### CSRF
 
-* [CSRF](./CSRF/README.md)
+* [CSRF](./CSRF/CSRF.md)
+* [CSRF MindMap](./CSRF/README.md)
 * [CSRF Bypass](./CSRF/Cross_Site_Request_Forgery_Bypass.md)
 
 ### Finding CVEs
