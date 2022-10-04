@@ -60,7 +60,7 @@
 
 ### File Upload Bypass
 
-* [File Upload Bypass](./File_Upload_bypass/file_upload_bypass.md)
+* [File Upload Bypass](./File_Upload/file_upload.md)
 
 ### Find Origin IP
 
