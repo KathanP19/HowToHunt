@@ -494,7 +494,8 @@ File upload functionality is not straightforward to implement securely. Some rec
 
 # Mind-Map
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35267f41-cf52-4b38-af14-6f6f0eda0a49/File_Upload.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35267f41-cf52-4b38-af14-6f6f0eda0a49/File_Upload.png)
+![File_Upload_MindMap](https://user-images.githubusercontent.com/33719912/193826710-b6d71979-04f4-42a6-a9c6-7d14784de9d4.png)
+
 
 # Tools And Payload.
 
