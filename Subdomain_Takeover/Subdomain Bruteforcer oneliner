@@ -1,6 +1,6 @@
-#Welcome To Oneliner Subdomain Bruteforcer Command 
-##Tool Name :- **FFUF** 
+#Oneliner Subdomain Bruteforcer Command
+-Tool Name :- **FFUF**
 ##Link For Download :- [FFUF](https://github.com/ffuf/ffuf.git)
-$$
-Using FFUF as a Subdomain Bruteforcer :- ffuf -u https://FUZZ.HOST -w FILE.txt -v | grep "| URL |" | awk '{print $4}'
-$$
+
+###Using FFUF as a Subdomain Bruteforcer 
+`ffuf -u https://FUZZ.HOST -w FILE.txt -v | grep "| URL |" | awk '{print $4}' `
