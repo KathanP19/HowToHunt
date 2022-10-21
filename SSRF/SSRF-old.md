@@ -102,6 +102,7 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/flaws/
 * https://portswigger.net/web-security/ssrf
 * https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery
 * https://krevetk0.medium.com/ssrf-vulnerability-via-ffmpeg-hls-processing-f3823c16f3c7
+* https://docs.google.com/presentation/d/1JdIjHHPsFSgLbaJcHmMkE904jmwPM4xdhEuwhy2ebvo/htmlpresent
 
 ### Github Repos
 * https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery
