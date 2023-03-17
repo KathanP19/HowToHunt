@@ -97,6 +97,18 @@ Email Verfication was bypassed due to Broken Authentication Mechanism , Thus mor
     6) If You Are Able to Change Your Password Again Than This Is a tiny Bug  ;).
 ```
 
+### Insufficient account process validation leads to account takeover (P3/P4):
+   * Steps :
+```
+      1) Create an account on the website.
+      2) Go to profile section. And Change & update your details in the name parameter and before saving it Open Burp suite, turn the proxy on and then click on Save.
+      3) Now capture the request in Burp suite and send it to the Repeater tab.
+      4) Now log out from the website and go back to the Burp suite.
+      5) Now change the details email & name parameters and click on "Go" in the repeater tab.
+      6) Now you will be able to see 200 ok response from the web server.
+      7) Now, login into your account and go to the Profile section to confirm
+```
+
 * Thanks For Reading Guys Happy Hunting :).
 
   ## Resources:
@@ -106,3 +118,4 @@ Email Verfication was bypassed due to Broken Authentication Mechanism , Thus mor
 * [https://twitter.com/Virdoex_hunter](https://twitter.com/Virdoex_hunter) 
 * Linkedin : [@chirag_Agrawal](https://www.linkedin.com/in/chirag-agrawal-770488144/), Twitter  : [@Raiders](https://twitter.com/ChiragA15977205)
 * Twitter : [Fani Malik](https://twitter.com/fanimalikhack) 
+* Linkedin : [@suprit-pandurangi](https://www.linkedin.com/in/suprit-pandurangi-a90526106/)
