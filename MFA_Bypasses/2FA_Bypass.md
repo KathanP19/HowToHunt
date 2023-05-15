@@ -26,6 +26,10 @@
     Signup for two account -> Login into attacker account & capture the disable 2FA request -> generate CSRF POC with .HTML extension -> Login into victim account and fire the request — — -> It disable 2FA which leads to 2FA Bypass.
     ```
  * 11:- Bypass 2FA by Adding null or 000000
+ * 12:- Bypass 2FA by Batch API request
+    ```
+    Suppose if 2FA parameter like "code" of "OTP" is going with the request, add same parameter into the request multiple times like BATCH Mode for REST APi.
+    ```
 
 * https://twitter.com/FaniMalikHack/status/1395042756108505092
 * https://twitter.com/FaniMalikHack/status/1402627994833805313
