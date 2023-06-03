@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-67-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-68-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -114,6 +114,7 @@ Thanks goes to these wonderful people :
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/v3daxt"><img src="https://avatars.githubusercontent.com/u/69508556?v=4?s=100" width="100px;" alt="Vedant"/><br /><sub><b>Vedant</b></sub></a><br /><a href="#tutorial-v3daxt" title="Tutorials">✅</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://omemishra.me"><img src="https://avatars.githubusercontent.com/u/25466820?v=4?s=100" width="100px;" alt="Ome Mishra"/><br /><sub><b>Ome Mishra</b></sub></a><br /><a href="#tutorial-omemishra" title="Tutorials">✅</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/s3ctat0r"><img src="https://avatars.githubusercontent.com/u/52566434?v=4?s=100" width="100px;" alt="Suprit Pandurangi"/><br /><sub><b>Suprit Pandurangi</b></sub></a><br /><a href="#tutorial-s3ctat0r" title="Tutorials">✅</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/0xPugazh"><img src="https://avatars.githubusercontent.com/u/75373225?v=4?s=100" width="100px;" alt="Pugalarasan"/><br /><sub><b>Pugalarasan</b></sub></a><br /><a href="#tutorial-0xPugazh" title="Tutorials">✅</a></td>
     </tr>
   </tbody>
 </table>
