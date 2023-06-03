@@ -589,6 +589,15 @@
       "contributions": [
         "tutorial"
       ]
+    },
+    {
+      "login": "omemishra",
+      "name": "Ome Mishra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25466820?v=4",
+      "profile": "https://omemishra.me",
+      "contributions": [
+        "tutorial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -596,5 +605,7 @@
   "projectOwner": "KathanP19",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
