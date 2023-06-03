@@ -297,6 +297,14 @@ Oracle Cloud:
 http://169.254.169.254/opc/v1/instance/
 ```
 
+```jsx
+Alibaba Cloud:
+http://100.100.100.200/latest/meta-data/
+http://100.100.100.200/latest/meta-data/instance-id
+http://100.100.100.200/latest/meta-data/image-id
+http://100.100.100.200/latest/user-data
+```
+
 ## **Impact:**
 
 An attacker can tunnel into internal networks and access sensitive internal data such as AWS metadata information.
