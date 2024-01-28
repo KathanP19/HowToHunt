@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-71-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-72-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -120,6 +120,7 @@ Thanks goes to these wonderful people :
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/prakhar0x01/"><img src="https://avatars.githubusercontent.com/u/89337486?v=4?s=100" width="100px;" alt="Prakhar Porwal"/><br /><sub><b>Prakhar Porwal</b></sub></a><br /><a href="#tutorial-prakhar0x01" title="Tutorials">✅</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://anmolksachan.github.io/"><img src="https://avatars.githubusercontent.com/u/60771253?v=4?s=100" width="100px;" alt="Anmol K Sachan"/><br /><sub><b>Anmol K Sachan</b></sub></a><br /><a href="#tutorial-anmolksachan" title="Tutorials">✅</a></td>
     </tr>
   </tbody>
 </table>
