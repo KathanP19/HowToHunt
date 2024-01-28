@@ -1,6 +1,6 @@
 # HowToHunt
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-70-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-71-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
 
@@ -117,6 +117,9 @@ Thanks goes to these wonderful people :
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/0xPugazh"><img src="https://avatars.githubusercontent.com/u/75373225?v=4?s=100" width="100px;" alt="Pugalarasan"/><br /><sub><b>Pugalarasan</b></sub></a><br /><a href="#tutorial-0xPugazh" title="Tutorials">✅</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/prince-prafull-19a477194/"><img src="https://avatars.githubusercontent.com/u/75206412?v=4?s=100" width="100px;" alt="Prince Prafull"/><br /><sub><b>Prince Prafull</b></sub></a><br /><a href="#tutorial-princep4" title="Tutorials">✅</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/offensive-droid"><img src="https://avatars.githubusercontent.com/u/138177031?v=4?s=100" width="100px;" alt="offensive-droid"/><br /><sub><b>offensive-droid</b></sub></a><br /><a href="#tutorial-offensive-droid" title="Tutorials">✅</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/prakhar0x01/"><img src="https://avatars.githubusercontent.com/u/89337486?v=4?s=100" width="100px;" alt="Prakhar Porwal"/><br /><sub><b>Prakhar Porwal</b></sub></a><br /><a href="#tutorial-prakhar0x01" title="Tutorials">✅</a></td>
     </tr>
   </tbody>
 </table>
