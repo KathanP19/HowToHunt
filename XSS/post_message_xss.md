@@ -1,9 +1,8 @@
-Post message xss
+# Post message xss
 specifically in the event listener of postMessage requests that do not check the origin before accessing data. As a result, an attacker can exploit this vulnerability by sending malicious data to your application from a null (sandboxed iframe) and pretending that it came from a trusted source. This could lead to a number of security risks such as data theft or other malicious activities.
 
-code
-Proof of Concept (PoC)
-code
+# Proof of Concept (PoC)
+```
 <!doctype html>
 <html>
     <head>
@@ -25,3 +24,4 @@ code
         <iframe src="https://url" onload="pocFrame(this.contentWindow)"></iframe>                    
     </body>
 </html>
+```
