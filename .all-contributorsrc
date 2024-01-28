@@ -625,6 +625,15 @@
       "contributions": [
         "tutorial"
       ]
+    },
+    {
+      "login": "offensive-droid",
+      "name": "offensive-droid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/138177031?v=4",
+      "profile": "https://github.com/offensive-droid",
+      "contributions": [
+        "tutorial"
+      ]
     }
   ],
   "contributorsPerLine": 7,
