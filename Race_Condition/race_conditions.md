@@ -13,13 +13,16 @@
 
 ### This method required Burp version 2023.9.x or higher (This is the easiest method to exploit, you can create your own script also.)
 1 - Send the request to repeater for `'n' no. of times`.
+
 2 - Create a Tab for all those request and choose `Send Parallel (single Packet Attack)`
+
 3 - Hit send , if application is Vulnerable, you'll see the magic.
 <hr>
 
 ## Rate-Limit Bypass via RC
 
 1 - Select the parameter in request that you want to bruteforce(let's say password), and `send the request into TurboIntruder`.
+
 2 - If it is password or something , then wordlist should be copied in your clipboard that and use the below python script in Turbo Intruder.
 
 ```
@@ -60,6 +63,7 @@ def handleResponse(req, interesting):
     - /cart/checkout  --> Buy that product
 
 2 - Send all the required request into burp repeater for the product you want in a sequence and create a Tab.
+
 3 - Select `Send Parallel (single Packet Attack)` and hit send.
 
 <hr>
@@ -75,11 +79,11 @@ def handleResponse(req, interesting):
   
 2 - Since, email is updated in DataBase and only confirmation is needed, 
    
-3 - So we `Send Parallel (Single Packet Attack)` of the changing email for, 
-   
-      `attacker@email.com`
-      `victim@email.com`
- 
+3 - So we `Send Parallel (Single Packet Attack)` of the changing email for,
+```
+attacker@email.com
+victim@email.com
+```
 4 - In Backend, Because we request so much fast that when application server generate confirmation link for `attacker@email.com` at the same time `victim@email.com` request is also reach their and application got confused to prioritise , As a result it sends both confirmation links on the same email.
 
 5 - Impact : This will lead to Full Acount Takeover.
