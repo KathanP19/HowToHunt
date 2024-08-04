@@ -70,8 +70,29 @@
      2) Check if otp has been leaked in respone (Capture the request in burpsuite and send it to repeater to check the response)
      3) Check if old OTP is still vaild
  ```
- 
+# Rate Limit
 
+## Steps To Reproduce :
+```
+- 1 - Go to the URL : `https://abc.target.com/verify/phoneno`
+- 2 - Enter random code (000000)
+- 3 - `Intercept` the Request
+- 4 - Send it to the `Intrude`r and add a payload position on `OTP parameter`
+- 5 - Apply payload type as numbers, Set the range(000000-999999) and step as 1
+- 6 - Start attack
+- 7 The response length will change at correct OTP
+```
+## Impact : 
+- The attacker will be able to bypass the OTP which can lead to an Zero Account Takeover
+
+## Mitigation :
+```
+- 1 - IP Based Blocking
+- 2 - Captcha
+- 3 - Firewall
+- 4 - Reducing the number of API requests
+```
+--------------------
 ### Contributors:
 * [@akshaykerkar13](https://twitter.com/akshaykerkar13)
 * [@Yn0tWhy](https://twitter.com/Yn0tWhy)
@@ -79,3 +100,4 @@
 * [febinrev](https://twitter.com/febinrev)
 * [Fani Malik](https://twitter.com/fanimalikhack)
 * [@v3daxt](https://twitter.com/v3daxt)
+* [@prakhar0x01](https://twitter.com/prakhar0x01)
