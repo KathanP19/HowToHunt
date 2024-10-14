@@ -1,6 +1,8 @@
 # SQL Injection
 Here are some quick methods to detect the SQL Injection vulnerability, though the methods are not limited. There are various tricks and tools.
 
+这里是一些快速检测SQL注入的方法，虽然这些方法是无止境的，这里有一些技巧和工具可以使用。
+
 # Methods To Find Sqli
 
 ## 1. Using Burpsuite :
