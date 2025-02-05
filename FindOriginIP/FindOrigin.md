@@ -73,6 +73,15 @@ python3 cloudfail.py -t 0x00sec.org
 example: 
 `curl -s -k -H "Host: 0x00sec.org" https://<ip address>/`
 
+**Shodan**
+```
+ssl.cert.subject.CN:"example.com" 200
+```
+OR
+```
+ssl:"example.com" 200
+```
+
 **Mail headers**
 - The next step is to retrieve the headers in the mails issued by your target: Subscribe the newsletter, create an account, use the function “forgotten password”, order something… in a nutshell do whatever you can to get an email from the website you’re testing 
 - Once you get an email, check the source, and especially the headers. Record all IPs you can find there, as well as subdomains, that could possibly belong to a hosting service. And again, try to access your target through all of them.
