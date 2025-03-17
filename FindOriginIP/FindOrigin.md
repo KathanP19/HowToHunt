@@ -73,6 +73,26 @@ python3 cloudfail.py -t 0x00sec.org
 example: 
 `curl -s -k -H "Host: 0x00sec.org" https://<ip address>/`
 
+**Shodan Method to Find Origin IP**
+
+Shodan can be used to find the origin IP by searching for SSL certificates associated with the target domain.
+
+**Shodan Queries:**
+```sh
+ssl.cert.subject.CN:"example.com"
+```
+This query searches for SSL certificates where the **Common Name (CN)** matches the target domain. However, some certificates use **Subject Alternative Names (SAN)** instead.
+
+```sh
+ssl:"example.com"
+```
+This is a broader search that checks if **any part of the SSL certificate** (CN, SAN, etc.) contains the target domain.
+
+**Note:**  
+- Results may include **CDN/Proxy IPs**, so verify manually.  
+- If a website uses **Let's Encrypt**, this method may return shared certificates.  
+- **SAN fields are more reliable than CN**, so manually inspect the results.  
+
 **Mail headers**
 - The next step is to retrieve the headers in the mails issued by your target: Subscribe the newsletter, create an account, use the function “forgotten password”, order something… in a nutshell do whatever you can to get an email from the website you’re testing 
 - Once you get an email, check the source, and especially the headers. Record all IPs you can find there, as well as subdomains, that could possibly belong to a hosting service. And again, try to access your target through all of them.
