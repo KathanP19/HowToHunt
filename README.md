@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/all_contributors-72-orange.svg?style=flat-square" alt="Contributors">
 </p>
 
-<p align="center">A collection of practical guides, methodologies, and resources for hunting vulnerabilities - from the community, for the community.  
+<p align="center">A collection of practical guides, methodologies, and resources for hunting vulnerabilities </br> From Hackers for Community, because Hacking is not just a skill </br> It’s a Mindset
 </p>
 
 ## 💡 What is HowToHunt?
