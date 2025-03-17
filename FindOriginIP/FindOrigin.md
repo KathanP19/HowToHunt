@@ -1,110 +1,154 @@
-**Identifying a WAF**
-```
+# Finding Origin IPs Behind WAFs
+
+## Introduction
+
+Web Application Firewalls (WAFs) like Cloudflare, AWS WAF, and others protect web applications by filtering and monitoring HTTP traffic. However, discovering the origin IP address behind these protective layers can be crucial during security assessments. This guide outlines various techniques to identify origin IPs.
+
+## Identifying the Presence of a WAF
+
+Before attempting to bypass a WAF, first confirm its presence:
+
+```bash
+# Get the IP address
 dig +short example.com
+
+# Check the organization
 curl -s https://ipinfo.io/IP | jq -r '.org'
 ```
 
--  With AWS, you can often identify a load balancer with the presence of "AWSLB" and "AWSLBCORS" cookies
+**Common WAF Indicators:**
+- AWS WAF: Look for "AWSLB" and "AWSLBCORS" cookies
+- Cloudflare: Organization info will indicate Cloudflare, Inc.
+- Other WAFs may have specific signatures or response headers
 
-**Identifying the source**
+## Techniques for Origin IP Discovery
 
-- Use https://dnsdumpster.com to generate a map.
+### 1. Historical DNS Records
 
-- Next, make a search using Censys and save the IP's that look to match your target in a text file.
-Example: https://censys.io/ipv4?q=0x00sec.org
+Historical DNS records often reveal IPs used before WAF implementation:
 
-- Another way you can find IP's tied to a domain is by viewing their historical IPs. You can do this with SecurityTrails DNS trails. 
-https://securitytrails.com/domain/0x00sec.org/dns
+- **SecurityTrails DNS History**
+  - Visit: https://securitytrails.com/domain/example.com/dns
+  - Export historical A records
+  - Extract IPs:
+    ```bash
+    grep -E -o "([0-9]{1,3}[\\.]){3}[0-9]{1,3}" dns_history.txt | sort -u > potential_ips.txt
+    ```
 
-	-	Here we can see what A records existed and for how long. It is so common for an administrator to switch to a WAF solution after X amount of years of using it bare-metal, and do you think they configure whitelisting? No of course not, it works fine!
-	-	you can just copy the entire table(Select full table and copy paste it in a txt file) body and use awk to filter the IP's out.
-		
-		`grep -E -o "([0-9]{1,3}[\\.]){3}[0-9]{1,3}" tails.txt | sort -u | tee -a ips.txt`
-		
-**DNS Enumeration**
-		
-	If you enumerate your targets DNS, you may find that they have something resembling a dev.example.com or staging.example.com subdomain, and it may be pointing to the source host with no WAF. 
-		
-	- Get all the subdomains.
-		`subfinder -silent -d 0x00sec.org | dnsprobe -silent | awk  '{ print $2 }'  | sort -u | tee -a ips.txt`
-		
-**Checking IP's for hosts**
+- **DNS Dumpster**
+  - Use https://dnsdumpster.com to generate network maps
+  - Look for non-WAF IP addresses in the results
 
+### 2. Subdomain Enumeration
 
-```
-for ip in $(cat ips.txt) # iterate through each line in file
-do 
-	org=$(curl -s <https://ipinfo.io/$ip> | jq -r '.org') #  Get Org from IPInfo
-  title=$(timeout 2 curl -s -k -H "Host: 0x00sec.org" <https://$ip/> | pup 'title text{}') # Get title
-	echo "IP: $ip Title: $title Org: $org" # Print results
-done 
-```
-in one line, same command:
-`for ip in $(cat ips.txt); do org=$(curl -s <https://ipinfo.io/$ip> | jq -r '.org'); title=$(timeout 2 curl --tlsv1.1 -s -k -H "Host: 0x00sec.org" <https://$ip/> | pup 'title text{}'); echo "IP: $ip Title: $title Org: $org"; done`
+Development or staging environments often lack proper WAF protection:
 
-
-- What we have now is a quick overview of which IP's respond to which Host header, and we can view the title
-- We went through each host, requested the IP directly with the host header, and we have our source IP!
-
-**Setting the Host Header manually**
-`curl -s -k -H "Host: 0x00sec.org" https://<ip address>/`
-
-or set Host Header in burp.
-
-**CloudFail** 
-
-```
-git clone <https://github.com/m0rtem/CloudFail.git>
-cd CloudFail
-pip install -r requirements.txt
-python3 cloudfail.py -t 0x00sec.org
+```bash
+# Find subdomains and their IPs
+subfinder -silent -d example.com | dnsprobe -silent | awk '{ print $2 }' | sort -u > subdomain_ips.txt
 ```
 
-**But first, Recon!**
-- The idea is to start your normal recon process and grab as many IP addresses as you can (host, nslookup, whois, ranges…), then check which of those servers have a web server enabled (netcat, nmap, masscan). 
-- Once you have a list of web server IP, the next step is to check if the protected domain is configured on one of them as a virtual host.
+Focus on subdomains like:
+- dev.example.com
+- staging.example.com
+- test.example.com
+- beta.example.com
 
-**Censys**
--  Choose “Certificates” in the select input, provide the domain of your target, then hit \<enter\>
--  You should see a list of certificates that fit to your target
--  Click on every result to display the details and, in the “Explore” menu at the very right, choose “IPv4 Hosts”.
--  You should be able to see the IP addresses of the servers that use the certificate
--  From here, grab all IP you can and, back to the previous chapter, try to access your target through all of them.
-example: 
-`curl -s -k -H "Host: 0x00sec.org" https://<ip address>/`
+### 3. SSL Certificate Information
 
-**Shodan Method to Find Origin IP**
+Certificates often reveal all domains and IPs where they're deployed:
 
-Shodan can be used to find the origin IP by searching for SSL certificates associated with the target domain.
+- **Censys Method**:
+  1. Search for certificates using your target domain
+  2. Select "Certificates" in the input field and search for your domain
+  3. Review each certificate and click "Explore" > "IPv4 Hosts"
+  4. Collect all associated IPs
 
-**Shodan Queries:**
-```sh
-ssl.cert.subject.CN:"example.com"
+- **Shodan Method**:
+  ```
+  # Search by Common Name (CN)
+  ssl.cert.subject.CN:"example.com"
+  
+  # Search in all certificate fields (broader)
+  ssl:"example.com"
+  ```
+
+  **Note:** Verify results manually as they may include CDN/proxy IPs. SAN (Subject Alternative Name) fields are generally more reliable than CN.
+
+### 4. Direct IP Testing
+
+For each potential IP, test if it responds to the target hostname:
+
+```bash
+# Test single IP
+curl -s -k -H "Host: example.com" https://POTENTIAL_IP/
+
+# Test multiple IPs
+for ip in $(cat potential_ips.txt); do
+  org=$(curl -s https://ipinfo.io/$ip | jq -r '.org')
+  title=$(timeout 2 curl -s -k -H "Host: example.com" https://$ip/ | pup 'title text{}')
+  echo "IP: $ip | Title: $title | Org: $org"
+done
 ```
-This query searches for SSL certificates where the **Common Name (CN)** matches the target domain. However, some certificates use **Subject Alternative Names (SAN)** instead.
 
-```sh
-ssl:"example.com"
-```
-This is a broader search that checks if **any part of the SSL certificate** (CN, SAN, etc.) contains the target domain.
+### 5. Email Headers Analysis
 
-**Note:**  
-- Results may include **CDN/Proxy IPs**, so verify manually.  
-- If a website uses **Let's Encrypt**, this method may return shared certificates.  
-- **SAN fields are more reliable than CN**, so manually inspect the results.  
+Emails from the target domain often contain internal IP information:
 
-**Mail headers**
-- The next step is to retrieve the headers in the mails issued by your target: Subscribe the newsletter, create an account, use the function “forgotten password”, order something… in a nutshell do whatever you can to get an email from the website you’re testing 
-- Once you get an email, check the source, and especially the headers. Record all IPs you can find there, as well as subdomains, that could possibly belong to a hosting service. And again, try to access your target through all of them.
+1. Trigger emails from the target (register, password reset, newsletters)
+2. Examine email headers, particularly:
+   - Return-Path
+   - Received
+   - X-Originating-IP
 
-The value of header Return-Path worked pretty well
+### 6. Specialized Tools
 
-Tool: https://github.com/christophetd/CloudFlair
-This tools works on censys data.
+Several tools automate origin IP discovery:
 
-References:
-https://delta.navisec.io/a-pentesters-guide-part-5-unmasking-wafs-and-finding-the-source/
-https://blog.detectify.com/2019/07/31/bypassing-cloudflare-waf-with-the-origin-server-ip-address/
+- **CloudFail**:
+  ```bash
+  git clone https://github.com/m0rtem/CloudFail.git
+  cd CloudFail
+  pip install -r requirements.txt
+  python3 cloudfail.py -t example.com
+  ```
 
-# Authors
-* [@maverickNerd](https://twitter.com/maverickNerd)
+- **CloudFlair**:
+  ```bash
+  git clone https://github.com/christophetd/CloudFlair
+  cd CloudFlair
+  pip install -r requirements.txt
+  python3 cloudflair.py example.com
+  ```
+
+## Verifying the Origin IP
+
+After discovering potential origin IPs, verify them:
+
+1. Compare response content with the WAF-protected site
+2. Look for server fingerprints (headers, error pages)
+3. Check for administrative interfaces or panels not accessible via WAF
+
+## Best Practices
+
+- Combine multiple techniques for better results
+- Document all discovered IPs and their verification status
+- Check IP ranges belonging to the organization
+- Consider timing your requests to avoid rate limiting
+
+## References
+
+- [Navisec: A Pentester's Guide - Unmasking WAFs and Finding the Source](https://delta.navisec.io/a-pentesters-guide-part-5-unmasking-wafs-and-finding-the-source/)
+- [Detectify: Bypassing Cloudflare WAF with the Origin Server IP Address](https://blog.detectify.com/2019/07/31/bypassing-cloudflare-waf-with-the-origin-server-ip-address/)
+
+## Credits
+
+### Original Author
+* [maverickNerd](https://x.com/maverickNerd)
+
+### Contributors
+* [nagarajcruze](https://github.com/nagarajcruze)
+* [www](https://github.com/www)
+
+---
+*Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
