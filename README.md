@@ -1,27 +1,54 @@
-# HowToHunt
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-72-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-Some Tutorials and Things to Do while Hunting Particular Vulnerability. 
+<h1 align="center">HowToHunt</h1>
 
-## GitBook Link :- https://kathan19.gitbook.io/
-## GitHub Repo Link :- https://github.com/KathanP19/HowToHunt
+<p align="center">
+  <img src="https://img.shields.io/github/stars/KathanP19/HowToHunt?style=social" alt="Stars">
+  <img src="https://img.shields.io/github/forks/KathanP19/HowToHunt?style=social" alt="Forks">
+  <img src="https://img.shields.io/github/issues/KathanP19/HowToHunt" alt="Issues">
+  <img src="https://img.shields.io/github/license/KathanP19/HowToHunt" alt="License">
+  <img src="https://img.shields.io/badge/all_contributors-72-orange.svg?style=flat-square" alt="Contributors">
+</p>
 
-***\- Go to Above GitBook link if you want to read and To Contribute go to Github and and make a Pull Request !!.***
+<p align="center">A collection of practical guides, methodologies, and resources for hunting vulnerabilities - from the community, for the community.  
+</p>
 
-**Note: You can help me complete this list by making Pull Request and please do mention your twitter handler at the end of the file.**
+## 💡 What is HowToHunt?
 
-**All the credits to all the contributors, without you all it could have never been possible**
+HowToHunt is a collaborative repository of step-by-step guides, methodologies, and hands-on techniques for finding specific vulnerabilities. Whether you're a beginner or an experienced hunter, you'll find valuable resources to enhance your bug hunting skills.
 
-**If you want to know what's added every week then follow me on twitter [https://twitter.com/KathanP19](https://twitter.com/KathanP19) I post what's updated every weekends.**
+> **Note:** This repository aims to provide practical, actionable guides rather than theoretical knowledge. Each guide is contributed by experienced hunters who have successfully used these techniques in the field.
 
-[If You Want To Support Project Or Me You Can Buy Me A Coffee](https://www.buymeacoffee.com/kathanp19)
+## 📖 How to Use
 
-<a href="https://www.buymeacoffee.com/kathanp19" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+### For Readers
+Visit our [GitBook](https://kathan19.gitbook.io/) for an organized, searchable reading experience with all the guides properly categorized.
 
-## Contributors ✨
+### For Contributors
+1. Fork the repository
+2. Create your feature branch (`git checkout -b add-new-guide`)
+3. Add your guide in the appropriate category folder
+4. Commit your changes (`git commit -m 'Add guide for XSS in login forms'`)
+5. Push to the branch (`git push origin add-new-guide`)
+6. Open a Pull Request
 
-Thanks goes to these wonderful people :
+## ☕ Support the Project
+
+If you find this project helpful and want to show your appreciation:
+
+<a href="https://www.buymeacoffee.com/kathanp19" target="_blank">
+  <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >
+</a>
+
+## 🛠️ Contribution Guidelines
+
+- Focus on practical, actionable techniques
+- Include real-world examples when possible
+- Provide clear step-by-step instructions
+- Add references to tools, resources, or write-ups that support your guide
+- Please mention your Twitter handle at the end of your guide
+
+## 🌟 Contributors
+
+Thanks goes to these wonderful people who have shared their knowledge and experience:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -130,4 +157,3 @@ Thanks goes to these wonderful people :
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
