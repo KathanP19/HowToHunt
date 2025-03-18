@@ -1,36 +1,67 @@
-# XSS Filters Bypass.
+# XSS Filter Bypass Techniques
 
-if You Are a Beginner then First Clear the Basic Concepts .
+## Introduction
 
+For those new to Cross-Site Scripting (XSS) attacks, it is essential to first understand the fundamental concepts before exploring filter bypass techniques.
 
-* ```alert()``` Alternatives
-```
-   1)Use confirm() Not alert()
-   2)Use prompt() Not alert()
-   3)Use console.log() Not alert()
-   4)use eval() Not alert()
+---
+
+## Alternatives to `alert()`
+
+Many web applications block the `alert()` function to mitigate XSS attacks. Below are alternative functions that can be used:
+
+- **`confirm()`** instead of `alert()`
+- **`prompt()`** instead of `alert()`
+- **`console.log()`** instead of `alert()`
+- **`eval()`** instead of `alert()`
+
+---
+
+## Alternatives to the `onerror` Event Handler
+
+If the `onerror` event handler is blocked, the following alternatives can be used to trigger JavaScript execution:
+
+- **`onload`**
+- **`onfocus`**
+- **`onmouseover`**
+- **`onblur`**
+- **`onclick`**
+- **`onscroll`**
+
+These event handlers can be embedded within HTML elements to execute scripts when the event is triggered.
+
+---
+
+## Handling Parentheses Filtering
+
+If parentheses `()` are filtered, backticks `` ` ` `` can be used as an alternative. Examples:
+
+```html
+<script>alert`1`</script>
+<img src=x onerror=alert`1`>
+<img src=x onerror=prompt`1`>
+javascript:prompt`1`
+javascript:alert`1`
 ```
 
-* ```onerror``` Event Handler Alternatives
-```
-   1)Use onload
-   2)Use onfocus
-   3)Use onmouseover
-   4)Use onblur
-   5)Use onclick
-   6)Use onscroll   
-```
-* Note:- if () get filtered then Use \`\` Rather then () , Some Examples Are Below.
+This method is effective against weak input sanitization mechanisms that only block standard function calls enclosed in parentheses.
 
-```
-   1)<script>alert`1`</script>
-   2)<img src=x onerror=alert`1`>
-   3)<img src=x onerror=prompt`1`>
-   4)javascript:prompt`1`
-   5)javascript:alert`1`
-```
-## Resources
-- 1:-[Portswigger](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
-- 2:-[OWASP](https://owasp.org/www-community/xss-filter-evasion-cheatsheet)
+---
 
-## Twitter:[Fani Malik](https://twitter.com/fanimalikhack/)
+## Additional Resources
+
+For further learning and reference, the following resources provide comprehensive details on XSS filter evasion techniques:
+
+1. **PortSwigger XSS Cheat Sheet** - [Visit PortSwigger](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+2. **OWASP XSS Filter Evasion Cheat Sheet** - [Visit OWASP](https://owasp.org/www-community/xss-filter-evasion-cheatsheet)
+
+---
+
+## Contact Information
+
+For discussions and insights, you can connect with:
+
+- **[@Fani Malik](https://twitter.com/fanimalikhack/)**
+
+---
+*Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
