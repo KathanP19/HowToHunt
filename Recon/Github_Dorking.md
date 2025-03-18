@@ -85,6 +85,7 @@
 
 1. [TruffleHog](https://github.com/dxa4481/truffleHog)
 2. [WatchTower](https://radar.nightfall.ai/)
+3. [Dorki](https://dorki.attaxa.com/)
 
 ## NOTE :
 If you find any API key or credentials or any other sensitive information under test directory then do not report it because that is an intended behaviour.
