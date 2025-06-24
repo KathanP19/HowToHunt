@@ -1,27 +1,57 @@
-# Easy CVES using Researching
-  
+# Easy CVEs using Research
+
 ### Tools
-* Google
-* Twitter
-* Nuclei
-  
-## Steps:
-```
-    1.Grab all the subdomains i.e, subfinder -d domain.com | tee -a domains.txt
-    2.Grap all alive domains i.e,  cat domains.txt | httpx -status-code | grep 200 | cut -d " " -f1 | tee -a alive.txt
-    3.Run nuclei basic-detection,panels,workflows,cves templates differently and store results in different file. i.e, cat alive.txt | nuclei -t nuclei-templates/workflows | tee -a workflows.
-    4.Read each output carefully with patience.
-    5.Find interest tech used by target. i.e, jira
-    6.put that link into browser check the version used by target.
-    7.Go on google search with jira version exploit.
-    8.grep the cves
-    9.Go to twitter in explore tab search CVE(that you found from google) poc or CVE exploit
-    10.Go to google and put cve or some details grab from  twitter for a better poc read writeups related to that.
-    11.Try all cves if success report it.:)
- ```   
+
+* `Google`
+* `Twitter`
+* `Nuclei`
+
+---
+
+### Steps:
+
+1. **Grab all the subdomains**:
+
+   ```bash
+   subfinder -d domain.com -o subs.txt
+   ```
+
+2. **Grab all alive domains**:
+
+   ```bash
+   httpx -l subs.txt -mc 200 -o alive.txt
+   ```
+
+3. **Run Nuclei scans separately** for different template categories and store each result in a different file:
+
+   ```bash
+   nuclei -l alive.txt -t nuclei-templates/http/misconfiguration -o misconfigurations.txt
+   nuclei -l alive.txt -t nuclei-templates/http/exposed-panels -o exposed-panels.txt
+   nuclei -l alive.txt -t nuclei-templates/http/cves -o cves.txt
+   nuclei -l alive.txt -t nuclei-templates/http/technologies -o technologies.txt
+   ```
+
+
+4. **Read each output carefully** with patience.
+
+5. **Find interesting tech** used by target (e.g. Jira, WordPress, etc.).
+
+6. **Visit the page** and check the version used.
+
+7. **Google search** with that version like:
+   `jira <version> exploit`
+
+8. **Grep CVE IDs** that look promising.
+
+9. **Search CVE on Twitter** (`CVE-XXXX-XXXX poc` or `CVE-XXXX-XXXX exploit`)
+
+10. **Google the CVE or exploit keywords** for better PoCs or writeups.
+
+11. **Test all CVEs** — if successful, report it! 
+
+---
 
 ### Authors
-* [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
-    
-    
-    
+
+* [@Virdoex\_hunter](https://x.com/Virdoex_hunter)
+* [@Psikoz\_Coder](https://x.com/Psikoz_Coder)
