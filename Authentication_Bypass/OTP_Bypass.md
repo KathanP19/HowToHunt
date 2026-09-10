@@ -1,140 +1,106 @@
-# **OTP Bypass Techniques in Account Registration and Authentication**
+# OTP Bypass (Registration & Authentication)
 
-## **Introduction**
-One-Time Passwords (OTP) are commonly used for authentication and verification in account registration, login, and critical actions. However, poor OTP implementations can lead to **authentication bypass, account takeover, and unauthorized access**.
+One-Time Passwords verify phone/email ownership during signup, login, and critical actions. Poor OTP implementations allow bypass of the verification step itself — meaning an attacker registers or authenticates without owning the phone/email. Impact: authentication bypass → account takeover of numbers the attacker doesn't control (P1–P2 when proven on arbitrary accounts).
 
-This document outlines **various OTP bypass techniques**, including **response manipulation, rate limit exploitation, default OTP usage, and session validation flaws**.
+> For OTP as a *second factor at login*, see `MFA_Bypasses/2FA_Bypass.md`. This file covers OTP verification in signup/login/action flows.
 
----
+## Hunting Checklist
 
-## **OTP Bypass via Response Manipulation**
-### **Method 1: Manipulating OTP Verification Response**
-#### **Steps:**
-1. Register an account with a mobile number and request an OTP.
-2. Enter an **incorrect OTP** and capture the request using **Burp Suite**.
-3. Intercept and **modify the server's response**:
-   - Original response:
-     ```json
-     {"verificationStatus":false,"mobile":9072346577,"profileId":"84673832"}
-     ```
-   - Change to:
-     ```json
-     {"verificationStatus":true,"mobile":9072346577,"profileId":"84673832"}
-     ```
-4. Forward the manipulated response.
-5. The system authenticates the account despite the incorrect OTP.
+1. Map the OTP flow end to end: request/send endpoint, verify endpoint, resend endpoint, what identifiers bind them (phone, profileId, session).
+2. On the verify step, inspect the response body for trust flags the client consumes (`verificationStatus`, `status`, `success`).
+3. Test response manipulation with a deliberately wrong OTP.
+4. Test the binding: can a valid OTP from Account A verify Account B? Swap phone/profile IDs between the send and verify requests.
+5. Brute-force check: no rate limit / lockout on the verify endpoint (4–6 digit codes are cheap).
+6. Try edge values: `null`, empty, `000000`, `123456`, `111111`, non-numeric.
+7. Check the send/verify responses for OTP leakage in the body or JS.
+8. Check expiry and one-time semantics: reuse an old/already-used OTP.
+9. Test parameter confusion on the send request: change the destination number after request creation, arrays, HPP.
+10. Forced browse the post-verification page/endpoint and test status-code tricks.
 
-**Impact:**  
-- **Full account takeover** without providing a valid OTP.
+## Test Cases & Examples
 
----
+### 1. Response Manipulation on OTP Verification (3 working methods)
 
-### **Method 2: Changing Error Response to Success**
-#### **Steps:**
-1. Go to the **login page** and enter your phone number.
-2. When prompted for an OTP, enter an **incorrect OTP**.
-3. Capture the **server response**:
-   ```json
-   { "error": "Invalid OTP" }
-   ```
-4. Modify it to:
-   ```json
-   { "success": "true" }
-   ```
-5. Forward the response.
-6. If the server accepts this modification, you gain access without entering a valid OTP.
+**Method 1 — flip the verification flag:**
+1. Register with a mobile number and request the OTP.
+2. Enter an **incorrect OTP** and capture the server response in Burp.
+3. Modify it before it reaches the browser:
+```json
+{"verificationStatus":false,"mobile":9072346577,"profileId":"84673832"}
+```
+```json
+{"verificationStatus":true,"mobile":9072346577,"profileId":"84673832"}
+```
+4. Forward — the account authenticates despite the wrong OTP.
 
-**Impact:**  
-- **Authentication bypass leading to account takeover**.
+**Method 2 — replace the error with a success body:**
+```json
+{ "error": "Invalid OTP" }
+```
+```json
+{ "success": "true" }
+```
 
----
+**Method 3 — cross-account status substitution:**
+1. Register two accounts with different phone numbers.
+2. Enter the **correct OTP** for Account 1; note the success response (`status:1`).
+3. On Account 2 enter an **incorrect OTP** (`status:0`) and replace the response with the Account-1 success response.
+4. OTP verification for Account 2 is bypassed.
 
-### **Method 3: OTP Verification Across Multiple Accounts**
-#### **Steps:**
-1. Register **two different accounts** with separate phone numbers.
-2. **Enter the correct OTP** for one account and intercept the request.
-3. Capture the server response and note **status:1** (success).
-4. Now, attempt to verify the second account with an **incorrect OTP**.
-5. Intercept the server response where the status is **status:0** (failure).
-6. Change **status:0** to **status:1** and forward the response.
-7. If successful, you bypass OTP authentication.
+### 2. Brute Force via No Rate Limiting
+1. Request an OTP, enter a wrong code, capture the verify request:
+```http
+POST /api/otp/verify HTTP/1.1
+Host: target.com
+Content-Type: application/json
 
-**Impact:**  
-- **Bypassing OTP verification for multiple accounts**.
+{"phone":"9072346577","otp":"000000"}
+```
+2. Send to Intruder → payload on `otp` → Numbers `000000–999999`.
+3. No rate limit ⇒ the correct OTP is found (spot it via response-length/status difference).
 
----
+### 3. Form Resubmission / Recipient Swap in Repeater
+1. Start registration with a **non-existent phone number**; intercept the OTP-send request.
+2. Send to Repeater, then change the phone number in the request to **your real number** and resend.
+3. If the OTP for the fake number arrives on your phone, complete registration for the fake number → account tied to a number you don't control (or squatting victims' numbers).
 
-## **OTP Bypass Using Form Resubmission in Repeater**
-#### **Steps:**
-1. Register an account using a **non-existent phone number**.
-2. Intercept the OTP request in **Burp Suite**.
-3. Send the request to **Repeater** and forward it.
-4. Modify the phone number in the request to **your real number**.
-5. If the system **sends the OTP to your real number**, use it to register under the **fake number**.
+### 4. Default / Static OTPs
+```
+000000, 111111, 123456
+```
+Test misconfigured defaults and check the client bundles:
+```javascript
+var otp = "123456";
+```
 
-**Impact:**  
-- **Unauthorized account registration using someone else's OTP**.
+### 5. OTP Leakage in Server Response
+Intercept the response of the OTP-send request and grep the body for the just-sent code:
+```json
+{"message":"OTP sent","otp":"123456"}
+```
 
----
+### 6. Old / Reused OTPs
+- After a successful verification, request a new OTP and try the **previous** one — if accepted, codes aren't invalidated on use.
+- Verify with an OTP from an *expired* session to test the validity window.
 
-## **Bypassing OTP with No Rate Limiting**
-### **Steps:**
-1. **Create an account** and request an OTP.
-2. Enter an **incorrect OTP** and capture the request in Burp Suite.
-3. Send the request to **Burp Intruder** and **set a payload on the OTP field**.
-4. Set **payload type as numbers** (`000000` to `999999`).
-5. Start the attack.
-6. If **no rate limit** is enforced, the correct OTP will eventually match.
+## Bypass Techniques
 
-**Impact:**  
-- **Complete OTP bypass through brute force**.
+- `null`/empty code and type juggling: `otp=` and `otp[]=1` (array) can slip past loose server comparisons.
+- HPP on verify: `otp=000000&otp=123456` — validation and consumption may read different values.
+- Skip the step: forced-browse the page/endpoint reached after verification; compare behavior when the verify call is never made.
+- Status-code trust: a verify response of `4xx` rewritten to `200 OK` for clients that only check the status line (see `MFA_Bypasses/2FA_Bypass.md` #2).
 
----
+## Tools & Resources
 
-## **Additional OTP Bypass Test Cases**
-### **1. Default OTP Values**
-- Some applications use default OTP values such as:
-  ```
-  111111, 123456, 000000
-  ```
-- Test common default values to check for misconfigurations.
+- Burp Suite (Repeater, Intruder with Numbers payload, Match-and-Replace), Cookie Editor for session binding tests.
+- Related: `MFA_Bypasses/2FA_Bypass.md`, `Sign_Up_Functionality/Hunting_for_bugs_in_signup_feature.md`.
 
-### **2. OTP Leakage in Server Response**
-- Some applications leak OTPs in API responses.
-- **Intercept OTP request responses** and check if OTP is present.
+## Report Tips
 
-### **3. Checking if Old OTP is Still Valid**
-- Some systems allow the **reuse of old OTPs**.
-- Test if **previously used OTPs** are still accepted.
+- Prove bypass against an account whose phone/email you **do not control** — that converts "no rate limit" into demonstrated ATO.
+- Show both the wrong-OTP attempt (server says no) and the manipulated/brute-forced client state (logged in) in one video.
+- List the concrete defenses missing (rate limit, lockout, expiry, binding) so the fix is actionable for triage.
 
----
+## Credits
 
-## **Rate Limiting Attack on OTP Verification**
-### **Steps:**
-1. **Navigate to the OTP verification endpoint**:
-   ```
-   https://abc.target.com/verify/phoneno
-   ```
-2. Enter an **invalid OTP** (e.g., `000000`).
-3. **Intercept the request** and send it to **Intruder**.
-4. Set the **OTP field as the payload position**.
-5. Use **payload type: numbers** and define a **range (000000 - 999999)**.
-6. Start the attack.
-7. Identify a **response length change**, which may indicate the correct OTP.
-
-**Impact:**  
-- **Brute-force attack leading to OTP bypass and account takeover**.
-
----
-
-## **Contributors**
-- **[@akshaykerkar13](https://twitter.com/akshaykerkar13)**
-- **[@Yn0tWhy](https://twitter.com/Yn0tWhy)**
-- **[@Virdoex_hunter](https://twitter.com/Virdoex_hunter)**
-- **[@febinrev](https://twitter.com/febinrev)**
-- **[@fani_malik](https://twitter.com/fanimalikhack)**
-- **[@v3daxt](https://twitter.com/v3daxt)**
-- **[@prakhar0x01](https://twitter.com/prakhar0x01)**
-
----
-*Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
+- [@akshaykerkar13](https://twitter.com/akshaykerkar13), [@Yn0tWhy](https://twitter.com/Yn0tWhy), [@Virdoex_hunter](https://twitter.com/Virdoex_hunter), [@febinrev](https://twitter.com/febinrev), [@fani_malik](https://twitter.com/fanimalikhack), [@v3daxt](https://twitter.com/v3daxt), [@prakhar0x01](https://twitter.com/prakhar0x01); reformatted for HowToHunt by remonsec.

@@ -1,5 +1,14 @@
-# Some MindMap
----
+# CSRF
+
+Cross-Site Request Forgery (CSRF) tricks a logged-in victim's browser into submitting state-changing requests (with their cookies attached) that the site accepts as legitimate — up to account takeover via email/password change, transfers, or privilege actions.
+
+This folder:
+
+- [CSRF.md](CSRF.md) — core methodology: preconditions, Burp PoC generation, worked token/Referer/CRLF bypass test cases, mitigations.
+- [Cross_Site_Request_Forgery_Bypass.md](Cross_Site_Request_Forgery_Bypass.md) — quick-fire bypass cheat list (blank/null token, same-length swap, content-type switch, Referer regex, clickjacking).
+
+## MindMaps
+
 ### 6 CSRF Bypass by Hack3rSr0lls
 ![https://pbs.twimg.com/media/EY70bxkWkAAFzGb?format=jpg&name=900x900](https://pbs.twimg.com/media/EY70bxkWkAAFzGb?format=jpg&name=900x900)
 

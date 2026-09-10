@@ -1,57 +1,73 @@
-**Cross Site Request Forgery(CSRF)**
+# CSRF Bypass Cheat List
 
-Hello Guys, I Tried My Best To Share all The CSRF Bypasses I Know.
-I Hope This Will Help You.
+A field-tested checklist of ways to defeat CSRF protections when a state-changing endpoint *appears* token-protected. Each item corresponds to a common implementation mistake; full worked PoCs for the token/Referer scenarios live in [CSRF.md](CSRF.md).
 
-Csrf will be login, logout, resetpass, change password, add-cart, like, comment, profie change, user details change, blance transffer, subscription ect
-```
--Change Request Method [POST => GET]
+**Where to look:** login, logout, password reset, change password, add-to-cart, like, comment, profile change, user details change, balance transfer, subscription, etc.
 
--Remove Total Token Parameter
+## Hunting Checklist
 
--Remove The Token, And Give a Blank Parameter
+1. Pick a state-changing request and note where the CSRF token lives (body / query / header / cookie).
+2. Replay the request through each quick test below until one is accepted.
+3. If the token is accepted but tied to *your* session, move to the cookie-injection chains (CRLF/XSS) in CSRF.md.
+4. If everything server-side holds, check the client side: is the endpoint's page clickjackable?
+5. Confirm impact by performing the action on a secondary victim account.
 
--Copy a Unused Valid Token , By Dropping The Request and Use That Token
+## Test Cases & Quick Bypasses
 
--Use Own CSRF Token To Feed it to Victim
-
--Replace Value With Of A Token of Same Length 
-
--Reverse Engineer The Token
-
--Extract Token via HTML injection
-
--Switch From Non-Form `Content-Type: application/json` or `Content-Type: application/x-url-encoded` To `Content-Type: form-multipart`
-
--Change/delete the last or frist character from the token
-
--Change referrer to Referrer
-
--Bypass the regex
-  If the site is looking for “bank.com” in the referer URL, maybe “bank.com.attacker.com” or “attacker.com/bank.com” will work.
-    
--Remove the referer header (add this <meta name=”referrer” content=”no-referrer”> in your payload or html code)
-
--Clickjacking
-
-  (If you aren’t familiar with clickjacking attacks, more information can be found https://owasp.org/www-community/attacks/Clickjacking.)
-  Exploiting clickjacking on the same endpoint bypasses all CSRF protection. Because technically, the request is indeed originating from the legitimate site. If the page where   the vulnerable endpoint is located on is vulnerable to clickjacking, all CSRF protection will be rendered irrelevant and you will be able to achieve the same results as a CSRF   attack on the endpoint, albeit with a bit more effort.
-	
-
-
+```text
+- Change request method [POST => GET]
+- Remove the total token parameter
+- Remove the token, and give a blank parameter
+- Send null as the token value
+- Copy an unused valid token by DROPPING the request, and use that token
+- Use your own CSRF token to feed it to the victim (not tied to session)
+- Replace the token value with one of the SAME LENGTH
+- Change/delete the last or first character of the token
+- Reverse-engineer the token (algorithm/pattern, forge a valid one)
+- Extract the token via HTML injection
+- Switch content type: from non-form `Content-Type: application/json` /
+  `application/x-www-form-urlencoded` to `multipart/form-data`
+- Change/remove the Referer ("Change referrer to Referrer")
+- Bypass the Referer regex:
+    if the site looks for "bank.com" in the referer URL, try
+    "bank.com.attacker.com" or "attacker.com/bank.com"
+- Remove the Referer header completely (see payload below)
+- Clickjacking the same endpoint
 ```
 
-### References
-[Medium Writeup](https://medium.com/swlh/intro-to-csrf-cross-site-request-forgery-9de669df03de)
+Suppress the Referer header from your PoC page:
 
-[Medium Writeup](https://medium.com/swlh/attacking-sites-using-csrf-ba79b45b6efe)
+```html
+<meta name="referrer" content="no-referrer">
+```
 
-[Medium Writeup](https://medium.com/swlh/bypassing-csrf-protection-c9b217175ee)
+Blank / null token forms:
 
+```html
+<form method="POST" action="https://target.com/email/change">
+  <input type="hidden" name="email" value="pwned@evil-user.net">
+  <input type="hidden" name="csrf" value="">
+</form>
+<script>document.forms[0].submit();</script>
+```
 
-### Authors
-* [@SMHTahsin33](https://twitter.com/SMHTahsin33)
-* [@Virdoex_hunter](https://twitter.com/Virdoex_hunter)
-* [@remonsec](https://twitter.com/remonsec)
-* [@tamimhasan404](https://twitter.com/tamimhasan404)
+### Clickjacking as a CSRF bypass
 
+Exploiting clickjacking on the same endpoint **bypasses all CSRF protection**, because technically the request *is* originating from the legitimate site. If the page hosting the vulnerable endpoint is clickjackable, all CSRF defenses become irrelevant and you achieve the same result as a CSRF attack — with a bit more effort (framed page + transparent button overlay).
+
+- OWASP background: [Clickjacking](https://owasp.org/www-community/attacks/Clickjacking)
+
+## Tools & Resources
+
+- [PortSwigger Web Security Academy — CSRF](https://portswigger.net/web-security/csrf) (worked labs per validation flaw)
+- [Intro to CSRF](https://medium.com/swlh/intro-to-csrf-cross-site-request-forgery-9de669df03de)
+- [Attacking sites using CSRF](https://medium.com/swlh/attacking-sites-using-csrf-ba79b45b6efe)
+- [Bypassing CSRF protection](https://medium.com/swlh/bypassing-csrf-protection-c9b217175ee)
+- Detailed methodology + PoCs: [CSRF.md](CSRF.md) · index: [README.md](README.md)
+
+## Report Tips
+
+- Pair each accepted bypass with the *specific* validation flaw name (presence-only check, not session-bound, length-only check, Referer regex, content-type tolerance) — helps devs fix the root cause.
+- Even "self-XSS-ish" low-value actions (add-to-cart, like) stack up when chained to account-relevant endpoints; report the highest-impact action you reproduced.
+
+**Authors:** [@SMHTahsin33](https://twitter.com/SMHTahsin33), [@Virdoex_hunter](https://twitter.com/Virdoex_hunter), [@remonsec](https://twitter.com/remonsec), [@tamimhasan404](https://twitter.com/tamimhasan404)

@@ -1,69 +1,86 @@
-# Subdomain Enumeration 
-Well, subdomain enumeration is important when you are hunting on wildcard enable scope programs. 
-If you are able to get unique subdomains that other miss then it's a good chance for you to get some bugs
+# Subdomain Enumeration
 
-# General Methodology
-* Passive
-* Active
-* Permutation
+Subdomain enumeration is the core of attack-surface mapping — essential for wildcard-enabled scope programs, and for finding forgotten dev/staging/CI assets that the team itself has lost track of. If you resolve subdomains nobody else sees, you get first look at the bugs living on them (takeovers, exposed panels, debug endpoints).
 
-## Passive
-In this stage you have to use as much resources as you can to passivly gather subdomains
-Now a days it's not that much hard to do with community standard tools that usages API keys
+## Hunting Checklist
 
-### Tools
+1. **Passive collection** — query as many data sources as possible (certificate transparency, search engines, DNS aggregators, pastes) using API-key-driven tools; costs no traffic to the target.
+2. **Merge & de-duplicate** — combine outputs into one sorted list; keep sources separate so you can judge reliability later.
+3. **Wildcard detection** — before trusting results, check the domain for wildcard DNS, or every random name will "resolve".
+4. **Active brute-force** — resolve wordlist candidates against the target to find records not published anywhere; tune the wordlist to the org's naming conventions (dev, stage, api, internal, brand names).
+5. **Permutation** — mutate already-known names (`api` → `api-dev`, `staging-api`, `test2`) and re-resolve; these frequently hit undocumented environments.
+6. **Resolve & verify** — convert surviving names to IPs, then port-scan to find live services on odd ports.
+7. **Fingerprint the survivors** — hand off to httpx/nmap and continue the [recon workflow](Workflow.md).
 
-* Subfinder
-* Amass
-* Assetfinder
-* Findomain
+## Test Cases & Examples
 
-## Active
-In this stage you have to perform bruteforcing on your target host to see if the word from your wordlist resolve as valid subdomain or not
+### Passive enumeration
 
-### Tools
+Community-standard tools that consume API keys and aggregate dozens of sources:
 
-* ShuffleDNS
-* Aiodnsbrute
+- **Subfinder** — `subfinder -d example.com -o subs.txt`
+- **Amass** — `amass enum -passive -d example.com`
+- **Assetfinder** — `assetfinder --subs-only example.com`
+- **Findomain** — cert-transparency focused, very fast
 
-## Permutation
-In this stage you have to play around the subdomains. Now do changed with the words and see still it resolve as valid or not
+### Wildcard check
 
-## Portscan
-Convert domains into ip address
 ```bash
-while read l; do ip=$(dig +short $l|grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"|head -1);echo "[+] '$l' => $ip";echo $ip >> ips.txt;done < domains.txt
-
+# Resolve two random, unlikely names; identical/mirrored answers = wildcard DNS
+dig +short a1b2c3d4.example.com
+dig +short e5f6a7b8.example.com
 ```
 
-we will use masscan for faster results
+### Active brute-force
 
->masscan -p1-65535 -iL ips.txt --max-rate 1800 -oG output.log
+In this stage you perform brute-forcing against the target to see if a word from your wordlist resolves as a valid subdomain:
 
-or you can use [Naabu](https://github.com/projectdiscovery/naabu), [RustScan](https://github.com/RustScan/RustScan/).
+- **ShuffleDNS** — `shuffledns -d example.com -list subs.txt -resolver resolvers.txt -wordlist subdomains.txt`
+- **Aiodnsbrute** — async brute-forcer
 
-### Tools
+### Permutation
 
-* AltDNS
-* DNSGen + ShuffleDNS
+Play around with known subdomains: mutate/combine words and check whether they still resolve as valid names:
 
-## Reference & Resources
+- **AltDNS**
+- **DNSGen + ShuffleDNS** (generate permutations, then brute-resolve them)
 
-https://pentester.land/cheatsheets/2018/11/14/subdomains-enumeration-cheatsheet.html
+### Port scanning
 
-https://0xpatrik.com/subdomain-enumeration-2019/
+Convert domains into IP addresses:
 
-https://0xpatrik.com/subdomain-enumeration-smarter/
+```bash
+while read l; do ip=$(dig +short $l|grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"|head -1);echo "[+] '$l' => $ip";echo $ip >> ips.txt;done < domains.txt
+```
 
-https://rootsploit.com/bug-bounty-recon-faster-port-scan/
+Use masscan for faster results:
 
-Theres a lot you can do. For now just mentioning communty standard approaches. Will be updating it regularly depending on the methodology comes out. 
+```bash
+masscan -p1-65535 -iL ips.txt --max-rate 1800 -oG output.log
+```
 
-## Framework
-An automated framework can be used to automate those whole workflow
+Or use [Naabu](https://github.com/projectdiscovery/naabu) or [RustScan](https://github.com/RustScan/RustScan/).
 
-* [SEF](https://github.com/remonsec/SEF)
-___
-## Author
+## Bypass Techniques
+
+- **Rate limiting / source throttling:** rotate resolvers (public DNS lists for ShuffleDNS) and run passive sources over several days instead of hammering one API.
+- **Private/internal names:** they won't appear in CT logs — brute-force and permutation are the only ways in.
+- There's a lot more you can do; the above are the community-standard approaches.
+
+## Tools & Resources
+
+- [SEF](https://github.com/remonsec/SEF) — automated framework that chains this whole workflow
+- [Pentester.Land subdomain enumeration cheatsheet](https://pentester.land/cheatsheets/2018-11-14/subdomains-enumeration-cheatsheet.html)
+- [Subdomain enumeration (2019) — 0xpatrik](https://0xpatrik.com/subdomain-enumeration-2019/)
+- [Subdomain enumeration — smarter — 0xpatrik](https://0xpatrik.com/subdomain-enumeration-smarter/)
+- [Bug bounty recon — faster port scan](https://rootsploit.com/bug-bounty-recon-faster-port-scan/)
+
+## Report Tips
+
+- A subdomain that resolves but is dead/unclaimed may be a **subdomain takeover** — prove it with a working PoC (CNAME to an available resource) rather than reporting the name alone.
+- For undocumented environments (staging, internal panels), framing matters: explain business risk (weak credentials, test data, production parity) — see [Subdomain_Takeover](../Subdomain_Takeover/Subdomain_Takeover.md).
+
+### Author
+
 [Mehedi Hasan Remon](https://twitter.com/remonsec)
 [Rishi Choudhary](https://twitter.com/0xRyuk)

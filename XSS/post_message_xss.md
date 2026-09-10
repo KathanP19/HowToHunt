@@ -1,55 +1,55 @@
-# **PostMessage XSS (Cross-Site Scripting) Vulnerability**
+# postMessage XSS (DOM-based Cross-Site Scripting)
 
-## **Introduction**
-The `postMessage` API is widely used in modern web applications to enable cross-origin communication between different windows, iframes, and pop-ups. However, **if the receiving application does not properly validate the origin of incoming messages**, it may be vulnerable to **PostMessage XSS**.
+The `postMessage` API enables cross-origin communication between windows, iframes, and pop-ups. When the receiving application does not validate the sender's `origin` (or validates it weakly) and then processes `event.data` in an unsafe way, an attacker on any site can push attacker-controlled data into the victim page's DOM. This yields DOM-based XSS: data theft, session hijacking, and arbitrary JavaScript execution in the target's origin — typically a medium/high finding when sensitive data or actions are reachable.
 
-This vulnerability allows attackers to send malicious data from an **untrusted source (e.g., sandboxed iframe, null origin, or malicious website)** to a trusted application, leading to **security risks such as data theft, session hijacking, and arbitrary JavaScript execution.**
+Workflow for general XSS hunting: [Xss.md](./Xss.md).
 
----
+## Hunting Checklist
 
-## **How PostMessage Works**
-The `window.postMessage()` function allows scripts running in one window to send messages to another window. The syntax is:
+1. In the site's JavaScript, search for listeners: `addEventListener("message"`, `onmessage`, `attachEvent`.
+2. For every listener, check whether `event.origin` / `event.source` are validated before the data is used; note weak checks (`endsWith`, `indexOf(...) !== -1`, regex without `^...$` anchors).
+3. Trace where `event.data` flows: sinks like `document.body.innerHTML`, `eval`, `setTimeout`, `src`/`href` assignment, jQuery `$(...).html()`.
+4. Find senders using `postMessage(..., "*")` — any window can trigger app logic with crafted payloads.
+5. Check whether messages are parsed from JSON without schema/field checks (type confusion).
+6. Test with a `null` origin: sandboxed iframe or `data:` URI (see Bypass Techniques).
+7. Verify exploitability from your own page using the PoC below against the target's listener.
+
+## Test Cases & Examples
+
+### How postMessage works
 
 ```javascript
 window.postMessage(message, targetOrigin, [transfer]);
 ```
 
-- `message`: The data to be sent to the target window.
-- `targetOrigin`: A string specifying the expected origin of the recipient (use `"*"` to allow any origin, which is insecure).
-- `transfer`: Optional, used for passing objects.
+- `message`: the data to send to the target window.
+- `targetOrigin`: expected origin of the recipient (using `"*"` allows any origin and is insecure).
+- `transfer`: optional, for passing objects.
 
 Example of secure usage:
+
 ```javascript
 window.postMessage("data", "https://trusted-site.com");
 ```
 
----
+### Insecure implementation (no origin validation)
 
-## **Vulnerability: Improper Origin Validation**
-If an application listens for `postMessage` events **without verifying the sender’s origin**, an attacker can exploit this by crafting a malicious message from an unauthorized source.
-
-### **Example of an Insecure Implementation**
 ```javascript
 window.addEventListener("message", function (event) {
     // No origin validation
     document.body.innerHTML = event.data;
 });
 ```
-**Security Issue:**  
-- The application directly processes any received message without verifying the sender's origin.
-- If an attacker sends a malicious payload (e.g., JavaScript injection), it can lead to XSS.
 
-### **Exploitation Scenario**
-1. The vulnerable website listens for messages using `postMessage`, but **does not check the sender’s origin**.
-2. An attacker hosts a malicious page and sends a **crafted message** to the vulnerable application.
-3. The malicious script gets executed inside the vulnerable website, leading to **DOM-based XSS**.
+Security issue: any message from any source is processed; a malicious payload (e.g. an image tag with an event handler) becomes DOM-based XSS.
 
----
+### Exploitation scenario
 
-## **Exploiting PostMessage XSS**
+1. The vulnerable site listens for `postMessage` events **without checking the sender's origin**.
+2. The attacker hosts a malicious page that sends a **crafted message** to the vulnerable application.
+3. The script executes inside the vulnerable website — **DOM-based XSS**.
 
-### **Proof of Concept (PoC)**
-The following PoC demonstrates how an attacker can inject malicious JavaScript into a vulnerable application by exploiting a poorly validated `postMessage` request.
+### Proof of Concept
 
 ```html
 <!doctype html>
@@ -65,26 +65,48 @@ The following PoC demonstrates how an attacker can inject malicious JavaScript i
     </script>
 </head>
 <body>
-    <a href="#" onclick="pocLink();">Click to Exploit</a>          
-    <iframe src="https://vulnerable-website.com" onload="pocFrame(this.contentWindow)"></iframe>                    
+    <a href="#" onclick="pocLink();">Click to Exploit</a>
+    <iframe src="https://vulnerable-website.com"></iframe>
 </body>
 </html>
 ```
 
-### **Breakdown of the Attack**
-- The script opens the target **vulnerable website** in a new window (`window.open()`).
-- It **sends a malicious payload** via `postMessage()` that contains an XSS injection.
-- If the application **does not validate the message origin**, the payload executes, triggering **arbitrary JavaScript execution**.
+Breakdown:
 
----
+- `window.open()` opens the **vulnerable website** in a new window.
+- `postMessage()` delivers the **malicious payload** containing the XSS injection.
+- With no origin validation on the receiver, the payload executes → **arbitrary JavaScript execution**.
 
-## **Impact of PostMessage XSS**
-An attacker exploiting this vulnerability can:
-- **Execute malicious JavaScript** on the vulnerable application.
-- **Steal sensitive data** such as session tokens, authentication credentials, or user inputs.
-- **Modify page content** or inject phishing links.
-- **Bypass Same-Origin Policy (SOP)** by controlling a trusted domain’s behavior.
-- **Perform clickjacking attacks** by embedding the site in an iframe.
+## Bypass Techniques
 
----
-*Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
+Weak origin checks and how to defeat them:
+
+- **`event.origin.endsWith("trusted-site.com")`** — register `evil-trusted-site.com` (suffix confusion):
+
+```javascript
+// From https://attacker-controlled-trusted-site.com
+child.postMessage('<img src=x onerror=alert(1)>', 'https://trusted-site.com');
+```
+
+- **`event.origin.indexOf("trusted-site.com") !== -1`** — substring check: use `https://trusted-site.com.attacker.com`.
+- **`null` origin** — sandboxed iframes and `data:` URIs report `origin: "null"`; if the listener trusts `"null"`, exploit it from:
+
+```html
+<iframe src="https://vulnerable-website.com" sandbox="allow-scripts allow-post-message"></iframe>
+```
+
+- **Protocol-only or missing `targetOrigin` on the sender side** — intercept/observe frames from your own page and inject into any window handle (`window.opener`, named frames, `window.frames[...]`).
+- **Trusted-domain gadgets** — even with correct origin checks, if a trusted origin contains XSS itself (user-controlled subdomains, open redirect + JS URIs), relay messages through it; see [Open_Redirection](../Open_Redirection/Open_Redirection_Hunting.md).
+
+## Tools & Resources
+
+- Burp Suite **DOM Invlector** (manual DOM XSS verification through the browser) and Burp Suite PRO crawler JS analysis.
+- [RA2 DOM XSS Scanner](https://github.com/dpnishant/ra2-dom-xss-scanner)
+- JS recon: `waybackurls target.com | grep '\.js' | xargs -n1 curl -sk | grep -E 'postMessage|addEventListener\("message'`
+- PortSwigger research: [postMessage JavaScript vuln analysis](https://portswigger.net/bappstore) & Web Security Academy DOM XSS material; OWASP [Testing for DOM-based attacks](https://owasp.org/www-project-web-security-testing-guide/).
+
+## Report Tips
+
+- Frame impact as DOM XSS in the target's origin: "an attacker page can execute JS as the victim without any interaction beyond visiting the attacker site" — cookie/token theft, actions as the user, phishing overlay.
+- Include the vulnerable listener (JS file + snippet/line), the PoC HTML, and a recording of the alert firing on the victim origin.
+- If origin is checked but bypassable (suffix/subdomain/null), state exactly which check was defeated — it proves the fix and often raises severity.

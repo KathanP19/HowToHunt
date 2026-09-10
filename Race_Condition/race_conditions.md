@@ -1,31 +1,48 @@
-# RACE CONDITIONS
-## What is Race conditions ? 
- - Race conditions are a common type of vulnerability closely related to business [logic flaws](https://portswigger.net/web-security/logic-flaws). 
- - They occur when websites process requests concurrently without verifying. This can lead to multiple distinct threads interacting with the same data at the same time, resulting in a "collision" that causes unintended behavior in the application.
+# Race Conditions
 
- <hr>
- 
-## Limit over run RC (Exploiting Logic Flaws) 
-- There are some basic RC tests that you can try in the context of Logic Flaws.
-  - Invite user
-  - Joining a group
-  - Like, subscribe, follow, unfollow, Vote ..etc that required limit. 
+Race conditions occur when a website processes requests concurrently without proper verification, so multiple threads interact with the same data at the same time and "collide," producing unintended behavior. They are closely related to [business logic flaws](https://portswigger.net/web-security/logic-flaws) and matter because they break the assumptions behind limits, one-time actions, and uniqueness guarantees. Typical impact: limit overruns (invites, votes, redemptions), duplicated payments, account takeover via email-change races, and rate-limit bypass.
 
-### This method required Burp version 2023.9.x or higher (This is the easiest method to exploit, you can create your own script also.)
-1 - Send the request to repeater for `'n' no. of times`.
+## Hunting Checklist
 
-2 - Create a Tab for all those request and choose `Send Parallel (single Packet Attack)`
+1. Inventory every feature with a one-time or capped effect: gift cards, coupons, promo codes, referral/invite limits, withdrawals, free trials, CTF flag submission, likes/follows/subscribes/votes, group joins, email/phone change, password reset.
+2. For each, ask: does the check happen before the action is committed, and can two requests pass the check before either write lands?
+3. Single-request race: send N copies of the same request simultaneously (Burp Repeater → create a tab group → **Send Parallel (single-packet attack)**; requires Burp 2023.9.x+, or write your own script).
+4. Multi-endpoint race: chain the whole user flow (e.g., `/product` → `/cart` → `/cart/checkout`) as parallel tabs and fire together.
+5. Second-order race: if functionality requires email verification and a new value overwrites the stored old one in the DB *before* confirmation, race the two overwriting requests.
+6. Time-sensitive race: fire two related requests (e.g., two forgot-password requests) and analyze whether tokens/state collide or response times overlap.
+7. For rate-limit bypass, use Turbo Intruder with a single-packet HTTP/2 engine rather than raw parallelism.
+8. Repeat attempts many times — races are probabilistic; one failure is not evidence of absence.
+9. Compare server-side effects (not just HTTP status): re-fetch balances/limits/member lists to confirm the double-application.
 
-3 - Hit send , if application is Vulnerable, you'll see the magic.
-<hr>
+## Test Cases & Examples
 
-## Rate-Limit Bypass via RC
+### Limit-overrun race (logic flaw)
 
-1 - Select the parameter in request that you want to bruteforce(let's say password), and `send the request into TurboIntruder`.
+Targets: invite user, joining a group, like/subscribe/follow/unfollow/vote — anything with a required limit.
 
-2 - If it is password or something , then wordlist should be copied in your clipboard that and use the below python script in Turbo Intruder.
+Example single-action request to replay in parallel:
 
+```http
+POST /api/coupons/apply HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Cookie: session=<attacker-session>
+
+{"code":"SAVE10"}
 ```
+
+Method (easiest — Burp 2023.9.x or higher; you can also create your own script):
+
+1. Send the request to Repeater N times.
+2. Create a tab group for all those requests and choose **Send Parallel (single-packet attack)**.
+3. Hit send — if the application is vulnerable, you'll see the magic (limit applied once, action executed N times).
+
+### Rate-limit bypass via RC (Turbo Intruder)
+
+1. Select the parameter to brute-force (e.g., password) and send the request into Turbo Intruder.
+2. Copy your wordlist to the clipboard and use the script below:
+
+```python
 def queueRequests(target, wordlists):
 
     # as the target supports HTTP/2, use engine=Engine.BURP2 and concurrentConnections=1 for a single-packet attack
@@ -33,15 +50,15 @@ def queueRequests(target, wordlists):
                            concurrentConnections=1,
                            engine=Engine.BURP2
                            )
-    
+
     # assign the list of candidate passwords from your clipboard
     passwords = wordlists.clipboard
-    
+
     # queue a login request using each password from the wordlist
     # the 'gate' argument withholds the final part of each request until engine.openGate() is invoked
     for password in passwords:
         engine.queue(target.req, password, gate='1')
-    
+
     # once every request has been queued
     # invoke engine.openGate() to send all requests in the given gate simultaneously
     engine.openGate('1')
@@ -50,91 +67,75 @@ def handleResponse(req, interesting):
     table.add(req)
 ```
 
-3 - Hit Attack and see the magic.
+3. Hit attack and see the magic.
 
-<hr>
+### Multi-endpoint race conditions
 
-## Multi-Endpoint Race Conditions
+When one functionality chains multiple requests, e.g., buying a product on an e-commerce app:
 
-1 - When a single functionality chains with multiple request , eg - `Buying a product from a E-Commerce application`
-
-    - /product --> for the product
-    - /cart    --> Add to cart that product
-    - /cart/checkout  --> Buy that product
-
-2 - Send all the required request into burp repeater for the product you want in a sequence and create a Tab.
-
-3 - Select `Send Parallel (single Packet Attack)` and hit send.
-
-<hr>
-
-##  Single Endpoint RaceCondition
-
- - If you've facing a functionality where new objects edit the older object and require email verification, then we can test there for RaceConditions, Eg. Email Change functionality
-
-       `Account A : Attacker --> attacker@email.com` 
-       `Account B : Victim --> victim@email.com`
-
-1 - Application has email change functionality, where the new requested email is updated over older email, and send the confirmation link to the user email address.
-  
-2 - Since, email is updated in DataBase and only confirmation is needed, 
-   
-3 - So we `Send Parallel (Single Packet Attack)` of the changing email for,
+```http
+POST /product HTTP/1.1
+Host: example.com
 ```
-attacker@email.com
-victim@email.com
+
+```http
+POST /cart HTTP/1.1
+Host: example.com
 ```
-4 - In Backend, Because we request so much fast that when application server generate confirmation link for `attacker@email.com` at the same time `victim@email.com` request is also reach their and application got confused to prioritise , As a result it sends both confirmation links on the same email.
 
-5 - Impact : This will lead to Full Acount Takeover.
+```http
+POST /cart/checkout HTTP/1.1
+Host: example.com
+```
 
-<hr>
+1. Send all the required requests into Burp Repeater for the target product, in sequence, and create a tab group.
+2. Select **Send Parallel (single-packet attack)** and hit send — one checkout may satisfy N orders (e.g., zero-discount applied N times, or stock/limit checked once).
 
-## Time Sensitive Vulnerabilities
-1 - Send two parallel `forget password` request for `Attacker i..e Account-A`
+### Single-endpoint race condition (email change → ATO)
 
-2 - If both `password reset links contains same token`, then we can test their for ATO.
+If a functionality edits an older object and requires email verification, test there (e.g., email change):
 
-3 - This time send both request again by `changing victim's username/password in one of them`.
+- Account A (attacker): `attacker@email.com`
+- Account B (victim): `victim@email.com`
 
-4 - Analyze the response time, if `both request have same response time`, then their might be chances of ATO
+1. The app's email-change feature updates the requested email over the old one in the DB and sends a confirmation link to the *stored* address.
+2. Fire a **Send Parallel (single-packet attack)** of the change-email request for both `attacker@email.com` and `victim@email.com`.
+3. Because the requests arrive faster than the server processes them, when the app generates the confirmation for `attacker@email.com` the `victim@email.com` request is already mid-handling — the app gets confused about which to prioritize and sends both confirmation links to the same email.
+4. Impact: this can lead to full account takeover.
 
-<hr><hr>
+### Time-sensitive vulnerability (forgot-password)
 
-# REAL World Cases : (H1 reports)
+1. Send two parallel forgot-password requests for the attacker's account (Account A).
+2. If both password-reset links contain the **same token**, test for ATO.
+3. Send both requests again, changing the victim's username/email in one of them.
+4. Analyze response times: if both requests have the same response time, there may be a chance of ATO.
 
-### 1 - Race condition in flag submission
-   - [Found in --> HackerOne](https://hackerone.com/reports/454949)
-   - Report describes a Race Condition Vulnerability which `allow an authenticated user to submit the same ctf Flag multiple times`. Increasing the user points and therefore the chances to get an invitation to a private program.
+## Bypass Techniques
 
-### 2 - Race condition on Invite user action
-   - [Found in --> Omise](https://hackerone.com/reports/1285538)
-   - Race condition vulnerability which `allows the invitation of the same member multiple times to a single team` via the dashboard.
+- **Latency kills races**: prefer HTTP/2 single-packet attack (all requests share one connection, last byte flushed at once via gate) — Turbo Intruder's `Engine.BURP2` with `concurrentConnections=1`.
+- **Distribute across worker threads**: try many parallel copies and vary counts (5/10/20/50) to find the window where two handlers overlap.
+- **Strip noise**: remove browser-injected headers/CSRF churn only if the endpoint tolerates it; keep sessions valid so you don't lose the race to an auth check.
+- **Unique-key extraction**: if the app rejects duplicate payloads, vary non-semantic fields (whitespace, param order) so WAFs/parsers treat requests as distinct while the logic still collides.
+- **H2 vs H1 behavior differs** — test the same endpoint on both protocol versions.
 
-### 3 - Race condition in performing retest allows duplicated payments
-   - [Found in --> HackerOne](https://hackerone.com/reports/429026)
-   - By executing `multiple requests to confirm a retest at the same time`, a malicious user is paid multiple times for the retest. This `allows for stealing money from HackerOne`, which could go unnoticed by both HackerOne and the attacker.
+## Tools & Resources
 
-### 4 - Race Condition leads to Un-Deletable group member
-   - [Found in --> HackerOne](https://hackerone.com/reports/604534)
-   - Small Race condition bug in which a group `user couldn't be removed from the group even by the admin` after they join.
+- Burp Repeater group + Send Parallel (single-packet attack) — Burp 2023.9.x+
+- Turbo Intruder (BApp store) — https://github.com/PortSwigger/turbo-intruder
+- PortSwigger race condition research/labs: https://portswigger.net/web-security/race-conditions
+- Real-world reports:
+  - Race condition in flag submission (H1): https://hackerone.com/reports/454949 — same CTF flag submitted multiple times, inflating points.
+  - Race condition on invite-user (Omise): https://hackerone.com/reports/1285538 — invite the same member multiple times to one team.
+  - Duplicated retest payments (H1): https://hackerone.com/reports/429026 — multiple simultaneous confirm-requests paid the retester several times.
+  - Un-deletable group member (H1): https://hackerone.com/reports/604534 — user couldn't be removed by admin after a joined-in-race state.
+  - Following a user twice (every.org): https://hackerone.com/reports/927384 — follow the same user multiple times instead of getting an error.
+  - Popular reports feature (H1): https://hackerone.com/reports/146845 — up/downvote a report multiple times, boosting its rank.
+  - CTF group join (H1): https://hackerone.com/reports/1540969 — join the same CTF group multiple times; duplicate member entries.
+  - Invitation-limit bypass (Keybase): https://hackerone.com/reports/115007 — 7 invites sent despite a 3-invite limit.
+  - Gift-card multi-redemption (Reverb): https://hackerone.com/reports/759247 — redeem one gift card repeatedly to buy multiple times.
 
-### 5 - Race Condition when following a user
-   - [Found in --> every.org](https://hackerone.com/reports/927384)
-   - Race condition vulnerability when following a user. If you send the Follow requests asynchronously, you can `follow a user multiple times instead getting an error message`.
+## Report Tips
 
-### 6 - Race Conditions in Popular reports feature.
-   - [Found in --> HackerOne](https://hackerone.com/reports/146845)
-   - This report describes a race condition bug which `allow an authenticated user to upvote or downvote multiple times a single report`, increasing its counter (and its rank on the hacktivity page).
-
-### 7 - Race condition in joining CTF group
-   - [Found in --> HackerOne](https://hackerone.com/reports/1540969)
-   - A race condition in https://ctf.hacker101.com/group/join `allows a user to join the same CTF group multiple times`.The user will show up in the group member list multiple times, and affect the group statistics.
-
-### 8 - Race conditions can be used to bypass invitation limit
-   - [Found in --> KeyBase](https://hackerone.com/reports/115007)
-   - Using Race conditions, attacker was `able to send out a total of 7 invites to his throwaway emails, obviously bypassing the 3 no. of invitations limit`.
-
-### 9 - Race Condition allows to redeem multiple times gift cards.
-   - [Found in --> Reverb.com](https://hackerone.com/reports/759247)
-   - I've found a Race Condition vulnerability which `allows to redeem gift cards multiple times`. This how an attacker can easily buy stuff just buying one gift card and redeem it over and over again.
+- Prove server-side state changed twice (before/after screenshots of balance, counter, member list) — not just 2× HTTP 200.
+- Quantify the business impact: money duplicated, invites/gifts over-issued, or ATO path — financial/coupon/gift-card races are usually high/critical.
+- State the concurrency primitive used (Repeater parallel / Turbo Intruder gate, request count, HTTP/2) so the team can reproduce reliably.

