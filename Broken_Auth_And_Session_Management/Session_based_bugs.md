@@ -1,121 +1,103 @@
-# Broken Authentication And Session Management.
+# Broken Authentication & Session Management Bugs
 
-### Old Session Does Not Expire After Password Change:
-* Steps:
-```
-      1.create An account On Your Target Site
-      2.Login Into Two Browser With Same Account(Chrome, FireFox.You Can Use Incognito Mode As well) 
-      3.Change You Password In Chrome, On Seccessfull Password Change Referesh Your Logged in Account In FireFox/Incognito Mode.
-      4.If you'r still logged in Then This Is a Bug
-```      
+Session-management bugs let credentials, sessions, tokens, or verification states survive or leak across lifecycle events (logout, password change, email change, reset). They rarely look critical alone, but each one is a bridge to Account Takeover when combined with XSS, phishing, or stolen devices. Typical impact: session hijacking, verification bypass, P3–P1 depending on the chain proven.
 
-### Session Hijacking (Intended Behavior)
-* Steps:
-```
-    1.Create your account
-    2.Login your account
-    3.Use cookie editor extension in browser
-    4.Copy all the target cookies
-    5.Logout your account
-    6.Paste that cookies in cookie editor extension
-    7.Refresh page if you are logged in than this is a session hijacking
-```  
-`Impact:` If attacker get cookies of victim it will leads to account takeover.
- 
- 
-### Password reset token does not expire (Insecure Configurability)
-* Steps:
-```
-      1.Create your account on target Site.
-      2.request for a forget password token.
-      3.Don't use that link
-      4.Instead logged in with your old password and change your email to other.
-      5.Now use that password link sents to old email and check if you are able to change your password if yes than there is the litle bug.
- ```    
- 
- ### Server security misconfiguration -> Lack of security headers -> Cache control for a security page
- * Steps :
- ``` 
-     1. Login to the application
-     2. Navigate around the pages
-     3. Logout
-     4. Press (Alt+left-arrow) buttons
-     5. If you are logged in or can view the pages navigated by the user. Then you found a bug.
-  ```
-  `Impact:` At a PC cafe, if a person was in a very important page with alot of details and logged out, then another person comes and clicks back (because he didnt close the browser) then data is exposed. User information leaked
- 
- ### Broken Authentication To Email Verification Bypass (P4) :
-  `category` : P4 >> Broken Authentication and Session Management >> Failure to Invalidate Session >> On Password Reset and/or Change
+## Hunting Checklist
 
-* Steps To Reproduce:
-``` 
-    1)First You need to make a account & You will receive a Email verification link.
-    2)Application in my case give less Privileges & Features to access if not verified.
-    3)Logged into the Application & I change the email Address to Email B.
-    4)A Verification Link was Send & I verified that.
-    5) Now I again Changed the email back to Email I have entered at the time of account creation.
-    6) It showed me that my Email is Verified.
-    7) Hence , A Succesful Email verfication Bypassed as I haven't Verified the Link which was sent to me in the time of account creation still my email got verified.
-    8)Didn't Receive any code again for verification when I changed back my email & When I open the account it showed in my Profile that its Verified Email.
+1. Run every sensitive action twice across two browsers/profiles and observe what the other session can still do after: password change, email change, logout, account delete, 2FA enable, reset completion.
+2. Test logout semantics: paste the pre-logout cookies back after logging out (session invalidation), and use the Back button after logout (cache on authed pages).
+3. For password-reset tokens: test single-use, expiry after successful reset, expiry when a new token is requested, and expiry after email change (see also `Password_Reset_Functionality/`).
+4. For email-verification states: never click the first link; change email mid-flow and see which pending link verifies which address.
+5. Replay captured authenticated requests *after logout* to test server-side auth checks on state changes.
+6. Note every behavior where an unverified or lower-privilege state can reach privileged pages (forced browsing).
+
+## Test Cases & Examples
+
+### 1. Old Session Does Not Expire After Password Change
+1. Create an account; log in in two browsers (Chrome + Firefox/incognito).
+2. Change the password in Chrome.
+3. Refresh the Firefox session — if it is still logged in, sessions are not invalidated on credential change (classic ATO persistence vector).
+
+### 2. Session Hijacking via Non-Invalidated Cookies (Intended-Behavior Check)
+1. Log in; copy all target cookies with a cookie-editor extension.
+2. Log out.
+3. Paste the old cookies back and refresh — if you are logged in again, old session cookies were never revoked; a stolen cookie survives logout.
+```http
+GET /dashboard HTTP/1.1
+Host: target.com
+Cookie: session=<copied_before_logout>
 ```
 
-`Impact` :
-Email Verfication was bypassed due to Broken Authentication Mechanism , Thus more Privileged account can be accessed by an attacker making website prone to Future Attacks.    
-  Happy Hacking:)
-  
-  ### Email Verification Bypass (P3/P4)
-  * Steps :
-   ``` 
-    1)First You need to Create an account with Your Own Email Address.
-    2)After Creating An Account A Verification Link will be sent to your account.
-    3)Dont Use The Email Verification link. Change Your Email to Victim's Email.
-    4)Now Go in Your Email and Click on Your Own Email Verification Link.
-    5)if the Victim's Email Get Verified then This is a Bug.
+### 3. Cache Control Missing on Authed Pages
+1. Log in, navigate through sensitive pages, then log out.
+2. Press Back (`Alt + ←`): if pages render from cache, sensitive data is exposed to the next person at the machine (PC-cafe scenario).
+- Root cause: authed responses lacking `Cache-Control: no-store`.
+
+### 4. Email Verification Bypass via Round-Trip (P3/P4)
 ```
-`Impact` : Email Verfication Bypass
-
- ### Old Password Reset Token Not Expiring Upon Requesting New One (Sometimes P4) :
-  * Steps :
- ``` 
-    1)First You need to Create an account with a Valid Email Address.
-    2)After Creating An Account log out from your Account and Navigate on Forgot Password Page.
-    3)Request a Password Reset Link for your Account.A Verification Link will be sent to your account.
-    4)Without Using this Password Reset Link Request A New Password Reset Link.
-    5)Now go in Your email and Use 1st Password Reset Link Rather than Using 2nd One And Change Your Password.
-    6) If You Are Able to Change Your Password Than This Is a tiny Bug ;).
+Category: Broken Authentication and Session Management →
+Failure to Invalidate Session → On Password Reset and/or Change
 ```
-* Note:- Some Companies Won't Accept it As Valid Issue. 
+1. Create an account; receive the verification email — **do not click it**.
+2. Notice the app grants reduced privileges until verified.
+3. Change the email to Email B, click the B verification link.
+4. Change the email back to the original address.
+5. The profile now shows "verified" even though the *original* signup link was never clicked → verification state survived email round-trips; attacker reaches full-privilege state without completing the intended check.
 
-### Password Reset Token Not Expiring After Password Change (P4):
-  * Steps :
- ``` 
-    1)First You need to Create an account with a Valid Email Address.
-    2)After Creating An Account log out from your Account and Navigate on Forgot Password Page.
-    3)Request a Password Reset Link for your Account.
-    4)Use The Password Reset Link And Change The Password, After Changing the Password Login to Your Account.
-    5)Now Use The Old Password Reset Link To Change The Password Again.
-    6) If You Are Able to Change Your Password Again Than This Is a tiny Bug  ;).
+### 5. Email Verification Bypass via Stale Link (P3/P4)
+1. Create an account with your own email; leave the verification link unclicked.
+2. Change the account email to the victim's address.
+3. Open **your own** original verification link.
+4. If the victim's email is now marked verified, the pending token validated the *new* address — an attacker who controls an unverified signup can get arbitrary emails marked as verified.
+
+### 6. Password-Reset Token Valid After Password Change
+1. Request a reset link, use it, change the password, log in.
+2. Re-open the **old** reset link and try to change the password again.
+3. Success ⇒ used tokens are not single-use (token reuse ⇒ delayed ATO).
+
+### 7. Old Reset Token Not Revoked When a New One Is Issued (sometimes P4)
+1. Request reset link #1, then request link #2 without using #1.
+2. Complete reset using link #1.
+3. Success ⇒ old tokens are not invalidated on reissue. Note: some programs accept this as valid, others don't — report the reuse chain with an expiry claim.
+
+### 8. Reset Token Survives Email Change (Insecure Configurability)
+1. Request a forget-password token and **don't** open the link.
+2. Log in and change the account email to another address.
+3. Use the token that went to the **old** email — if it still resets the password, the pending token wasn't bound to the current address.
+
+### 9. State Change Accepted After Logout (Insufficient Process Validation)
+1. Create an account; open the profile edit page.
+2. Fill name/email changes, enable Burp intercept on Save, capture the update request, send to Repeater.
+3. **Log out** of the site.
+4. Click "Go" in Repeater:
+```http
+POST /api/profile/update HTTP/1.1
+Host: target.com
+Content-Type: application/json
+Cookie: session=<post_logout_copy>
+
+{"name":"attacker","email":"attacker@evil.com"}
 ```
+5. If it returns 200 and the change persists at next login, unauthenticated/stale sessions can still mutate account state.
 
-### Insufficient account process validation leads to account takeover (P3/P4):
-   * Steps :
-```
-      1) Create an account on the website.
-      2) Go to profile section. And Change & update your details in the name parameter and before saving it Open Burp suite, turn the proxy on and then click on Save.
-      3) Now capture the request in Burp suite and send it to the Repeater tab.
-      4) Now log out from the website and go back to the Burp suite.
-      5) Now change the details email & name parameters and click on "Go" in the repeater tab.
-      6) Now you will be able to see 200 ok response from the web server.
-      7) Now, login into your account and go to the Profile section to confirm
-```
+## Bypass Techniques
 
-* Thanks For Reading Guys Happy Hunting :).
+- If direct logout replay is blocked, replay before the server sees logout (parallel/queued requests — race).
+- For cached-session bugs, combine with `Clear-Site-Data`-less logout flows and shared machines as the impact path.
+- Verification-state bugs often also reproduce via password-reset "skip email step" flows — try both orders (verify-then-change, change-then-verify).
 
-  ## Resources:
-  Google,Youtube.
+## Tools & Resources
 
-## Authors
-* [https://twitter.com/Virdoex_hunter](https://twitter.com/Virdoex_hunter) 
-* Linkedin : [@chirag_Agrawal](https://www.linkedin.com/in/chirag-agrawal-770488144/), Twitter  : [@Raiders](https://twitter.com/ChiragA15977205)
-* Twitter : [Fani Malik](https://twitter.com/fanimalikhack) 
-* Linkedin : [@suprit-pandurangi](https://www.linkedin.com/in/suprit-pandurangi-a90526106/)
+- Burp Suite (Repeater, Match-and-Replace), Cookie Editor / EditThisCookie, browser dev-tools Application tab for storage scope checks.
+- OWASP Testing Guide: Session Management Testing (ST); PortSwigger Web Security Academy: "Testing other application defenses", "Session management".
+- Related files: `Password_Reset_Functionality/`, `Account_Takeovers_Methodologies/Account_Takeovers_Methods.md`, `Sign_Up_Functionality/Hunting_for_bugs_in_signup_feature.md`.
+
+## Report Tips
+
+- Always finish with a demonstrated consequence: logged-in state from a revoked cookie, or an email marked verified that never was — not just "session still works".
+- Map each finding to lifecycle event (logout / password change / email change / reset) and say which sessions should have died.
+- Low-severity-looking ones (stale reset links) get better ratings when you chain them: "old token + no expiry = ATO window of N days".
+
+## Credits
+
+- [Virdoex_hunter](https://twitter.com/Virdoex_hunter), [Chirag Agrawal](https://www.linkedin.com/in/chirag-agrawal-770488144/) ([@Raiders](https://twitter.com/ChiragA15977205)), [Fani Malik](https://twitter.com/fanimalikhack), [Suprit Pandurangi](https://www.linkedin.com/in/suprit-pandurangi-a90526106/).

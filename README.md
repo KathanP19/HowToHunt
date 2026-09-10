@@ -1,5 +1,8 @@
-<h1 align="center">HowToHunt</h1>
+<h1 align="center">HowTHunt</h1>
 
+<p align="center">
+  A reworked &amp; expanded edition of <a href="https://github.com/KathanP19/HowToHunt">HowToHunt</a> by Kathan Patel and contributors
+</p>
 <p align="center">
   <img src="https://img.shields.io/github/stars/KathanP19/HowToHunt?style=social" alt="Stars">
   <img src="https://img.shields.io/github/forks/KathanP19/HowToHunt?style=social" alt="Forks">
@@ -11,16 +14,35 @@
 <p align="center">A collection of practical guides, methodologies, and resources for hunting vulnerabilities </br> From Hackers for Community, because Hacking is not just a skill </br> It’s a Mindset
 </p>
 
-## 💡 What is HowToHunt?
+## 💡 What is HowTHunt?
 
-HowToHunt is a collaborative repository of step-by-step guides, methodologies, and hands-on techniques for finding specific vulnerabilities. Whether you're a beginner or an experienced hunter, you'll find valuable resources to enhance your bug hunting skills.
+HowTHunt is a collaborative knowledge base of step-by-step guides, methodologies, and hands-on techniques for finding specific vulnerabilities. Whether you're a beginner or an experienced hunter, you'll find valuable resources to enhance your bug hunting skills.
+
+This edition was rebuilt from the original HowToHunt repo: every guide follows one uniform format, stale duplicate files were merged, and messy code blocks were cleaned up so the whole thing is skimmable and copy-pasteable.
 
 > **Note:** This repository aims to provide practical, actionable guides rather than theoretical knowledge. Each guide is contributed by experienced hunters who have successfully used these techniques in the field.
+
+## 🧭 Start Here
+
+* Full index: [SUMMARY.md](SUMMARY.md)
+* New to hunting? Work top to bottom through the [Web Pentesting Checklist](CheckList/Web-Application-Pentesting-checklist.md), then follow the [Recon Workflow](Recon/Workflow.md).
+* Hunting the high-dollar bugs? [Account Takeover Methodologies](Account_Takeovers_Methodologies/Account_Takeovers_Methods.md), [IDOR](IDOR/IDOR.md), [SSRF](SSRF/SSRF.md), [Sensitive Info Leaks](Sensitive_Info_Leaks/README.md).
+
+## 📐 Guide Format
+
+Every methodology doc in this repo follows the same structure so you always know where to look:
+
+1. **Overview** - what the bug class is, why it matters, typical impact
+2. **Hunting Checklist** - numbered, actionable steps to run on target
+3. **Test Cases & Examples** - real requests, payloads, and commands
+4. **Bypass Techniques** - when the first attempt gets blocked
+5. **Tools & Resources** - what automates or assists the hunt
+6. **Report Tips** - how to frame impact so the report doesn't get closed as N/A
 
 ## 📖 How to Use
 
 ### For Readers
-Visit our [GitBook](https://kathan19.gitbook.io/) for an organized, searchable reading experience with all the guides properly categorized.
+Browse locally via [SUMMARY.md](SUMMARY.md), or use the upstream [GitBook](https://kathan19.gitbook.io/) for a searchable reading experience.
 
 ### For Contributors
 1. Fork the repository

