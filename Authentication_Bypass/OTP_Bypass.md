@@ -126,7 +126,18 @@ This document outlines **various OTP bypass techniques**, including **response m
 - **Brute-force attack leading to OTP bypass and account takeover**.
 
 ---
+## **Bypass registered mobile already exists**
+### **Steps:**
+1. Signup with mobile number.
+2. Check HTTP request how it sends mobile number.
+3. Try to register again with same mobile number, add/remove `+`, `0`, `+91`(Country code).
+4. Forward/Send request.
 
+**Impact:**
+- Validation Bypass
+- To increase impact, fill the different details each account (i.e. Attacker, Victim)
+
+---
 ## **Contributors**
 - **[@akshaykerkar13](https://twitter.com/akshaykerkar13)**
 - **[@Yn0tWhy](https://twitter.com/Yn0tWhy)**
@@ -135,6 +146,7 @@ This document outlines **various OTP bypass techniques**, including **response m
 - **[@fani_malik](https://twitter.com/fanimalikhack)**
 - **[@v3daxt](https://twitter.com/v3daxt)**
 - **[@prakhar0x01](https://twitter.com/prakhar0x01)**
+- **[@th3.d1p4k](https://x.com/DipakPanchal05)**
 
 ---
 *Enhanced and reformatted for HowToHunt repository by [remonsec](https://x.com/remonsec)*
