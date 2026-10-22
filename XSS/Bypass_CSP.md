@@ -126,6 +126,13 @@ By modifying the `script-src` directive, an attacker can include a malicious dom
 
 ---
 
+## Tool 
+- **Link:** [CSP Validator by th3.d1p4k](https:cspvalidator.netlify.app)
+
+**Reference Links:**
+- **Link1:** [OWASP CSP](https://owasp.org/www-community/controls/Content_Security_Policy#:~:text=CSP%20Validator)
+- **Link2:** [OWASP WSTG](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/12-Test_for_Content_Security_Policy#:~:text=CSP%20Validator)
+
 ## Author
 
 For further information or discussions, feel free to reach out to:
