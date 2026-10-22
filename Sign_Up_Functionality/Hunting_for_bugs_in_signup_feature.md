@@ -100,6 +100,29 @@ Insufficient Email Verification means the application doesn’t verify the email
 >  [https://hackerone.com/reports/617896](https://hackerone.com/reports/617896)  
 >  [https://hackerone.com/reports/737169](https://hackerone.com/reports/737169)
 
+#### Email verification bypass via Remember me
+
+The pending-verification page is only one gate. Also test login with **Remember me** turned on. Some applications block a normal login until the email is confirmed, then skip that check on the Remember me path and send the browser back to `/signup/pending/<token>`. Removing that path while the new session is set can open the account.
+
+Use a host you are allowed to test. The steps below use `dashboard.example.com` as a placeholder.
+
+**_Steps to reproduce:_**
+
+1) Sign up at `https://dashboard.example.com/signup` with an email you control.
+2) Stop on the verification page. The URL looks like `https://dashboard.example.com/signup/pending/<token>`.
+3) Delete `/signup/pending/<token>` so the address bar is `https://dashboard.example.com/`.
+4) The application should redirect to `https://dashboard.example.com/login`.
+5) Log in with the account from step 1 and turn **Remember me** on.
+6) If you are sent back to `https://dashboard.example.com/signup/pending/<token>`, delete that path again and open `https://dashboard.example.com/`.
+7) If the account loads, email verification was not enforced on this login path.
+
+Impact: the account is usable before ownership of the mailbox is proven. An attacker who registers an address first can hold it (pre-account takeover). Unverified accounts can also keep a real session.
+
+Every login path, including Remember me, still has to require a verified email. Opening the site root with a pending-verification session must not authenticate the user.
+
+> Further Read  
+>  [https://github.com/KathanP19/HowToHunt/issues/247](https://github.com/KathanP19/HowToHunt/issues/247)
+
 #### 6\. Path Overwrite
 
 If an application allows users to check their profile with direct path /{username} always try to signup with system reserved file names, such as index.php, signup.php, login.php, etc. In some cases what happens here is, when you signup with username: `index.php`, now upon visiting target.tld/index.php, your profile will comeup and occupy the index.php page of an application. Similarly, if an attacker is able to signup with username `login.php`, Imagine login page getting takeovered.
@@ -117,3 +140,4 @@ https://infosecwriteups.com/logical-flaw-resulting-path-hijacking-dd4d1e1e832f
 
 + @Kushagra Sarathe - [Twitter](https://twitter.com/kushagrasarathe) & [GitHub](https://github.com/kushagrasarathe)
 + @Sm4rty - [Twitter](https://twitter.com/Sm4rty\_)  , [LinkedIn](https://www.linkedin.com/in/sm4rty) &  [Instragram](https://www.instagram.com/sm4rty)
++ @adityaax - [GitHub](https://github.com/adityaax)
