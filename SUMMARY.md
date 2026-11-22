@@ -206,6 +206,10 @@
 
 * [WAF Bypass Using Headers](./WAF_Bypasses/WAF_Bypass_Using_headers.md)
 
+### Web Cache Poisoning and Deception
+
+* [Web Cache Poisoning and Deception](./Web_Cache_Poisoning/Web_Cache_Poisoning.md)
+
 ### Weak Password Policy
 
 * [Weak Password Policy](./Weak_Password_Policy/Weak_password_policy.md)
